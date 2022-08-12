@@ -1,0 +1,90 @@
+<div class="page-main-header" [ngClass]="{'open': headerStrech}">
+  <div class="main-header-right row">
+    <div class="main-header-left d-lg-none">
+      <div class="logo-wrapper"><a [routerLink]="['']" routerLinkActive="router-link-active"><img
+            src="assets/images/compost-logso1.png" alt=""></a></div>
+    </div>
+
+
+    <div class="nav-right col pull-right right-menu">
+      <ul class="nav-menus" [ngClass]="{'open': openNav}">
+        <li>
+          <div class="dropdown" ngbDropdown>
+            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"><span class="media user-header"
+                ngbDropdownToggle>
+                <img class="mr-2 rounded-circle img-35" src="assets/images/dashboard/user.png" alt="">
+                <span class="media-body">
+                  <span class="f-12 f-w-600"></span>
+                  <span class="d-block"></span></span></span></button>
+            <div class="dropdown-menu p-0 profile-dropdown" ngbDropdownMenu>
+              <ul>
+                <li class="gradient-primary-1">
+                  <h6 class="mb-0"></h6>
+                </li>
+                <li *ngIf="storageService.isAuthenticated"><a href="javascript:void(0)" (click)="storageService.logout()">
+                    <app-feather-icons [icon]="'log-out'"></app-feather-icons>Logout
+                  </a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="dropdown" ngbDropdown>
+            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" ngbDropdownToggle><i
+                data-feather="bell"></i><span class="notification badge badge-pill badge-danger f-10">{{alertas.length}}</span></button>
+            <div class="dropdown-menu p-0 notification-dropdown" ngbDropdownMenu>
+              <ul>
+                <li class="gradient-primary-1">
+                  <h6>Notificaciones</h6><span>Tiene {{alertas.length}} alertas para el dia de hoy</span>
+                </li>
+                <li *ngFor="let data of alertas; let i = index" (click)="viewAlerts(data)" style="cursor: pointer;">
+                  <div class="media">
+                    <div class="notification-icons bg-success mr-3"><i class="mt-0" data-feather="thumbs-up"></i>
+                    </div>
+                    <div class="media-body">
+                      <h6>{{data.materia}}</h6>
+                      <p class="mb-0">{{data.descripcion}}</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+
+      
+      </ul>
+    </div>
+
+    <form class="form-inline search-full" [ngClass]="{'open':open_search}" *ngIf="open">
+      <div class="form-group form-control-plaintext">
+        <input type="text" placeholder="Search.." [class.open]="isOpenMobile" [(ngModel)]="text"
+          [ngModelOptions]="{standalone: true}" (keyup)="searchTerm(text)">
+        <i class="icon-close close-search" (click)="ToggleSearch()"></i>
+        <div class="Typeahead-menu" [class.is-open]="searchResult" *ngIf="menuItems?.length" id="search-outer">
+          <div class="ProfileCard u-cf" *ngFor="let menuItem of menuItems | slice:0:8">
+            <div class="ProfileCard-avatar">
+              <app-feather-icons [icon]="menuItem.icon" class="header-search"></app-feather-icons>
+            </div>
+            <div class="ProfileCard-details">
+              <div class="ProfileCard-realName">
+                <a [routerLink]="menuItem?.path" class="realname" (click)="removeFix()">{{menuItem?.title}}</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="Typeahead-menu" [class.is-open]="searchResultEmpty">
+          <div class="tt-dataset tt-dataset-0">
+            <div class="EmptyMessage">
+              Opps!! There are no result found.
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="d-lg-none mobile-toggle pull-right" (click)="openMobileNav()">
+      <app-feather-icons [icon]="'more-horizontal'"></app-feather-icons>
+    </div>
+  </div>
+</div>

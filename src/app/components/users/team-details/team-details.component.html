@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-12">
+          <div class="card">
+              <div class="card-header">
+                  <h5>Filter</h5>
+              </div>
+              <div class="card-body custom-datatable">
+                  <input type="text" class="filter-ngx form-control" placeholder='Filter'
+                      (keyup)="updateFilter($event)" />
+                  <ngx-datatable #table 
+                      class='bootstrap' 
+                      [columns]="columns" 
+                      [columnMode]="ColumnMode.force"
+                      [headerHeight]="50" 
+                      [footerHeight]="50" 
+                      rowHeight="auto" 
+                      [limit]="10" 
+                      [rows]="rows">
+
+                      <ngx-datatable-column *ngFor="let col of columns" [name]="col.name"> 
+                        <ng-template ngx-datatable-header-template let-sort="sortFn">
+                            <span (click)="sort()">{{ col.label }}</span>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column >
+                        <ng-template ngx-datatable-cell-template let-row="row" let-rowIndex="rowIndex" let-value="value">
+                          <span  class="badge badge-pill pill-badge-info"  (click)="editProfile(row)">Edit</span>
+                          <span *ngIf="row.active == 0" class="badge badge-pill pill-badge-success" (click)="activateItem(row.id)" >Activate</span>
+                          <span *ngIf="row.active == 1" class="badge badge-pill pill-badge-secondary" (click)="openConfirmation(row)" >Inactivate</span>
+                        </ng-template>
+                      </ngx-datatable-column>
+                     
+                  </ngx-datatable>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-body">
+    </div>
+  </ng-template>

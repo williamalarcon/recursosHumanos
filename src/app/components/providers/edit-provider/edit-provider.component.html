@@ -1,0 +1,73 @@
+<div class="container-fluid">
+  <div class="edit-profile">
+    <div class="row">
+      <div class="col-lg-12">
+        <form class="card" [formGroup]="editSubject">
+          <div class="card-header">
+            <h4 class="card-title mb-0">Editar Curso</h4>
+            <div class="card-options"><a class="card-options-collapse" href="javascript:void(0)" data-toggle="card-collapse"><i
+                  class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="javascript:void(0)" data-toggle="card-remove"><i
+                  class="fe fe-x"></i></a></div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-9">
+                <div class="form-group">
+                  <label class="form-label">Nombre</label>
+                  <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }">
+                  <div *ngIf="submitted && f.nombre.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="form-label">Clasificación</label>
+                  <select class="form-control btn-square" formControlName="clasificacion" (change)="selectClasificacion($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.clasificacion.errors }">
+                    <option value="" selected>Seleccione</option>
+                    <option value="1">Materia</option>
+                    <option value="2">Guia</option>
+                  </select>
+                  <div *ngIf="submitted && f.clasificacion.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
+                </div>
+              </div>
+              <div class="col-md-3" *ngIf="clasificacion == 2">
+                <div class="form-group">
+                  <label class="form-label">Tipo de Guia</label>
+                  <select class="form-control btn-square" formControlName="tipoGuia" [ngClass]="{ 'is-invalid': submitted && f.tipoGuia.errors }" >
+                    <option value="" selected>Seleccione</option>
+                    <option *ngFor="let data of typeGuides; let i = index" value="{{data.id}}">{{data.nombre}}</option>        
+                  </select>
+                  <div *ngIf="submitted && f.tipoGuia.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
+                </div>
+              </div>
+              
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="form-label">Área</label>
+                  <select class="form-control btn-square" formControlName="area" [ngClass]="{ 'is-invalid': submitted && f.area.errors }">
+                    <option value="" selected>Seleccione</option>
+                    <option *ngFor="let data of areas; let i = index" value="{{data.id}}">{{data.nombre}}</option>        
+                  </select>
+                  <div *ngIf="submitted && f.area.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
+                </div>
+              </div>
+
+              <div class="col-md-9">
+                <div class="form-group">
+                    <label class="form-label">Descripción</label>
+                    <textarea type="text" maxlength="500" class="md-textarea form-control" formControlName="descripcion" mdbInput [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }"></textarea>
+                    <div *ngIf="submitted && f.descripcion.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="card-footer text-right">
+            <button class="btn btn-primary" type="submit"  (click)="eSubject(editSubject.value)">Editar Curso</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,319 @@
+<div class="container-fluid">      
+    <ng-template #content let-modal>
+      <div class="modal-body">
+      </div>
+    </ng-template>
+    <div class="edit-profile">
+      <div class="row">
+        <div class="col-lg-8">
+          <form class="card custom-datepicker-dropdown" [formGroup]="petitionsForm">
+            <div class="card-header">
+              <h4 class="card-title mb-0">Formulario de radicación de solicitudes</h4>
+              <div class="card-options"><a class="card-options-collapse" href="javascript:void(0)" data-toggle="card-collapse"><i
+                    class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="javascript:void(0)" data-toggle="card-remove"><i
+                    class="fe fe-x"></i></a></div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group ">
+              
+                    <label class="form-label">Fecha solicitud (*)</label>
+                     <div class="input-group">
+                          <input class="form-control" 
+                                
+                                 name="dp" 
+                                 readonly
+                                 [(ngModel)]="model" 
+                                 ngbDatepicker #d="ngbDatepicker" 
+                                 formControlName="fecha"
+                                 [ngClass]="{ 'is-invalid': submitted && f.fecha.errors }">
+                          <div class="input-group-append">
+                            <button class="btn calendar" (click)="d.toggle()" type="button">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                          </div>
+                        </div>
+                        
+                        <div *ngIf="submitted && f.fecha.errors" class="text text-danger mt-1">Fecha es obligatoria</div>
+                  </div>
+                </div>
+                  <div class="col-md-12">
+                    <h5>Persona que solicita</h5>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" [ngClass]="{ 'is-invalid': submitted && f.persona.errors }" formControlName="persona" placeholder="Nombres y Apellidos"
+                        >
+                        <div *ngIf="submitted && f.persona.errors" class="text text-danger mt-1">Ingrese un dato válido</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input class="form-control" type="text" [ngClass]="{ 'is-invalid': submitted && f.cargo.errors }"  formControlName="cargo" placeholder="Cargo">
+                      <div *ngIf="submitted && f.cargo.errors" class="text text-danger mt-1">Ingrese un dato válido</div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                      <label class="form-label">Email (*)</label>
+                      <input class="form-control" type="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" formControlName="email" placeholder="Email">
+                      <div *ngIf="submitted && f.email.errors" class="text text-danger mt-1">El email no es válido</div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                      <label class="form-label">Teléfono (*)</label>
+                      <input class="form-control" type="number" formControlName="telefono" placeholder="Telefono" [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }">
+                      <div *ngIf="submitted && f.telefono.errors" class="text text-danger mt-1">Ingrese un dato válido</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="form-label">Regional (*)</label>
+                      <select class="form-control btn-square" formControlName="idRegional" (change)="selectRegional($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.idRegional.errors }">
+                        <option value="" selected>Seleccione</option>
+                        <option *ngFor="let data of regionales; let i = index" value="{{data.id}}">{{data.nombre}}</option>
+                      </select>
+                      <div *ngIf="submitted && f.idRegional.errors" class="text text-danger mt-1">El regional es obligatorio</div>
+                   </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label">Ciudades (*)</label>
+                       <ng-select [items]="ciudades"
+                                 [searchable]="true" 
+                                 bindLabel="nombre"
+                                 bindValue="id"
+                                 [multiple]="true" 
+                                 formControlName="ciudades"
+                                 [ngClass]="{ 'is-invalid': submitted && f.ciudades.errors }"
+                                 ></ng-select>
+                      <div *ngIf="submitted && f.ciudades.errors" class="text text-danger mt-1">Debe seleccionar al menos una cuidad</div>
+                   </div>
+                </div>
+                  <div class="col-md-12">
+                    <h5>Persona que aprueba</h5>
+                  </div>  
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <select class="form-control btn-square" 
+                                (change)="selectAprobador($event.target.value)"
+                                formControlName="selectAprobador"
+                                [ngClass]="{ 'is-invalid': submitted && f.selectAprobador.errors }">
+                                <option value="" selected>Seleccione</option>
+                                <option *ngFor="let data of funcionarios; let i = index" value="{{i}}">{{data.nombre}}</option>
+                        </select>
+                        <div *ngIf="submitted && f.selectAprobador.errors" class="text text-danger mt-1">La persona que aprueba es obligatorio</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <input id="cargoAprobador" class="form-control" type="text" readonly placeholder="Cargo" value="{{cargoFuncionario}}">
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <h5>Tipo de Solicitud (*)</h5>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="Actualizacion" value="Actualizacion" formControlName="tipo" name="tipo" [ngClass]="{ 'is-invalid': submitted && f.tipo.errors }" (change)="selectSolicitud($event)" mdbInput>
+                        <label class="custom-control-label" for="Actualizacion">Actualización</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="Capacitacion"  value="Capacitacion" formControlName="tipo" name="tipo"  [ngClass]="{ 'is-invalid': submitted && f.tipo.errors }" (change)="selectSolicitud($event)" mdbInput>
+                        <label class="custom-control-label" for="Capacitacion">Capacitación</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="Inquietudes" n value="Inquietudes" formControlName="tipo" name="tipo"  [ngClass]="{ 'is-invalid': submitted && f.tipo.errors }" (change)="selectSolicitud($event)" mdbInput>
+                        <label class="custom-control-label" for="Inquietudes">Inquietudes</label>
+                    </div>
+                  </div>
+
+                  <!--Actualizacion-->
+                  <div class="container-if row" *ngIf="tipoSolicitud=='Actualizacion'">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="form-label">Canales de Servicio (*)</label>
+                          <select class="form-control btn-square" formControlName="idCanal" [ngClass]="{ 'is-invalid': submitted && f.idCanal.errors }">
+                            <option value="" selected>Seleccione</option>
+                            <option *ngFor="let data of canales; let i = index" value="{{data.id}}">{{data.nombre}}</option>
+                          </select>
+                          <div *ngIf="submitted && f.idCanal.errors" class="text text-danger mt-1">Los canales de servicio son obligatorios</div>
+                       </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="form-label">Área (*)</label>
+                          <select class="form-control btn-square" formControlName="idArea" (change)="selectArea($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.idArea.errors }">
+                            <option value="" selected>Seleccione</option>
+                            <option *ngFor="let data of areas; let i = index" value="{{data.id}}">{{data.nombre}}</option>
+                          </select>
+                          <div *ngIf="submitted && f.idArea.errors" class="text text-danger mt-1">Debe seleccionar un área</div>
+                       </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="form-label">Curso (*)</label>
+                          <select class="form-control btn-square" formControlName="idTema" [ngClass]="{ 'is-invalid': submitted && f.idTema.errors }">
+                            <option value="" selected>Seleccione</option>
+                            <option *ngFor="let data of temas; let i = index" value="{{data.id}}">{{data.nombre}}</option>
+                          </select>
+                          <div *ngIf="submitted && f.idTema.errors" class="text text-danger mt-1">Debe seleccionar un curso</div>
+                       </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-label">Cuéntanos tu requerimiento (*)</label>
+                            <textarea placement="right" ngbTooltip="Aquí puedes describir el requerimiento que estás solicitando, aclarando si es un curso o capacitación, una actualización o creación de una guía. " 
+                                      maxlength="500" type="text" id="form8" class="md-textarea form-control" formControlName="novedades" mdbInput [ngClass]="{ 'is-invalid': submitted && f.novedades.errors }"></textarea>
+                            <div *ngIf="submitted && f.novedades.errors" class="text text-danger mt-1">Debe diligenciar este campo</div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-label">Detalla tu requerimiento (*)</label>
+                            <textarea placement="right" ngbTooltip="Aquí podrás detallar tu requerimiento, déjanos saber qué curso necesitas y para cuantas personas lo necesitas o el nombre de la guía que deseas que se actualice o se cree, si es para actualizar una guía por favor anexa lo que quieres que se cambie o adicione." 
+                                maxlength="500" type="text" id="form8" class="md-textarea form-control" formControlName="directrices" mdbInput [ngClass]="{ 'is-invalid': submitted && f.directrices.errors }"></textarea>
+                            <div *ngIf="submitted && f.directrices.errors" class="text text-danger mt-1">Debe diligenciar este campo</div>
+                        </div>
+                    </div>
+                  </div>
+                  <!-- /Actualizacion-->
+                  <!--Capacitacion-->
+                  <div class="container-if row" *ngIf="tipoSolicitud=='Capacitacion'">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="form-label">Colaborador (*)</label>
+                          <select class="form-control btn-square" formControlName="colaborador" [ngClass]="{ 'is-invalid': submitted && f.colaborador.errors }">
+                              <option value="">Seleccione</option>
+                              <option value="Nuevo">Nuevo</option>
+                              <option value="Antiguo">Antiguo</option>
+                          </select>
+                          <div *ngIf="submitted && f.colaborador.errors" class="text text-danger mt-1">Debe seleccionar un colaborador</div>
+                       </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="form-label">Canales de Servicio (*)</label>
+            
+                          <select class="form-control btn-square" formControlName="idCanal" [ngClass]="{ 'is-invalid': submitted && f.idCanal.errors }">
+                            <option value="" selected>Seleccione</option>
+                            <option *ngFor="let data of canales; let i = index" value="{{data.id}}">{{data.nombre}}</option>
+                          </select>
+                          <div *ngIf="submitted && f.idCanal.errors" class="text text-danger mt-1">Debe seleccionar un canal</div>
+                       </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="form-label">Área (*)</label>
+                          <select class="form-control btn-square" (change)="selectArea($event.target.value)" formControlName="idArea" [ngClass]="{ 'is-invalid': submitted && f.idArea.errors }">
+                            <option value="" selected>Seleccione</option>
+                            <option *ngFor="let data of areas; let i = index" value="{{data.id}}">{{data.nombre}}</option>
+                          </select>
+                          <div *ngIf="submitted && f.idArea.errors" class="text text-danger mt-1">Debe seleccionar un área</div>
+                       </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="form-label">Curso (*)</label>
+                          <select class="form-control btn-square" formControlName="idTema" [ngClass]="{ 'is-invalid': submitted && f.idTema.errors }">
+                            <option value="" selected>Seleccione</option>
+                            <option *ngFor="let data of temas; let i = index" value="{{data.id}}">{{data.nombre}}</option>
+                          </select>
+                          <div *ngIf="submitted && f.idTema.errors" class="text text-danger mt-1">Debe seleccionar un curso</div>
+                       </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="form-label">Fecha Capacitación (*)</label>
+                           <div class="input-group">
+                                <input class="form-control" placeholder="dd/mm/aaaa" readonly
+                                       name="dCapacitacion" [(ngModel)]="model1" ngbDatepicker #dc="ngbDatepicker" formControlName="fcapacitacion" [ngClass]="{ 'is-invalid': submitted && f.fcapacitacion.errors }">
+                                <div class="input-group-append">
+                                  <button class="btn calendar" (click)="dc.toggle()" type="button">
+                                      <i class="fa fa-calendar"></i>
+                                  </button>
+                                </div>
+                              </div>
+                              <div *ngIf="submitted && f.fcapacitacion.errors" class="text text-danger mt-1">Fecha de capacitacion es obligatoria</div>
+                        </div>
+                      </div>
+          
+                  </div>
+                  <!--/Capacitacion-->
+                  <!--Inquietud-->
+                  <div class="container-if row" *ngIf="tipoSolicitud=='Inquietudes'">
+                      
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="form-label">Canales de Servicio (*)</label>
+                          <select class="form-control btn-square" formControlName="idCanal" [ngClass]="{ 'is-invalid': submitted && f.idCanal.errors }">
+                              <option value="" selected>Seleccione</option>
+                              <option *ngFor="let data of canales; let i = index" value="{{data.id}}">{{data.nombre}}</option>
+                          </select>
+                          <div *ngIf="submitted && f.idCanal.errors" class="text text-danger mt-1">Debe seleccionar un canal</div>
+                       </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="form-label">Área (*)</label>
+                          <select class="form-control btn-square" formControlName="idArea" (change)="selectArea($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.idArea.errors }">
+                            <option value="" selected>Seleccione</option>
+                            <option *ngFor="let data of areas; let i = index" value="{{data.id}}">{{data.nombre}}</option>
+                          </select>
+                          <div *ngIf="submitted && f.idArea.errors" class="text text-danger mt-1">Debe seleccionar un área</div>
+                       </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="form-label">Curso (*)</label>
+                          <select class="form-control btn-square" formControlName="idTema" [ngClass]="{ 'is-invalid': submitted && f.idTema.errors }">
+                            <option value="" selected>Seleccione</option>
+                            <option *ngFor="let data of temas; let i = index" value="{{data.id}}">{{data.nombre}}</option>
+                          </select>
+                          <div *ngIf="submitted && f.idTema.errors" class="text text-danger mt-1">Debe seleccionar un curso</div>
+                       </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-label">Descripción (*)</label>
+                            <textarea maxlength="500" type="text" id="form8" class="md-textarea form-control" formControlName="descripcion" mdbInput [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }"></textarea>
+                            <div *ngIf="submitted && f.descripcion.errors" class="text text-danger mt-1">Ingrese un dato válido</div>
+                        </div>
+                    </div>
+
+    
+                   </div>
+                  <!--Inquietud-->
+                  <div class="col-md-12" [hidden]="tipoSolicitud=='' || tipoSolicitud=='Inquietudes'">
+                    <label><h5>Adjuntar anexos</h5>(Se pueden adjuntar archivos .doc, .xls, .jpg, .zip y pdf, con un peso máximo de 4MB)</label>
+                    <table *ngFor="let data of filesInput; let i = index">
+                      <tr>
+                        <td width="60%" style="display: -webkit-inline-box;">
+                          <input class="files file-Input-{{i+1}}" id="file" type="file" (change)="selectFiles($event, i)" #file accept=".jpg, .png, .pdf .doc .docx .xls .xlsx .zip" >
+                        </td>
+                        <td><button type="button" class="btn btn-danger"  (click)="removeInputFile(i)" *ngIf="i != 0" >-</button></td>
+                        <td><button type="button" class="btn btn-success" (click)="addInputFile()" *ngIf="(i+1) == filesInput.length" >+</button></td>
+                      </tr>  
+                    </table>
+                    <div *ngIf="submitted && validFiles" class="text text-danger mt-1">Debe cargar un archivo</div>
+                    
+                  </div>
+
+              </div>
+            </div>
+         
+            <div class="card-footer text-right">
+              <button class="btn btn-primary" type="submit" [disabled]='!buttonEnabled' (click)="sendForm(petitionsForm.value)">Enviar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pnl-spinner" *ngIf="!buttonEnabled">
+    <div class="loader-box">
+      <div class="loader-30"></div>
+    </div>
+    <h4 class="text-loader">Se esta cargando su solicitud, por favor espere un momento</h4>
+  </div>

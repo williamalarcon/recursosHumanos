@@ -1,0 +1,66 @@
+<div class="container-fluid">
+  <div class="edit-profile">
+    <div class="row">
+      <div class="col-lg-12">
+        <form class="card" [formGroup]="createProfile">
+          <div class="card-header">
+            <h4 class="card-title mb-0">Create User</h4>
+            <div class="card-options"><a class="card-options-collapse" href="javascript:void(0)" data-toggle="card-collapse"><i
+                  class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="javascript:void(0)" data-toggle="card-remove"><i
+                  class="fe fe-x"></i></a></div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <input class="form-control" type="text" placeholder="Email" formControlName="email">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="form-label">Agency Staff Division</label>
+                  <select class="form-control btn-square" formControlName="division">
+                    <option value="" selected>Seleccione</option>
+                    <option *ngFor="let data of divisions; let i = index" value="{{data.id}}">{{data.name}}</option>       
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="form-group">
+                  <label class="form-label">Agency Staff First Name</label>
+                  <input class="form-control" type="text" placeholder="First Name" formControlName="firstName">
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="form-group">
+                  <label class="form-label">Agency Staff Last Name</label>
+                  <input class="form-control" type="text" placeholder="Last Name" formControlName="lastName">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="form-label">Agency Staff Title</label>
+                  <select class="form-control btn-square" formControlName="title">
+                    <option value="" selected>Seleccione</option>
+                    <option *ngFor="let data of titles; let i = index" value="{{data.id}}">{{data.name}}</option>       
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="form-group">
+                  <label class="form-label">Agency Mobile</label>
+                  <input class="form-control" type="text" placeholder="Agency Mobile" formControlName="companyMobile">
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="card-footer text-right">
+            <button class="btn btn-primary" type="submit" [disabled]='!createProfile.valid' (click)="cProfile(createProfile.value)">Create User</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

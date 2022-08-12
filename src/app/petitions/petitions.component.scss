@@ -1,0 +1,93 @@
+.loader--text {
+  top: 200%;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.pnl-spinner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  background:rgba(255,255,255,0.8);
+}
+
+h4.text-loader {
+  text-align: center;
+  color: #5b58b2;
+}
+
+.loader-box {
+  margin-top: 15%;
+} 
+.container-if{
+  width: 100%;
+  margin: 10px auto;
+}
+.edit-profile .row .col-lg-8{
+  margin: auto;
+}
+.loader--text:after {
+  content: "Loading";
+  font-weight: bold;
+  animation-name: loading-text;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+
+.custom-tooltip-blue{
+  background-color: #0C6A9E;
+  color: #ffffff;
+}
+
+
+.edit-profile .tooltip-inner {
+  background: #0069a7 !important  ;
+}
+.edit-profile .bs-tooltip-right .arrow::before, .bs-tooltip-auto[x-placement^="right"] .arrow::before {
+  border-right-color: #0069a7 !important;
+}
+
+
+@keyframes loader {
+  15% {
+    transform: translateX(0);
+  }
+  45% {
+    transform: translateX(230px);
+  }
+  65% {
+    transform: translateX(230px);
+  }
+  95% {
+    transform: translateX(0);
+  }
+}
+@keyframes loading-text {
+  0% {
+    content: "Loading";
+  }
+  25% {
+    content: "Loading.";
+  }
+  50% {
+    content: "Loading..";
+  }
+  75% {
+    content: "Loading...";
+  }
+}
