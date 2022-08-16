@@ -34,7 +34,7 @@ export class DefaultComponent implements OnInit {
   estadisticasSolicitudes = {};
   categoriasSolicitudes;
 
-  meses = ["January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "Octuber ", "November ", "December "];
+  meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
   month: String;
   totalGuias = 1;
   rows = [];

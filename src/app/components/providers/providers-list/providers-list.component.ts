@@ -2,7 +2,7 @@ import { NgbActiveModal, NgbModal, ModalDismissReasons, NgbModalConfig } from '@
 import { Component, OnInit, ViewChild ,Input} from '@angular/core';
 import { DatatableComponent, ColumnMode } from '@swimlane/ngx-datatable';
 import { Router } from '@angular/router';
-import { SubjectsService } from '../../../shared/httpClient/subjects/subjects.service';
+import { ProviderService } from '../../../shared/httpClient/provider.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -54,7 +54,7 @@ export class ProvidersListComponent implements OnInit {
 
   ColumnMode = ColumnMode;
 
-  constructor(private subjectsService: SubjectsService, 
+  constructor(private __providerService: ProviderService, 
               public toaster: ToastrService, 
               private modalService: NgbModal,
               public router: Router) {  
@@ -62,16 +62,12 @@ export class ProvidersListComponent implements OnInit {
     this.getMaterias(data => {
       this.temp = [...data];  
       this.rows = data;
-      console.log(this.rows);
     });
-
-    console.log(this.rows);
-
     
   }
 
   getMaterias(dataComp){
-    this.subjectsService.getListMaterias().subscribe(
+    this.__providerService.getAllData().subscribe(
       data  => {
           dataComp(data);
          }
@@ -99,7 +95,7 @@ export class ProvidersListComponent implements OnInit {
 
   deleteSubject(id, update){
   
-    this.subjectsService.sendDeleteRequest(id,update).subscribe(
+   /* this.subjectsService.sendDeleteRequest(id,update).subscribe(
       data  => {
           this.toaster.success(data['message']);
           this.modalService.dismissAll();
@@ -109,7 +105,7 @@ export class ProvidersListComponent implements OnInit {
             this.table.offset = 0;
           });
          },
-        error  => {this.toaster.error(error.error.message);});
+        error  => {this.toaster.error(error.error.message);});*/
   }
 
 

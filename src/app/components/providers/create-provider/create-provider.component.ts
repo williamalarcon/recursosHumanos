@@ -1,9 +1,13 @@
+import { expressionType, THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SubjectsService } from '../../../shared/httpClient/subjects/subjects.service';
-import { AreaService } from '../../../shared/httpClient/areas/area.service';
-import { TypeguidesService } from '../../../shared/httpClient/typeguides/typeguides.service';
-import { removeSpaces} from '../../../shared/validators/removeSpaces';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl, ValidationErrors } from '@angular/forms';
+import { __asyncDelegator } from 'tslib';
+import { ProviderService } from '../../../shared/httpClient/provider.service';
+import { CompanyHeadquaterService } from '../../../shared/httpClient/companyHeadquater.service';
+import { CompanyBranchesService } from '../../../shared/httpClient/companyBranches.service';
+import { ConsultantsService } from '../../../shared/httpClient/consultants.service';
+import { TitlesService } from '../../../shared/httpClient/titles.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -14,21 +18,77 @@ import { removeSpaces} from '../../../shared/validators/removeSpaces';
 export class CreateProviderComponent implements OnInit {
   public mySubject: FormGroup;
   public createSubject: FormGroup;
-  areas = [];
-  typeGuides = [];
-  clasificacion = null;
+  public createHeadquater: FormGroup;
+  public createBranch: FormGroup;
+  public createconsultant: FormGroup;
+  public headquaters: FormGroup;
+  private pages: string[] = ["tab-selectbyid1", "tab-selectbyid2", "tab-selectbyid3"];
+  titles = [];
+  public listHeadQuaters;
+  public listBranches;
+  public listConsultants;
+  public providerId = null;
   submitted = false;
+  submittedHeadquater = false;
+  submittedBranch = false;
+  submittedConsultant = false;
 
   constructor(private fb: FormBuilder, 
-              private areaService: AreaService,
-              private typeguidesService: TypeguidesService,
-              private subjectsService: SubjectsService) { 
-    this.getAreas(data => {this.areas = data;});
-    this.getTypeGuides(data => {this.typeGuides = data;});
+              public toaster: ToastrService, 
+              private __providerService: ProviderService,
+              private __titlesService: TitlesService,
+              private __companyBranchesService: CompanyBranchesService,
+              private __consultantsService: ConsultantsService,
+              private __companyHeadquaterService: CompanyHeadquaterService) { 
 
   }
 
   ngOnInit(): void {
+    /*
+    this.getHeadQuaters(data => {
+      this.listHeadQuaters = [...data];  
+    });
+
+    this.getBranches(data => {
+      this.listBranches = [...data];  
+    });  
+
+    this.getConsultants(data => {
+      this.listConsultants = [...data];  
+    });  
+    */
+
+    this.getTitles(data => {this.titles = data;});
+
+    this.headquaters = this.fb.group({
+      adittionalItems: this.fb.array([
+        this.fb.group({
+         name: [""]
+       })
+     ])
+    });
+
+
+    this.createHeadquater = this.fb.group({
+      name: ['', Validators.required]
+    });
+
+    this.createBranch = this.fb.group({
+      name: ['', Validators.required],
+      headQuater: ['', Validators.required]
+    });
+
+
+    this.createconsultant = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      title: ['', Validators.required],
+      email: ['', [Validators.required,Validators.email]],
+      phone: ['', [ Validators.required, Validators.min(1)]],
+      branch: ['', Validators.required]
+    });
+
+
     this.createSubject = this.fb.group({
       providerCompany: ['',[Validators.required]],
       abn: ['', [Validators.required]],
@@ -39,39 +99,234 @@ export class CreateProviderComponent implements OnInit {
       postcode: ['', [Validators.required]],
       providerRegion: ['', [Validators.required]],
       providerSite: ['', [Validators.required]],
-      providerConsultantFirstName: ['', [Validators.required]],
-      providerConsultantLastName: ['', [Validators.required]],
-      providerConsultantTitle: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       email: ['', [Validators.required]],
     })
   }
 
 
-  getAreas(dataComp){
-    this.areaService.sentGetAllAreas().subscribe(data  => {dataComp(data);});   
+  addConsultant(data){;
+    this.submittedConsultant = true;
+    if (this.createconsultant.invalid) {
+      return;
+    }
+
+    this.__consultantsService.createObject(data).subscribe(
+      data  => {
+          this.getConsultants(data => {
+            this.listConsultants = [...data];  
+          });  
+          this.createconsultant.controls['firstName'].setValue("");
+          this.createconsultant.controls['lastName'].setValue("");
+          this.createconsultant.controls['title'].setValue("");
+          this.createconsultant.controls['email'].setValue("");
+          this.createconsultant.controls['phone'].setValue("");
+          this.createconsultant.controls['branch'].setValue("");
+          this.submittedConsultant = false;
+          this.toaster.success(data['message']);
+         },
+        error  => {
+          this.toaster.error(error.error.message);
+        });
+  
   }
 
-  getTypeGuides(dataComp){
-    this.typeguidesService.getListTipos().subscribe(data  => {dataComp(data);});   
+  addHeadQuater(data){;
+    this.submittedHeadquater = true;
+    if (this.createHeadquater.invalid) {
+      return;
+    }
+    data.providerId = this.providerId;
+    this.__companyHeadquaterService.createObject(data).subscribe(
+      data  => {
+          this.listHeadQuaters = [];
+          this.getHeadQuaters(data => {
+            this.listHeadQuaters = [...data];  
+          }); 
+          this.createHeadquater.controls['name'].setValue("");
+          this.submittedHeadquater = false;
+          this.toaster.success(data['message']);
+         },
+        error  => {
+          this.toaster.error(error.error.message);
+        });
+  }
+
+  addBranch(data){;
+    this.submittedBranch = true;
+    if (this.createBranch.invalid) {
+      return;
+    }
+    this.__companyBranchesService.createObject(data).subscribe(
+      data  => { 
+          this.createBranch.controls['name'].setValue("");
+          this.createBranch.controls['headQuater'].setValue("");
+          this.getBranches(data => {
+            this.listBranches = [...data];  
+          });  
+          this.submittedBranch = false;
+          this.toaster.success(data['message']);
+         },
+        error  => {
+          this.toaster.error(error.error.message);
+        });    
+  }
+
+  editItem(id){
+    console.log(this.listHeadQuaters);
+  }
+
+  activateHeadquater(id){
+    this.__companyHeadquaterService.activateItem(id).subscribe(result => {
+      this.toaster.success(result['message']);
+      this.getHeadQuaters(data => {
+        this.listHeadQuaters = [...data];  
+      });        
+    })
+  }
+
+  inactiveHeadquater(id){
+    this.__companyHeadquaterService.inactivateItem(id).subscribe(result => {
+      this.toaster.success(result['message']);
+      this.getHeadQuaters(data => {
+        this.listHeadQuaters = [...data];  
+      });        
+    })
   }
 
 
-  cSubject(data){
+  activateBranch(id){
+    this.__companyBranchesService.activateItem(id).subscribe(result => {
+      this.toaster.success(result['message']);
+      this.getBranches(data => { this.listBranches = [...data];  });  
+      
+    })
+  }
+
+  inactiveBranch(id){
+    this.__companyBranchesService.inactivateItem(id).subscribe(result => {
+      this.toaster.success(result['message']);
+      this.getBranches(data => {this.listBranches = [...data];  });  
+    })
+  }
+
+  activateConsultant(id){
+    this.__consultantsService.activateItem(id).subscribe(result => {
+      this.toaster.success(result['message']);
+      this.getConsultants(data => {this.listConsultants = [...data];  });  
+      
+    })
+  }
+
+  inactiveConsultant(id){
+    this.__consultantsService.inactivateItem(id).subscribe(result => {
+      this.toaster.success(result['message']);
+      this.getConsultants(data => {this.listConsultants = [...data];  });  
+    })
+  }
+
+
+  changeTabset(event){
+    
+  }
+
+  
+  getTitles(dataComp){
+    this.__titlesService.getAllData().subscribe(data  => {  dataComp(data);});   
+  }
+
+  getBranches(dataComp){
+    this.__companyBranchesService.getAllData(this.providerId).subscribe(results => {
+      dataComp(results);
+      this.listBranches.sort(function(obj1, obj2) {
+        return obj2.f - obj1.f;
+      });
+
+    })
+  }
+
+
+  getConsultants(dataComp){
+    this.__consultantsService.getAllData(this.providerId).subscribe(results => {
+      dataComp(results);
+      this.listBranches.sort(function(obj1, obj2) {
+        return obj2.f - obj1.f;
+      });
+
+    })
+  }
+
+  
+
+  getHeadQuaters(dataComp){
+    this.__companyHeadquaterService.getAllData(this.providerId).subscribe(results => {
+      dataComp(results);
+      this.listHeadQuaters.sort(function(obj1, obj2) {
+        return obj2.f - obj1.f;
+      });
+
+    })
+  }
+
+
+  cSubject(data, tabSet){
     this.submitted = true;
     if (this.createSubject.invalid) {
       return;
     }
 
-    this.subjectsService.sendCreateRequest(data);
+    this.__providerService.sendCreateRequest(data).subscribe(
+      data  => {
+        var that = this
+        tabSet.select(that.pages[1]);
+        this.providerId = data['id'];
+        this.toaster.success(data['message']);
+         },
+        error  => {
+          this.toaster.error(error.error.message);});
+
   }
 
-  selectClasificacion(data){
-    this.clasificacion = data;
-    if(this.clasificacion != 2){
-      this.createSubject.controls['tipoGuia'].setValue("");
+    /**
+   * Create form unit
+   */
+ private getadittionalItems() {
+  return this.fb.group({
+    name: ["", Validators.required],
+  });
+}
+
+
+  /**
+ * Add new unit row into form
+ */
+addUnit() {
+  const control = <FormArray>this.headquaters.controls["adittionalItems"];
+  control.push(this.getadittionalItems());
+  if(control.controls.length ==2 ){
+    control.controls[0]['controls'].name.setValidators([Validators.required]);
+    control.controls[0]['controls'].name.updateValueAndValidity();
+  }
+}
+
+
+  /**
+   * Remove unit row from form on click delete button
+   */
+   removeUnit(i: number) {
+    const control = <FormArray>this.headquaters.controls["adittionalItems"];
+    control.removeAt(i);
+    if(control.controls.length == 1){
+      control.controls[0]['controls'].name.clearValidators();
+      control.controls[0]['controls'].name.updateValueAndValidity();
     }
   }
+
+  get fconsultant() { return this.createconsultant.controls; }
+
+  get fbranch() { return this.createBranch.controls; }
+
+  get fh() { return this.createHeadquater.controls; }
 
   get f() { return this.createSubject.controls; }
 }
