@@ -37,13 +37,7 @@ export class CompanyHeadquaterService {
    * @param data Request para crear usuario encryptando la clave
    */  
      public updateObject(data){
-      this.httpClient.post(this.REST_API_SERVER+"/categories/uCategory",{"id" : data.id, "name" : data.name}).subscribe(
-        data  => {
-            this.toaster.success(data['message']);
-            
-            return this.router.navigateByUrl('/categories/categories-list');
-           },
-          error  => {this.toaster.error(error.error.message);});
+      return this.httpClient.post(this.REST_API_SERVER+"/companyHeadquaters/uHeadquater", data);
     }
 
 

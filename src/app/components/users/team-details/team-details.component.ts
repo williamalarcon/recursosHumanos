@@ -17,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
       </button>
     </div>
     <div class="modal-body" style="text-align: center">
-      <label>Yo you want desactivate the User:  <strong> {{firstName}} </strong></label>
+      <label>Do Yo you want desactivate the User:  <strong> {{firstName}} </strong></label>
       <br><br>
       <button class="btn btn-primary" type="submit"  (click)="delete(id)" style="margin-right: 10px">Ok</button>  
       

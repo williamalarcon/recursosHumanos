@@ -158,7 +158,8 @@
                                                   <td>
                                                       <h6 class="f-w-600 mb-0">{{item.name}}</h6>
                                                   </td>
-                                                  <td>                          
+                                                  <td>     
+                                                    <span class="badge badge-pill pill-badge-success" (click)="editHeadquater(item)" >Edit</span>                           
                                                     <span *ngIf="item.active == 0" class="badge badge-pill pill-badge-success" (click)="activateHeadquater(item.id)" >Activate</span>
                                                     <span *ngIf="item.active == 1" class="badge badge-pill pill-badge-secondary" (click)="inactiveHeadquater(item.id)" >Inactivate</span>
                                                   </td>
@@ -233,7 +234,8 @@
                                                     <td>
                                                         <h6 class="f-w-600 mb-0">{{item.companyHeadquater}}</h6>
                                                     </td>
-                                                    <td>                          
+                                                    <td>       
+                                                      <span class="badge badge-pill pill-badge-success" (click)="editBranch(item)" >Edit</span>                                      
                                                       <span *ngIf="item.active == 0" class="badge badge-pill pill-badge-success" (click)="activateBranch(item.id)" >Activate</span>
                                                       <span *ngIf="item.active == 1" class="badge badge-pill pill-badge-secondary" (click)="inactiveBranch(item.id)" >Inactivate</span>
                                                     </td>
@@ -345,7 +347,8 @@
                                                     <td><h6 class="f-w-600 mb-0">{{item.phone}}</h6></td>
                                                     <td><h6 class="f-w-600 mb-0">{{item.email}}</h6></td>
                                                     <td><h6 class="f-w-600 mb-0">{{item.branch_name}}</h6></td>
-                                                    <td>                          
+                                                    <td>          
+                                                      <span class="badge badge-pill pill-badge-success" (click)="editConsultant(item)" >Edit</span>                                                    
                                                       <span *ngIf="item.active == 0" class="badge badge-pill pill-badge-success" (click)="activateConsultant(item.id)" >Activate</span>
                                                       <span *ngIf="item.active == 1" class="badge badge-pill pill-badge-secondary" (click)="inactiveConsultant(item.id)" >Inactivate</span>
                                                     </td>

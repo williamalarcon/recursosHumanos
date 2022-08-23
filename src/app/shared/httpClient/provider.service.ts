@@ -43,21 +43,10 @@ export class ProviderService {
    * 
    * @param data Request para crear usuario encryptando la clave
    */  
-     public updateUser(data){
-      let encrypt
-      console.log(data.password)
-      if(data.password != null ){
-        const md5 = new Md5();
-        encrypt =  md5.appendStr(data.password).end();
-      }
-      
-      this.httpClient.post(this.REST_API_SERVER+"/users/uUser",{"id" : data.id, "first_name" : data.firstName, "last_name" : data.lastName , "password" :  encrypt, "title" : data.title, "division" : data.division, "company_mobile" : data.companyMobile, "email" : data.email}).subscribe(
-        data  => {
-            this.toaster.success(data['message']);
-            
-            return this.router.navigateByUrl('/user/team-details');
-           },
-          error  => {this.toaster.error(error.error.message);});
+     public updateObject(data){
+      let user = this.storageService.getCurrentSession();
+      data.userModified =  user['id'];
+      return this.httpClient.post(this.REST_API_SERVER+"/providers/uProvider",data);
     }
 
 
@@ -70,19 +59,12 @@ export class ProviderService {
     return this.httpClient.get(this.REST_API_SERVER+"/providers/lProviders");
   }
 
-  /**
-   * Trae el listado de funcionarios
-   */
-   public getAllUsers(){
-    return this.httpClient.get(this.REST_API_SERVER+"/users/lUsers/AGENCY");
-  }
 
-  
   /**
    * Inactivate Item 
    */
    public inactivateItem(data){
-    return this.httpClient.put(this.REST_API_SERVER+"/users/iUser",{"id": data});
+    return this.httpClient.put(this.REST_API_SERVER+"/providers/iProvider",{"id": data});
   }
 
     
@@ -90,15 +72,15 @@ export class ProviderService {
    * Activate Item 
    */
    public activateItem(data){
-    return this.httpClient.put(this.REST_API_SERVER+"/users/aUser",{"id": data});
+    return this.httpClient.put(this.REST_API_SERVER+"/providers/aProvider",{"id": data});
   }
 
 
   /**
    * Trae el listado de funcionarios
    */
-   public getDataById(data){
-    return this.httpClient.get(this.REST_API_SERVER+"users/rUser/"+data);
+   public getDataById(id){
+    return this.httpClient.get(this.REST_API_SERVER+"/providers/rProvider/"+id);
   }
 
 

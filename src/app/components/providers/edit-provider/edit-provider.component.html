@@ -1,73 +1,373 @@
-<div class="container-fluid">
+<div class="container-fluid">  
   <div class="edit-profile">
     <div class="row">
       <div class="col-lg-12">
-        <form class="card" [formGroup]="editSubject">
+        <form class="card" [formGroup]="editProvider">
           <div class="card-header">
-            <h4 class="card-title mb-0">Editar Curso</h4>
+            <h4 class="card-title mb-0">Edit Provider</h4>
             <div class="card-options"><a class="card-options-collapse" href="javascript:void(0)" data-toggle="card-collapse"><i
                   class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="javascript:void(0)" data-toggle="card-remove"><i
                   class="fe fe-x"></i></a></div>
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-md-9">
-                <div class="form-group">
-                  <label class="form-label">Nombre</label>
-                  <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }">
-                  <div *ngIf="submitted && f.nombre.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
-                </div>
+              <div class="col-md-12">
+                <ngb-tabset #t="ngbTabset" (tabChange)="changeTabset($event)">
+                  <ngb-tab id="tab-selectbyid1" title="Basic Data">
+                     <!-- Tab Galeria-->
+                     <ng-template ngbTabContent>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="form-label">Provider Company</label>
+                            <input class="form-control" type="text" placeholder="Provider Company" formControlName="providerCompany" [ngClass]="{ 'is-invalid': submitted && f.providerCompany.errors }">
+                            <div *ngIf="submitted && f.providerCompany.errors" class="text text-danger mt-1">This Field is required</div>
+                          </div>
+                        </div>
+                  
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label class="form-label">ABN</label>
+                            <input class="form-control" type="number" placeholder="ABN" formControlName="abn" [ngClass]="{ 'is-invalid': submitted && f.abn.errors }">
+                            <div *ngIf="submitted && f.abn.errors" class="text text-danger mt-1">This Field is required</div>
+                          </div>
+                        </div>
+                        <div class="col-md-5">
+                          <div class="form-group">
+                            <label class="form-label">Address</label>
+                            <input class="form-control" type="text" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+                            <div *ngIf="submitted && f.address.errors" class="text text-danger mt-1">This Field is required</div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label class="form-label">Unit</label>
+                            <input class="form-control" type="text" placeholder="Unit" formControlName="unit" [ngClass]="{ 'is-invalid': submitted && f.unit.errors }">
+                            <div *ngIf="submitted && f.unit.errors" class="text text-danger mt-1">This Field is required</div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label class="form-label">Suburb</label>
+                            <input class="form-control" type="text" placeholder="Suburb" formControlName="suburb" [ngClass]="{ 'is-invalid': submitted && f.suburb.errors }">
+                            <div *ngIf="submitted && f.suburb.errors" class="text text-danger mt-1">This Field is required</div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label class="form-label">State / Territory</label>
+                            <select class="form-control btn-square" formControlName="state" [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+                              <option value="" selected>Seleccione</option>
+                              <option value="1">ACT</option>
+                              <option value="2">NSW</option>
+                              <option value="3">NT</option>
+                              <option value="4">QLD</option>
+                              <option value="5">SA</option>
+                              <option value="6">TAS</option>
+                              <option value="7">VIC</option>
+                              <option value="8">WA</option>
+                            </select>
+                            <div *ngIf="submitted && f.state.errors" class="text text-danger mt-1">This Field is required</div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label class="form-label">Postcode</label>
+                            <input class="form-control" type="number" maxlength="4" placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
+                            <div *ngIf="submitted && f.postcode.errors" class="text text-danger mt-1">This Field is required</div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label class="form-label">Provider Region</label>
+                            <input class="form-control" type="text" placeholder="Provider Region" formControlName="providerRegion" [ngClass]="{ 'is-invalid': submitted && f.providerRegion.errors }">
+                            <div *ngIf="submitted && f.providerRegion.errors" class="text text-danger mt-1">This Field is required</div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label class="form-label">Provider Site Location</label>
+                            <input class="form-control" type="text" placeholder="Provider Site Location" formControlName="providerSite" [ngClass]="{ 'is-invalid': submitted && f.providerSite.errors }">
+                            <div *ngIf="submitted && f.providerSite.errors" class="text text-danger mt-1">This Field is required</div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label class="form-label">Phone</label>
+                            <input class="form-control" type="text" placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                            <div *ngIf="submitted && f.phone.errors" class="text text-danger mt-1">This Field is required</div>
+                          </div>
+                        </div>    
+                        <div class="col-md-5">
+                          <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input class="form-control" type="email" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                            <div *ngIf="submitted && f.email.errors" class="text text-danger mt-1">This Field is required</div>
+                          </div>
+                        </div>
+                      </div>
+                      <button class="btn btn-primary" type="submit" (click)="updateProvider(editProvider.value,t)">Save</button>
+                    </ng-template>
+
+
+                    <!-- /Tab Galeria-->
+                  </ngb-tab>                    
+                  <ngb-tab id="tab-selectbyid2" *ngIf="providerId != null" title="Company Headquaters">
+                      <ng-template ngbTabContent>
+                        <div class="row browse">
+                          <div class="col-md-6">
+                            <form class="card" [formGroup]="createHeadquater">
+                              <div class="card-header">
+                                  <h5>Add Company Headquaters</h5>
+                              </div>
+                                <div class="card-body">
+                                  <div class="row">
+                                    <div class="col-md-9">
+                                      <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Company Name" formControlName="name" [ngClass]="{ 'is-invalid': submittedHeadquater && fh.name.errors }">
+                                        <div *ngIf="submittedHeadquater && fh.name.errors" class="text text-danger mt-1">This Field is required</div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <div class="form-group">
+                                        <button class="btn btn-primary" type="submit" (click)="addHeadQuater(createHeadquater.value)">Add  <i class="fa fa-plus"></i></button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="card">
+                              <div class="card-header">
+                                  <h5>List of Company Headquaters</h5>
+                              </div>
+                              <div class="card-body p-0">
+                                  <div class="sales-product-table table-responsive hospital-table">
+                                      <table class="table table-bordernone text-center">
+                                          <thead>
+                                              <tr>
+                                                  <th scope="col">Name</th>
+                                                  <th scope="col">Action</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              <tr *ngFor="let item of listHeadQuaters">
+
+                                                  <td>
+                                                      <h6 class="f-w-600 mb-0">{{item.name}}</h6>
+                                                  </td>
+                                                  <td> 
+                                                    <span class="badge badge-pill pill-badge-success" (click)="editHeadquater(item)" >Edit</span>                         
+                                                    <span *ngIf="item.active == 0" class="badge badge-pill pill-badge-success" (click)="activateHeadquater(item.id)" >Activate</span>
+                                                    <span *ngIf="item.active == 1" class="badge badge-pill pill-badge-secondary" (click)="inactiveHeadquater(item.id)" >Inactivate</span>
+                                                  </td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </ng-template>
+                      </ngb-tab>
+                      <ngb-tab id="tab-selectbyid3" *ngIf="providerId != null" title="Company Branch">
+                        <ng-template ngbTabContent >
+                          <div class="row browse">
+                            <div class="col-md-6">
+                              <form class="card" [formGroup]="createBranch">
+                                <div class="card-header">
+                                    <h5>Add Company Branch</h5>
+                                </div>
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <div class="form-group">
+                                          <label class="form-label">Name</label>
+                                          <input class="form-control" type="text" placeholder="Company Name" formControlName="name" [ngClass]="{ 'is-invalid': submittedBranch && fbranch.name.errors }">
+                                          <div *ngIf="submittedBranch && fbranch.name.errors" class="text text-danger mt-1">This Field is required</div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <div class="form-group">
+                                          <label class="form-label">Company HeadQuater</label>
+                                          <select class="form-control btn-square" formControlName="headQuater" [ngClass]="{ 'is-invalid': submittedBranch && fbranch.headQuater.errors }">
+                                            <option value="" selected>Seleccione</option>
+                                            <ng-container *ngFor='let data of listHeadQuaters' ><option [value]="data.id" *ngIf="data.active=='1'">{{data.name}}</option>
+                                            </ng-container>    
+                                          </select>
+                                          <div *ngIf="submittedBranch && fbranch.headQuater.errors" class="text text-danger mt-1">This Field is required</div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-3">
+                                        <div class="form-group">
+                                          <button class="btn btn-primary" type="submit" (click)="addBranch(createBranch.value)">Add  <i class="fa fa-plus"></i></button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="card">
+                                <div class="card-header">
+                                    <h5>List of Company Branch</h5>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="sales-product-table table-responsive hospital-table">
+                                        <table class="table table-bordernone text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Headquater</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of listBranches">
+  
+                                                    <td>
+                                                        <h6 class="f-w-600 mb-0">{{item.name}}</h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="f-w-600 mb-0">{{item.companyHeadquater}}</h6>
+                                                    </td>
+                                                    <td>           
+                                                      <span class="badge badge-pill pill-badge-success" (click)="editBranch(item)" >Edit</span>                   
+                                                      <span *ngIf="item.active == 0" class="badge badge-pill pill-badge-success" (click)="activateBranch(item.id)" >Activate</span>
+                                                      <span *ngIf="item.active == 1" class="badge badge-pill pill-badge-secondary" (click)="inactiveBranch(item.id)" >Inactivate</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </ng-template>
+                       
+                      </ngb-tab>
+                      <ngb-tab id="tab-selectbyid4" *ngIf="providerId != null" title="Consultant">
+                        <!-- Tab Galeria-->
+                        <ng-template ngbTabContent >
+                          <div class="row browse">
+                            <div class="col-md-3">
+                              <form class="card" [formGroup]="createconsultant">
+                                <div class="card-header">
+                                    <h5>Add Company Branch</h5>
+                                </div>
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <div class="form-group">
+                                          <label class="form-label">First Name</label>
+                                          <input class="form-control" type="text" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.firstName.errors }">
+                                          <div *ngIf="submittedConsultant && fconsultant.firstName.errors" class="text text-danger mt-1">This Field is required</div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <div class="form-group">
+                                          <label class="form-label">Last Name</label>
+                                          <input class="form-control" type="text" placeholder="Last Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.lastName.errors }">
+                                          <div *ngIf="submittedConsultant && fconsultant.lastName.errors" class="text text-danger mt-1">This Field is required</div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <div class="form-group">
+                                          <label class="form-label">Agency Staff Title</label>
+                                          <select class="form-control btn-square" formControlName="title">
+                                            <option value="" selected>Seleccione</option>
+                                            <option *ngFor="let data of titles; let i = index" value="{{data.id}}">{{data.name}}</option>       
+                                          </select>
+                                          <div *ngIf="submittedConsultant && fconsultant.title.errors" class="text text-danger mt-1">This Field is required</div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <div class="form-group">
+                                          <label class="form-label">Phone</label>
+                                          <input class="form-control" type="text" placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.phone.errors }">
+                                          <div *ngIf="submittedConsultant && fconsultant.phone.errors" class="text text-danger mt-1">This Field is required</div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <div class="form-group">
+                                          <label class="form-label">Email</label>
+                                          <input class="form-control" type="text" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.email.errors }">
+                                          <div *ngIf="submittedConsultant && fconsultant.email.errors" class="text text-danger mt-1">This Field is required</div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <div class="form-group">
+                                          <label class="form-label">Company Branch</label>
+                                          <select class="form-control btn-square" formControlName="branch" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.branch.errors }">
+                                            <option value="" selected>Seleccione</option>
+                                            <ng-container *ngFor='let data of listBranches' ><option [value]="data.id" *ngIf="data.active=='1'">{{data.name}}</option>
+                                            </ng-container>    
+                                          </select>
+                                          <div *ngIf="submittedConsultant && fconsultant.branch.errors" class="text text-danger mt-1">This Field is required</div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <div class="form-group">
+                                          <button class="btn btn-primary" type="submit" (click)="addConsultant(createconsultant.value)">Add  <i class="fa fa-plus"></i></button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9">
+                              <div class="card">
+                                <div class="card-header">
+                                    <h5>List of Company Branch</h5>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="sales-product-table table-responsive hospital-table">
+                                        <table class="table table-bordernone text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">First Name</th>
+                                                    <th scope="col">Last Name</th>
+                                                    <th scope="col">Title</th>
+                                                    <th scope="col">Phone</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Branch</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of listConsultants">
+  
+                                                    <td><h6 class="f-w-600 mb-0">{{item.first_name}}</h6></td>
+                                                    <td><h6 class="f-w-600 mb-0">{{item.last_name}}</h6></td>
+                                                    <td><h6 class="f-w-600 mb-0">{{item.title}}</h6></td>
+                                                    <td><h6 class="f-w-600 mb-0">{{item.phone}}</h6></td>
+                                                    <td><h6 class="f-w-600 mb-0">{{item.email}}</h6></td>
+                                                    <td><h6 class="f-w-600 mb-0">{{item.branch_name}}</h6></td>
+                                                    <td>         
+                                                      <span class="badge badge-pill pill-badge-success" (click)="editConsultant(item)" >Edit</span>                                    
+                                                      <span *ngIf="item.active == 0" class="badge badge-pill pill-badge-success" (click)="activateConsultant(item.id)" >Activate</span>
+                                                      <span *ngIf="item.active == 1" class="badge badge-pill pill-badge-secondary" (click)="inactiveConsultant(item.id)" >Inactivate</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </ng-template>  
+                      </ngb-tab>
+                </ngb-tabset>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label class="form-label">Clasificación</label>
-                  <select class="form-control btn-square" formControlName="clasificacion" (change)="selectClasificacion($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.clasificacion.errors }">
-                    <option value="" selected>Seleccione</option>
-                    <option value="1">Materia</option>
-                    <option value="2">Guia</option>
-                  </select>
-                  <div *ngIf="submitted && f.clasificacion.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
-                </div>
-              </div>
-              <div class="col-md-3" *ngIf="clasificacion == 2">
-                <div class="form-group">
-                  <label class="form-label">Tipo de Guia</label>
-                  <select class="form-control btn-square" formControlName="tipoGuia" [ngClass]="{ 'is-invalid': submitted && f.tipoGuia.errors }" >
-                    <option value="" selected>Seleccione</option>
-                    <option *ngFor="let data of typeGuides; let i = index" value="{{data.id}}">{{data.nombre}}</option>        
-                  </select>
-                  <div *ngIf="submitted && f.tipoGuia.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
-                </div>
-              </div>
-              
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label class="form-label">Área</label>
-                  <select class="form-control btn-square" formControlName="area" [ngClass]="{ 'is-invalid': submitted && f.area.errors }">
-                    <option value="" selected>Seleccione</option>
-                    <option *ngFor="let data of areas; let i = index" value="{{data.id}}">{{data.nombre}}</option>        
-                  </select>
-                  <div *ngIf="submitted && f.area.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
-                </div>
-              </div>
-
-              <div class="col-md-9">
-                <div class="form-group">
-                    <label class="form-label">Descripción</label>
-                    <textarea type="text" maxlength="500" class="md-textarea form-control" formControlName="descripcion" mdbInput [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }"></textarea>
-                    <div *ngIf="submitted && f.descripcion.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <div class="card-footer text-right">
-            <button class="btn btn-primary" type="submit"  (click)="eSubject(editSubject.value)">Editar Curso</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+

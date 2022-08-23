@@ -1,12 +1,14 @@
 import { expressionType, THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl, ValidationErrors } from '@angular/forms';
+import { NgbActiveModal, NgbModal, ModalDismissReasons, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { __asyncDelegator } from 'tslib';
 import { ProviderService } from '../../../shared/httpClient/provider.service';
 import { CompanyHeadquaterService } from '../../../shared/httpClient/companyHeadquater.service';
 import { CompanyBranchesService } from '../../../shared/httpClient/companyBranches.service';
 import { ConsultantsService } from '../../../shared/httpClient/consultants.service';
 import { TitlesService } from '../../../shared/httpClient/titles.service';
+import { ModalComponent } from '../../modal/modal.component';
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -16,7 +18,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./create-provider.component.scss']
 })
 export class CreateProviderComponent implements OnInit {
-  public mySubject: FormGroup;
   public createSubject: FormGroup;
   public createHeadquater: FormGroup;
   public createBranch: FormGroup;
@@ -35,6 +36,7 @@ export class CreateProviderComponent implements OnInit {
 
   constructor(private fb: FormBuilder, 
               public toaster: ToastrService, 
+              private modalService: NgbModal,
               private __providerService: ProviderService,
               private __titlesService: TitlesService,
               private __companyBranchesService: CompanyBranchesService,
@@ -44,19 +46,6 @@ export class CreateProviderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /*
-    this.getHeadQuaters(data => {
-      this.listHeadQuaters = [...data];  
-    });
-
-    this.getBranches(data => {
-      this.listBranches = [...data];  
-    });  
-
-    this.getConsultants(data => {
-      this.listConsultants = [...data];  
-    });  
-    */
 
     this.getTitles(data => {this.titles = data;});
 
@@ -320,6 +309,45 @@ addUnit() {
       control.controls[0]['controls'].name.clearValidators();
       control.controls[0]['controls'].name.updateValueAndValidity();
     }
+  }
+
+  editBranch(data){
+    data.provider = this.providerId;
+    const dialogRef = this.modalService.open(ModalComponent, { })
+    dialogRef.componentInstance.data = data;
+    dialogRef.componentInstance.title = "Edit Company Branch";
+    dialogRef.componentInstance.option = 2;
+    dialogRef.componentInstance.action.subscribe((action) => {
+      this.getBranches(data => {
+        this.listBranches = [...data];  
+      });
+    });
+  }
+
+  editConsultant(data){
+    data.provider = this.providerId;
+    const dialogRef = this.modalService.open(ModalComponent, { })
+    dialogRef.componentInstance.data = data;
+    dialogRef.componentInstance.title = "Edit Consultant";
+    dialogRef.componentInstance.option = 3;
+    dialogRef.componentInstance.action.subscribe((action) => {
+      this.getConsultants(data => {
+        this.listConsultants = [...data];  
+      });  
+    });
+  }
+
+
+  editHeadquater(data){
+    const dialogRef = this.modalService.open(ModalComponent, { })
+    dialogRef.componentInstance.data = data;
+    dialogRef.componentInstance.title = "Edit Company Headquater";
+    dialogRef.componentInstance.option = 1;
+    dialogRef.componentInstance.action.subscribe((action) => {
+      this.getHeadQuaters(data => {
+        this.listHeadQuaters = [...data];  
+      });
+    });
   }
 
   get fconsultant() { return this.createconsultant.controls; }

@@ -32,6 +32,8 @@ import {NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap'
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { TagInputModule } from 'ngx-chips';
+import { ModalComponent } from './components/modal/modal.component';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -41,7 +43,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     LoginComponent,
-    PetitionsComponent
+    PetitionsComponent,
+    ModalComponent,
   ],
   imports: [
     //TagInputModule,
