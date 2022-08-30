@@ -121,7 +121,6 @@ export class EditProviderComponent implements OnInit {
     
     this.__providerService.getDataById(id).subscribe(
       data  => {
-        console.log(data);
         this.editProvider.controls['id'].setValue(data['id']);
         this.editProvider.controls['providerCompany'].setValue(data['providerCompany']);
         this.editProvider.controls['abn'].setValue(data['abn']);
@@ -134,8 +133,6 @@ export class EditProviderComponent implements OnInit {
         this.editProvider.controls['providerSite'].setValue(data['providerSite']);
         this.editProvider.controls['phone'].setValue(data['phone']);
         this.editProvider.controls['email'].setValue(data['email']);
-        
-          
          },
           error  => {this.toaster.error(error.error.message);}
         )

@@ -14,7 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [CandidatesListComponent, EditCandidateComponent, CreateCandidateComponent],
@@ -26,6 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       selectedMessage: 'selected'
       }
       }),
+      NgSelectModule,
     CommonModule,
     CandidateRoutingModule,
     FormsModule,

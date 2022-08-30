@@ -3,7 +3,7 @@
       <div class="col-sm-12">
           <div class="card">
               <div class="card-header">
-                  <h5>Filter Providers</h5>
+                  <h5>Filter</h5>
               </div>
               <div class="card-body custom-datatable">
                   <input type="text" class="filter-ngx form-control" placeholder='Filter'
@@ -25,11 +25,11 @@
                       </ngx-datatable-column>
                       <ngx-datatable-column size="1000">
                         <ng-template ngx-datatable-cell-template let-row="row"  let-rowIndex="rowIndex" let-value="value">
-                          <span  class="badge badge-pill pill-badge-primary" (click)="viewSubject(row)">Seguimiento</span>  
-                          <span  class="badge badge-pill pill-badge-info" (click)="editProfile(row)">Editar</span>
-                          <span *ngIf="row.activo == 0" class="badge badge-pill pill-badge-success" (click)="deleteSubject(row.id,1)" >Activar</span>
-                          <span *ngIf="row.activo == 1" class="badge badge-pill pill-badge-secondary" (click)="openConfirmation(row)" >Inactivar</span>
-                          <span  class="badge badge-pill pill-badge-warning" (click)="viewAlerts(row)">Alertas</span>
+
+                          <span  class="badge badge-pill pill-badge-info"  (click)="editProfile(row)">Edit</span>
+                          <span *ngIf="row.active == 0" class="badge badge-pill pill-badge-success" (click)="activateItem(row.id)" >Activate</span>
+                          <span *ngIf="row.active == 1" class="badge badge-pill pill-badge-secondary" (click)="openConfirmation(row)" >Inactivate</span>
+                          
                         </ng-template>
                       </ngx-datatable-column>
                      

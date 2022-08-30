@@ -1,39 +1,45 @@
 <!-- page-wrapper Start-->
 <div class="login-content container-fluid p-0">
-    <!-- login page start-->
-        <div class="row">
-            <div class="col-md-12">
+	<div class="row">
+		<div class="col-md-8">
+			<img class="img-login" src="../../../assets/images/login.jpg" >
+		</div>
+		<div class="col-md-4">
                 <div class="auth-innerright">
                     <div class="authentication-box">
+
+						<h4 class="color-green">Welcome to the platform</h4>
+
+						<div class="image-logo">
+							<img class="img-login" src="../../../assets/images/logo.png" >
+						</div>
+						<p><span>To access this page you can onlu do with username and password</span></p>
                         <div>
-                                
                                     <div>
                                         <form class="theme-form" [formGroup]="loginForm" *ngIf="!newUser">
-                                            <h4>Iniciar Sesión</h4>
                                             <div class="form-group">
-												<label class="col-form-label pt-0">Usuario</label>
-												<input class="form-control" formControlName="user" type="text" required="">
+												<input class="form-control" placeholder="User" formControlName="user" type="text" required="">
 												<div *ngIf="loginForm.controls.user.touched && loginForm.controls.user.errors?.required"
 													class="text text-danger mt-1">
-													Usuario invalido
+													User invalid
 												</div>
 												<div *ngIf="loginForm.controls.user.touched && loginForm.controls.user.errors?.user"
 													class="text text-danger mt-1">
-													Usuario invalido
+													User invalid
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-form-label">Contraseña</label>
-												<input class="form-control" type="password" formControlName="password" required="">
+											
+												<input class="form-control" placeholder="Password" type="password" formControlName="password" required="">
 												<div *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors?.required"
 													class="text text-danger mt-1">
-													Contraseña invalida
+													Password Invalid
 												</div>
 											</div>
 											<div class="form-group form-row mt-3 mb-0">
-												<button class="btn btn-primary btn-block btn-lg"
+												<button class="btn btn-primary btn-block btn-login btn-lg"
 													[disabled]="!loginForm.valid " (click)="login(loginForm.value)"
-													type="submit"><span>Ingresar</span>
+													type="submit"><span>Sing In</span>
 												</button>
 											</div>
                                         </form>
@@ -42,8 +48,6 @@
                         </div>
                     </div>
                 </div>
-            
-        </div>
-    </div>
-    <!-- login page end-->
+		</div>
+	</div>
 </div>

@@ -30,8 +30,6 @@ import { DashboardModule } from './components/dashboard/dashboard.module';
 import { NgbDateCustomParserFormatter} from './shared/filter/dateformat';
 import {NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
-
-import { TagInputModule } from 'ngx-chips';
 import { ModalComponent } from './components/modal/modal.component';
 
 
