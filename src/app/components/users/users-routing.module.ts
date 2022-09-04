@@ -4,6 +4,7 @@ import { TeamDetailsComponent } from './team-details/team-details.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
+import { SetPasswordComponent } from './set-password/set-password.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,14 @@ const routes: Routes = [
         data:{
           title:"Edit User",
           breadcrumb:"Edit User",
+        }
+      },
+      {
+        path:"set-password",
+        component:SetPasswordComponent,
+        data:{
+          title:"Set Password",
+          breadcrumb:"Set Password",
         }
       },
     ],

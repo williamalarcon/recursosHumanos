@@ -86,6 +86,35 @@ export class ProfileService {
   }
 
 
+
+    /**
+   * 
+   * @param data Request para crear usuario encryptando la clave
+   */  
+  public setPassword(data){
+      let encrypt;
+      if(data.password != null ){
+        const md5 = new Md5();
+        encrypt =  md5.appendStr(data.password).end();
+      }
+      
+      this.httpClient.post(this.REST_API_SERVER+"/users/setPassword",{"id" : data.id, "password" :  encrypt}).subscribe(
+        data  => {
+            this.toaster.success(data['message']);
+            let currentUser = JSON.parse(localStorage.currentUser);
+            currentUser.activatePw = 1;
+            localStorage.setItem("currentUser", JSON.stringify(currentUser));
+            window.location.href = '/dashboard/default';
+            
+            
+            
+
+            
+           },
+          error  => {this.toaster.error(error.error.message);});
+    }
+
+
     /**
    * 
    * @param data Request para crear usuario encryptando la clave

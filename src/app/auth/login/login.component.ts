@@ -82,7 +82,13 @@ export class LoginComponent implements OnInit {
 
   correctLogin(data){
     this.storageService.setCurrentSession(data);
-    this.router.navigateByUrl('/dashboard/default');
+    console.log(data);
+
+    if(data.activatePw == 0){
+      this.router.navigate(['/user/set-password'], { queryParams: { id: data.id } });
+    }else{
+      this.router.navigateByUrl('/dashboard/default');
+    }
   }
 
 

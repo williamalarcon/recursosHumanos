@@ -54,11 +54,13 @@
 }
 
 .btn-login:disabled {
+  border-radius: 35px;
   border-color: #7ed957 !important;
   background: #7ed957 !important;
 }
 
 .btn-login {
+  border-radius: 35px;
   border-color: #7ed957 !important;
   background: #7ed957 !important;
 }
@@ -71,7 +73,7 @@
 
 .authentication-box {
     background: #ffffff;
-    padding: 30px;
+    padding: 0px 50px;
     border-radius: 20px;    
     display: block;
 }

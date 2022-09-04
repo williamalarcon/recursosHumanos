@@ -39,6 +39,11 @@ export class NavService {
 		this.screenWidth = window.innerWidth;
 	}
 
+	
+	MENUACTIVATEUSER: Menu[] = [
+	];
+
+
 	MENUITEMS: Menu[] = [
 		{
 			title: 'Offers', icon: 'trello', type: 'sub', active: false, children: [

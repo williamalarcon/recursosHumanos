@@ -9,6 +9,7 @@ import 'mousetrap';
 import { TeamDetailsComponent } from './team-details/team-details.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { SetPasswordComponent } from './set-password/set-password.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -16,7 +17,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
-  declarations: [TeamDetailsComponent, ProfileComponent, EditProfileComponent, CreateProfileComponent],
+  declarations: [TeamDetailsComponent, ProfileComponent, EditProfileComponent, CreateProfileComponent, SetPasswordComponent],
   imports: [
     NgxDatatableModule,
     CommonModule,
