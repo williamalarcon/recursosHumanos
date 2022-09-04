@@ -21,7 +21,7 @@
                 <div class="form-group">
                   <label class="form-label">Agency Staff Division</label>
                   <select class="form-control btn-square" formControlName="division">
-                    <option value="">Seleccione</option>
+                    <option value="">Select</option>
                     <option *ngFor="let data of divisions; let i = index" value="{{data.id}}">{{data.name}}</option>       
                   </select>
                 </div>
@@ -42,7 +42,7 @@
                 <div class="form-group">
                   <label class="form-label">Agency Staff Title</label>
                   <select class="form-control btn-square" formControlName="title">
-                    <option value="" >Seleccione</option>
+                    <option value="" >Select</option>
                     <option *ngFor="let data of titles; let i = index" value="{{data.id}}">{{data.name}}</option>       
                   </select>
                 </div>

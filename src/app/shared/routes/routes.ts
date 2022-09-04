@@ -42,7 +42,15 @@ export const content: Routes = [
       breadcrumb: "Categories"
     }
   },
- 
+  
+  {
+    path: 'offers',
+    loadChildren: () => import('../../components/offers/offers.module').then(m => m.OffersModule),
+    data: {
+      title: "offers",
+      breadcrumb: "offers"
+    }
+  },
 
 
   {

@@ -29,7 +29,7 @@
           <div class="form-group">
             <label class="form-label">Company HeadQuater</label>
             <select class="form-control btn-square" formControlName="headquater" [ngClass]="{ 'is-invalid': submittedBranch && fbr.headquater.errors }">
-              <option value="" selected>Seleccione</option>
+              <option value="" selected>Select</option>
               <ng-container *ngFor='let data of listHeadQuaters' ><option [value]="data.id" *ngIf="data.active=='1'">{{data.name}}</option>
               </ng-container>    
             </select>
@@ -59,7 +59,7 @@
               <div class="form-group">
                 <label class="form-label">Agency Staff Title</label>
                 <select class="form-control btn-square" formControlName="title">
-                  <option value="" selected>Seleccione</option>
+                  <option value="" selected>Select</option>
                   <option *ngFor="let data of titles; let i = index" value="{{data.id}}">{{data.name}}</option>       
                 </select>
                 <div *ngIf="submittedConsultant && fc.title.errors" class="text text-danger mt-1">This Field is required</div>
@@ -83,7 +83,7 @@
               <div class="form-group">
                 <label class="form-label">Company Branch</label>
                 <select class="form-control btn-square" formControlName="branch" [ngClass]="{ 'is-invalid': submittedConsultant && fc.branch.errors }">
-                  <option value="" selected>Seleccione</option>
+                  <option value="" selected>Select</option>
                   <ng-container *ngFor='let data of listBranches' ><option [value]="data.id" *ngIf="data.active=='1'">{{data.name}}</option>
                   </ng-container>    
                 </select>
