@@ -31,8 +31,7 @@ export class ProfileService {
     let user = this.storageService.getCurrentSession();
     this.httpClient.post(this.REST_API_SERVER+"users/cUser",
     {"data" : data , 
-     "userCreated": user['id'],
-    "password" :  encrypt}).subscribe(
+     "userCreated": user['id']}).subscribe(
       data  => {
         this.toaster.success(data['message']);
          return this.router.navigateByUrl('/user/team-details');

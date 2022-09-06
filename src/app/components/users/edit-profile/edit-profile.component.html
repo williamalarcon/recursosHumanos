@@ -4,19 +4,13 @@
       <div class="col-lg-12">
         <form class="card" [formGroup]="editProfile">
           <div class="card-header">
-            <h4 class="card-title mb-0">Edit User</h4>
+            <h4 class="card-title mb-0">Edit user Agency</h4>
             <div class="card-options"><a class="card-options-collapse" href="javascript:void(0)" data-toggle="card-collapse"><i
                   class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="javascript:void(0)" data-toggle="card-remove"><i
                   class="fe fe-x"></i></a></div>
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-md-5">
-                <div class="form-group">
-                  <label class="form-label">Email</label>
-                  <input class="form-control" type="text" placeholder="Email" formControlName="email">
-                </div>
-              </div>
               <div class="col-md-3">
                 <div class="form-group">
                   <label class="form-label">Agency Staff Division</label>
@@ -45,6 +39,12 @@
                     <option value="" >Select</option>
                     <option *ngFor="let data of titles; let i = index" value="{{data.id}}">{{data.name}}</option>       
                   </select>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <input class="form-control" type="text" placeholder="Email" formControlName="email">
                 </div>
               </div>
               <div class="col-sm-6 col-md-3">

@@ -106,6 +106,18 @@ export class EditCandidateComponent implements OnInit {
     })
   }
 
+    
+  selectProfile(data){
+    if(data.target.value == 'Other'){
+      this.editObject.controls['otherProfile'].setValidators([Validators.required]);
+      this.editObject.controls['otherProfile'].updateValueAndValidity();
+    }else {
+      this.editObject.controls['otherProfile'].setValidators([]);
+      this.editObject.controls['otherProfile'].updateValueAndValidity();
+    }
+    
+  }
+
 
 
   ngOnInit(): void {

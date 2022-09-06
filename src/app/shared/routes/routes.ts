@@ -6,8 +6,8 @@ export const content: Routes = [
     path: 'user',
     loadChildren: () => import('../../components/users/users.module').then(m => m.UsersModule),
     data: {
-      title: "Users",
-      breadcrumb: "Users"
+      title: "Users Agency",
+      breadcrumb: "Users Agency"
     }
   },
   {

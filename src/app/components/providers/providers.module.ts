@@ -21,7 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     NgxDatatableModule.forRoot({
       messages: {
-      emptyMessage: 'No hay datos disponibles',
+      emptyMessage: 'No data to display',
       totalMessage: 'total',
       selectedMessage: 'selected'
       }

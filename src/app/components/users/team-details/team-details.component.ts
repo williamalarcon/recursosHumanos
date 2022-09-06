@@ -17,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
       </button>
     </div>
     <div class="modal-body" style="text-align: center">
-      <label>Do Yo you want desactivate the User:  <strong> {{firstName}} </strong></label>
+      <label>You want to deactivate the user:  <strong> {{firstName}} </strong></label>
       <br><br>
       <button class="btn btn-primary" type="submit"  (click)="delete(id)" style="margin-right: 10px">Ok</button>  
       
@@ -121,7 +121,7 @@ export class TeamDetailsComponent implements OnInit {
     const val = event.target.value.toLowerCase();
     // filter our data
     const temp = this.temp.filter(function(d) {
-      return (d.usuario.toLowerCase().indexOf(val) !== -1 || d.cargo.toLowerCase().indexOf(val) !== -1 || d.nombre.toLowerCase().indexOf(val) !== -1 || !val);
+      return (d.firstName.toLowerCase().indexOf(val) !== -1 || d.lastName.toLowerCase().indexOf(val) !== -1 || d.division.toLowerCase().indexOf(val) !== -1 || !val);
     });
     // update the rows
     this.rows = temp;

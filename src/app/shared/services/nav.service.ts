@@ -44,6 +44,18 @@ export class NavService {
 	];
 
 
+	MENUCANDIDATE: Menu[] = [
+		{
+			title: 'Offers', icon: 'trello', type: 'sub', active: false, children: [
+				{ path: '/offers/offers-list', title: 'List', type: 'link' }
+			]
+		},
+		{
+			title: 'Settings', icon: 'settings', type: 'sub', active: false, children: []
+		}
+	];
+
+
 	MENUITEMS: Menu[] = [
 		{
 			title: 'Offers', icon: 'trello', type: 'sub', active: false, children: [
@@ -91,6 +103,8 @@ export class NavService {
 	];
 	// Array
 	items = new BehaviorSubject<Menu[]>(this.MENUITEMS);
+	menuCandidate = new BehaviorSubject<Menu[]>(this.MENUCANDIDATE);
+	
 
 	
 

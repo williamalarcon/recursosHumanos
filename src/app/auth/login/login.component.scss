@@ -5,10 +5,16 @@
   margin: auto;
 }
 
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948 !important; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442 !important; /* red */
+}
 
 .authentication-box input {
   box-shadow: -1px -1px 20px 1px #c1c1c1;
-  border-left: 10px solid #3589a1;
 }
 
 .img-login { 

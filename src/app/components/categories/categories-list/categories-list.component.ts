@@ -105,7 +105,7 @@ export class CategoriesListComponent implements OnInit {
     const val = event.target.value.toLowerCase();
     // filter our data
     const temp = this.temp.filter(function(d) {
-      return (d.usuario.toLowerCase().indexOf(val) !== -1 || d.cargo.toLowerCase().indexOf(val) !== -1 || d.nombre.toLowerCase().indexOf(val) !== -1 || !val);
+      return (d.name.toLowerCase().indexOf(val) !== -1 || !val);
     });
     // update the rows
     this.rows = temp;

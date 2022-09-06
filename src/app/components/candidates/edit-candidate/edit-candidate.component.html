@@ -14,7 +14,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="form-label">Candidate First Name</label>
-                  <input class="form-control" type="text" placeholder="Candidate First Name" formControlName="candidateFirstName" [ngClass]="{ 'is-invalid': submitted && f.candidateFirstName.errors }">
+                  <input class="form-control" required type="text" placeholder="Candidate First Name" formControlName="candidateFirstName" [ngClass]="{ 'is-invalid': submitted && f.candidateFirstName.errors }">
                   <div *ngIf="submitted && f.candidateFirstName.errors" class="text text-danger mt-1">This Field is required</div>
                 </div>
               </div>
@@ -22,7 +22,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="form-label">Candidate Last Name</label>
-                  <input class="form-control" type="text" placeholder="Candidate Last Name" formControlName="candidateLastName" [ngClass]="{ 'is-invalid': submitted && f.candidateLastName.errors }">
+                  <input class="form-control" required type="text" placeholder="Candidate Last Name" formControlName="candidateLastName" [ngClass]="{ 'is-invalid': submitted && f.candidateLastName.errors }">
                   <div *ngIf="submitted && f.candidateLastName.errors" class="text text-danger mt-1">This Field is required</div>
                 </div>
               </div>
@@ -30,21 +30,21 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Address</label>
-                <input class="form-control" type="text" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+                <input class="form-control" required type="text" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
                 <div *ngIf="submitted && f.address.errors" class="text text-danger mt-1">This Field is required</div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Unit</label>
-                <input class="form-control" type="text" placeholder="Unit" formControlName="unit" [ngClass]="{ 'is-invalid': submitted && f.unit.errors }">
+                <input class="form-control"  type="text" placeholder="Unit" formControlName="unit" [ngClass]="{ 'is-invalid': submitted && f.unit.errors }">
                 <div *ngIf="submitted && f.unit.errors" class="text text-danger mt-1">This Field is required</div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Suburb</label>
-                <input class="form-control" type="text" placeholder="Suburb" formControlName="suburb" [ngClass]="{ 'is-invalid': submitted && f.suburb.errors }">
+                <input class="form-control" required type="text" placeholder="Suburb" formControlName="suburb" [ngClass]="{ 'is-invalid': submitted && f.suburb.errors }">
                 <div *ngIf="submitted && f.suburb.errors" class="text text-danger mt-1">This Field is required</div>
               </div>
             </div>
@@ -68,14 +68,14 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Postcode</label>
-                <input class="form-control" type="number"  placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
+                <input class="form-control" required type="number"  placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
                 <div *ngIf="submitted && f.postcode.errors" class="text text-danger mt-1">This Field is required</div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Email</label>
-                <input class="form-control" type="email" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                <input class="form-control" required type="email" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
                 <div *ngIf="submitted && f.email.errors" class="text text-danger mt-1">This Field is required</div>
               </div>
             </div>
@@ -95,7 +95,7 @@
               <div class="form-group">
                   <label class="form-label">Date of Birth</label>
                   <div class="input-group">
-                      <input class="form-control" placeholder="dd/mm/aaaa" readonly name="dp" [(ngModel)]="modelD" ngbDatepicker [minDate]="{year: 1970, month:1, day: 1}" 
+                      <input class="form-control" required placeholder="dd/mm/aaaa" readonly name="dp" [(ngModel)]="modelD" ngbDatepicker [minDate]="{year: 1970, month:1, day: 1}" 
                       [footerTemplate]="footerTemplate" #fd1="ngbDatepicker" formControlName="dateOfBirth" [ngClass]="{ 'is-invalid': submitted && f.dateOfBirth.errors }">
                       <div class="input-group-append">
                       <button class="btn calendar btn-success" (click)="fd1.toggle()" type="button"><i
@@ -113,19 +113,38 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Mobile</label>
-                <input class="form-control" type="number" maxlength="12" placeholder="Mobile" formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
+                <input class="form-control" required type="number" maxlength="12" placeholder="Mobile" formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
                 <div *ngIf="submitted && f.mobile.errors" class="text text-danger mt-1">This Field is required</div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Candidate Profile</label>
-                <select class="form-control btn-square" formControlName="candidateProfile" [ngClass]="{ 'is-invalid': submitted && f.candidateProfile.errors }">
+                <select class="form-control btn-square" (change)="selectProfile($event)" formControlName="candidateProfile" [ngClass]="{ 'is-invalid': submitted && f.candidateProfile.errors }">
                   <option value="" selected>Select</option>
-                  <option *ngFor="let data of titles; let i = index" value="{{data.id}}">{{data.name}}</option>     
+                  <option value="DES">DES</option>
+                  <option value="JVES">JVES</option>
+                  <option value="NDIS">NDIS</option>
+                  <option value="ParentsNext">ParentsNext</option>
+                  <option value="Strive Laboir Hire">Strive Laboir Hire</option>
+                  <option value="TtW">TtW</option>
+                  <option value="WFA">WFA</option>
+                  <option value="Other">Other</option>
                 </select>
                 <div *ngIf="submitted && f.candidateProfile.errors" class="text text-danger mt-1">This Field is required</div>
               </div>
+            </div>
+
+            
+            <div class="col-md-6" *ngIf="editObject.get('candidateProfile')?.value == 'Other' ">
+              <div class="form-group">
+                  <label for="name">Other Profile</label>
+                  <input class="form-control" type="text" placeholder="Other Profile" formControlName="otherProfile" >
+              </div>
+              <div class="text text-danger mt-1" 
+                  *ngIf="editObject.get('otherProfile')?.errors?.required
+                  && editObject.get('otherProfile')?.touched">
+                  This Field is required</div>
             </div>
 
             <div class="col-md-6">
@@ -158,13 +177,13 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Provider Region</label>
-                <input formControlName="providerRegion" class="form-control" disabled placeholder="Provider Region" >
+                <input formControlName="providerRegion" class="form-control"  disabled placeholder="Provider Region" >
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Provider Site Location</label>
-                <input formControlName="providerSiteLocation" class="form-control"  disabled placeholder="Provider Site Location" >
+                <input formControlName="providerSiteLocation" class="form-control"   disabled placeholder="Provider Site Location" >
               </div>
             </div>
             <div class="col-md-12">
@@ -181,7 +200,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Consultant Title</label>
-                <input class="form-control" formControlName="consultantTitle" placeholder="Provider Consultant Title" disabled>
+                <input class="form-control"  formControlName="consultantTitle" placeholder="Provider Consultant Title" disabled>
               </div>
             </div>
 
@@ -191,7 +210,7 @@
                   {{visibleCV}}
                   <button class="btn btn-block btn-danger" *ngIf="visibleCV != null" type="submit" (click)="openFile('cv')" >Open CV</button>
                   <input [ngClass]="{ 'is-invalid': submitted && f.cv.errors }"
-                      class="form-control"
+                      class="form-control" 
                       type="file" 
                       accept="PDF"
                       (change)="selectCV($event)"
@@ -209,7 +228,7 @@
                   <button class="btn btn-block btn-danger" *ngIf="visiblePT" (click)="openFile('pt')" type="submit">Open Presentation Letter</button>
                   <input 
                       [ngClass]="{ 'is-invalid': submitted && f.presentationLetter.errors }"
-                      class="form-control"
+                      class="form-control" 
                       type="file" 
                       accept="PDF"
                       (change)="selectPT($event)"

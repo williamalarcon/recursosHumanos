@@ -121,10 +121,11 @@ export class ProvidersListComponent implements OnInit {
       if(d.descripcion == null){
         d.descripcion = '';
       }
-      return (d.nombre.toLowerCase().indexOf(val) !== -1 ||
-       d.descripcion.toLowerCase().indexOf(val) !== -1 ||
-       d.area.toLowerCase().indexOf(val) !== -1 ||
-       d.clasificacion.toLowerCase().indexOf(val) !== -1 ||
+      return (d.providerCompany.toLowerCase().indexOf(val) !== -1 ||
+       d.abn.toLowerCase().indexOf(val) !== -1 ||
+       d.address.toLowerCase().indexOf(val) !== -1 ||
+       d.unit.toLowerCase().indexOf(val) !== -1 ||
+       d.email.toLowerCase().indexOf(val) !== -1 ||
        !val);
     });
     // update the rows

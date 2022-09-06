@@ -20,7 +20,7 @@
                         <div class="col-md-4">
                           <div class="form-group">
                             <label class="form-label">Provider Company</label>
-                            <input class="form-control" type="text" placeholder="Provider Company" formControlName="providerCompany" [ngClass]="{ 'is-invalid': submitted && f.providerCompany.errors }">
+                            <input class="form-control" required type="text" placeholder="Provider Company" formControlName="providerCompany" [ngClass]="{ 'is-invalid': submitted && f.providerCompany.errors }">
                             <div *ngIf="submitted && f.providerCompany.errors" class="text text-danger mt-1">This Field is required</div>
                           </div>
                         </div>
@@ -28,28 +28,28 @@
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="form-label">ABN</label>
-                            <input class="form-control" type="number" placeholder="ABN" formControlName="abn" [ngClass]="{ 'is-invalid': submitted && f.abn.errors }">
+                            <input class="form-control" required type="number" placeholder="ABN" formControlName="abn" [ngClass]="{ 'is-invalid': submitted && f.abn.errors }">
                             <div *ngIf="submitted && f.abn.errors" class="text text-danger mt-1">This Field is required</div>
                           </div>
                         </div>
                         <div class="col-md-5">
                           <div class="form-group">
                             <label class="form-label">Address</label>
-                            <input class="form-control" type="text" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+                            <input class="form-control" required type="text" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
                             <div *ngIf="submitted && f.address.errors" class="text text-danger mt-1">This Field is required</div>
                           </div>
                         </div>
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="form-label">Unit</label>
-                            <input class="form-control" type="text" placeholder="Unit" formControlName="unit" [ngClass]="{ 'is-invalid': submitted && f.unit.errors }">
+                            <input class="form-control" required type="text" placeholder="Unit" formControlName="unit" [ngClass]="{ 'is-invalid': submitted && f.unit.errors }">
                             <div *ngIf="submitted && f.unit.errors" class="text text-danger mt-1">This Field is required</div>
                           </div>
                         </div>
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="form-label">Suburb</label>
-                            <input class="form-control" type="text" placeholder="Suburb" formControlName="suburb" [ngClass]="{ 'is-invalid': submitted && f.suburb.errors }">
+                            <input class="form-control" required type="text" placeholder="Suburb" formControlName="suburb" [ngClass]="{ 'is-invalid': submitted && f.suburb.errors }">
                             <div *ngIf="submitted && f.suburb.errors" class="text text-danger mt-1">This Field is required</div>
                           </div>
                         </div>
@@ -73,35 +73,35 @@
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="form-label">Postcode</label>
-                            <input class="form-control" type="number" maxlength="4" placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
+                            <input class="form-control" required type="number" maxlength="4" placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
                             <div *ngIf="submitted && f.postcode.errors" class="text text-danger mt-1">This Field is required</div>
                           </div>
                         </div>
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="form-label">Provider Region</label>
-                            <input class="form-control" type="text" placeholder="Provider Region" formControlName="providerRegion" [ngClass]="{ 'is-invalid': submitted && f.providerRegion.errors }">
+                            <input class="form-control" required type="text" placeholder="Provider Region" formControlName="providerRegion" [ngClass]="{ 'is-invalid': submitted && f.providerRegion.errors }">
                             <div *ngIf="submitted && f.providerRegion.errors" class="text text-danger mt-1">This Field is required</div>
                           </div>
                         </div>
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="form-label">Provider Site Location</label>
-                            <input class="form-control" type="text" placeholder="Provider Site Location" formControlName="providerSite" [ngClass]="{ 'is-invalid': submitted && f.providerSite.errors }">
+                            <input class="form-control" required type="text" placeholder="Provider Site Location" formControlName="providerSite" [ngClass]="{ 'is-invalid': submitted && f.providerSite.errors }">
                             <div *ngIf="submitted && f.providerSite.errors" class="text text-danger mt-1">This Field is required</div>
                           </div>
                         </div>
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="form-label">Phone</label>
-                            <input class="form-control" type="text" placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                            <input class="form-control" required type="text" placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
                             <div *ngIf="submitted && f.phone.errors" class="text text-danger mt-1">This Field is required</div>
                           </div>
                         </div>    
                         <div class="col-md-5">
                           <div class="form-group">
                             <label class="form-label">Email</label>
-                            <input class="form-control" type="email" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                            <input class="form-control" required type="email" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
                             <div *ngIf="submitted && f.email.errors" class="text text-danger mt-1">This Field is required</div>
                           </div>
                         </div>
@@ -124,7 +124,7 @@
                                   <div class="row">
                                     <div class="col-md-9">
                                       <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Company Name" formControlName="name" [ngClass]="{ 'is-invalid': submittedHeadquater && fh.name.errors }">
+                                        <input class="form-control" required type="text" placeholder="Company Name" formControlName="name" [ngClass]="{ 'is-invalid': submittedHeadquater && fh.name.errors }">
                                         <div *ngIf="submittedHeadquater && fh.name.errors" class="text text-danger mt-1">This Field is required</div>
                                       </div>
                                     </div>
@@ -185,7 +185,7 @@
                                       <div class="col-md-12">
                                         <div class="form-group">
                                           <label class="form-label">Name</label>
-                                          <input class="form-control" type="text" placeholder="Company Name" formControlName="name" [ngClass]="{ 'is-invalid': submittedBranch && fbranch.name.errors }">
+                                          <input class="form-control" required type="text" placeholder="Company Name" formControlName="name" [ngClass]="{ 'is-invalid': submittedBranch && fbranch.name.errors }">
                                           <div *ngIf="submittedBranch && fbranch.name.errors" class="text text-danger mt-1">This Field is required</div>
                                         </div>
                                       </div>
@@ -263,14 +263,14 @@
                                       <div class="col-md-12">
                                         <div class="form-group">
                                           <label class="form-label">First Name</label>
-                                          <input class="form-control" type="text" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.firstName.errors }">
+                                          <input class="form-control" required type="text" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.firstName.errors }">
                                           <div *ngIf="submittedConsultant && fconsultant.firstName.errors" class="text text-danger mt-1">This Field is required</div>
                                         </div>
                                       </div>
                                       <div class="col-md-12">
                                         <div class="form-group">
                                           <label class="form-label">Last Name</label>
-                                          <input class="form-control" type="text" placeholder="Last Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.lastName.errors }">
+                                          <input class="form-control" required type="text" placeholder="Last Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.lastName.errors }">
                                           <div *ngIf="submittedConsultant && fconsultant.lastName.errors" class="text text-danger mt-1">This Field is required</div>
                                         </div>
                                       </div>
@@ -287,14 +287,14 @@
                                       <div class="col-md-12">
                                         <div class="form-group">
                                           <label class="form-label">Phone</label>
-                                          <input class="form-control" type="text" placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.phone.errors }">
+                                          <input class="form-control" required type="text" placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.phone.errors }">
                                           <div *ngIf="submittedConsultant && fconsultant.phone.errors" class="text text-danger mt-1">This Field is required</div>
                                         </div>
                                       </div>
                                       <div class="col-md-12">
                                         <div class="form-group">
                                           <label class="form-label">Email</label>
-                                          <input class="form-control" type="text" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.email.errors }">
+                                          <input class="form-control" required type="text" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.email.errors }">
                                           <div *ngIf="submittedConsultant && fconsultant.email.errors" class="text text-danger mt-1">This Field is required</div>
                                         </div>
                                       </div>

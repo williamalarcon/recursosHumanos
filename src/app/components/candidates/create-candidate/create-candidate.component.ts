@@ -141,7 +141,18 @@ export class CreateCandidateComponent implements OnInit {
     this.getConsultants(data => {
       this.listConsultants = [...data];  
     });  
+  }
 
+  
+  selectProfile(data){
+    if(data.target.value == 'Other'){
+      this.createSubject.controls['otherProfile'].setValidators([Validators.required]);
+      this.createSubject.controls['otherProfile'].updateValueAndValidity();
+    }else {
+      this.createSubject.controls['otherProfile'].setValidators([]);
+      this.createSubject.controls['otherProfile'].updateValueAndValidity();
+    }
+    
   }
 
   getConsultants(dataComp){

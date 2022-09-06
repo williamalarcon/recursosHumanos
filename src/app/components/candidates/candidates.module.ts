@@ -21,7 +21,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
   imports: [
     NgxDatatableModule.forRoot({
       messages: {
-      emptyMessage: 'No hay datos disponibles',
+      emptyMessage: 'No data to display',
       totalMessage: 'total',
       selectedMessage: 'selected'
       }

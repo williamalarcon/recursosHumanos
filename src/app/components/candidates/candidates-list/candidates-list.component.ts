@@ -133,10 +133,10 @@ export class CandidatesListComponent implements OnInit {
       if(d.descripcion == null){
         d.descripcion = '';
       }
-      return (d.nombre.toLowerCase().indexOf(val) !== -1 ||
-       d.descripcion.toLowerCase().indexOf(val) !== -1 ||
-       d.area.toLowerCase().indexOf(val) !== -1 ||
-       d.clasificacion.toLowerCase().indexOf(val) !== -1 ||
+      return (d.firstName.toLowerCase().indexOf(val) !== -1 ||
+       d.lastName.toLowerCase().indexOf(val) !== -1 ||
+       d.address.toLowerCase().indexOf(val) !== -1 ||
+       d.email.toLowerCase().indexOf(val) !== -1 ||
        !val);
     });
     // update the rows

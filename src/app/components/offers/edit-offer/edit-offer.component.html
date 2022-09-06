@@ -14,7 +14,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="form-label">Job Category</label>
-                  <select class="form-control btn-square" formControlName="jobCategory"  [ngClass]="{ 'is-invalid': submitted && f.jobCategory.errors }">
+                  <select class="form-control btn-square" required formControlName="jobCategory"  [ngClass]="{ 'is-invalid': submitted && f.jobCategory.errors }">
                     <option value="" selected>Select</option>
                     <ng-container *ngFor='let data of listCategories' ><option [value]="data.id" *ngIf="data.active=='1'">{{data.name}}</option>
                     </ng-container>    
@@ -32,7 +32,7 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="form-label">Job Title</label>
-                  <input class="form-control" type="text" placeholder="Candidate First Name" formControlName="jobTitle" [ngClass]="{ 'is-invalid': submitted && f.jobTitle.errors }">
+                  <input class="form-control" required type="text" placeholder="Candidate First Name" formControlName="jobTitle" [ngClass]="{ 'is-invalid': submitted && f.jobTitle.errors }">
                   <div *ngIf="submitted && f.jobTitle.errors" class="text text-danger mt-1">This Field is required</div>
                 </div>
               </div>
@@ -71,14 +71,14 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="form-label">Job Paying</label>
-                  <input class="form-control" type="text" placeholder="Candidate First Name" formControlName="jobPaying" [ngClass]="{ 'is-invalid': submitted && f.jobPaying.errors }">
+                  <input class="form-control" required type="text" placeholder="Candidate First Name" formControlName="jobPaying" [ngClass]="{ 'is-invalid': submitted && f.jobPaying.errors }">
                   <div *ngIf="submitted && f.jobPaying.errors" class="text text-danger mt-1">This Field is required</div>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="form-label">Job Time</label>
-                  <input class="form-control" type="text" placeholder="Candidate First Name" formControlName="jobTime" [ngClass]="{ 'is-invalid': submitted && f.jobTime.errors }">
+                  <input class="form-control" required type="text" placeholder="Candidate First Name" formControlName="jobTime" [ngClass]="{ 'is-invalid': submitted && f.jobTime.errors }">
                   <div *ngIf="submitted && f.jobTime.errors" class="text text-danger mt-1">This Field is required</div>
                 </div>
               </div>
@@ -103,28 +103,28 @@
               <div class="col-md-12">
                 <div class="form-group">
                     <label class="form-label">Job Description</label>
-                    <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control" formControlName="jobDescription" mdbInput [ngClass]="{ 'is-invalid': submitted && f.jobDescription.errors }"></textarea>
+                    <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control" required formControlName="jobDescription" mdbInput [ngClass]="{ 'is-invalid': submitted && f.jobDescription.errors }"></textarea>
                     <div *ngIf="submitted && f.jobDescription.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                     <label class="form-label">Skills and Experience</label>
-                    <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control" formControlName="skills" mdbInput [ngClass]="{ 'is-invalid': submitted && f.skills.errors }"></textarea>
+                    <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control"  formControlName="skills" mdbInput [ngClass]="{ 'is-invalid': submitted && f.skills.errors }"></textarea>
                     <div *ngIf="submitted && f.skills.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                     <label class="form-label">About the Role</label>
-                    <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control" formControlName="about" mdbInput [ngClass]="{ 'is-invalid': submitted && f.about.errors }"></textarea>
+                    <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control"  formControlName="about" mdbInput [ngClass]="{ 'is-invalid': submitted && f.about.errors }"></textarea>
                     <div *ngIf="submitted && f.about.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                     <label class="form-label">Employer Questions</label>
-                    <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control" formControlName="questions" mdbInput [ngClass]="{ 'is-invalid': submitted && f.questions.errors }"></textarea>
+                    <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control"  formControlName="questions" mdbInput [ngClass]="{ 'is-invalid': submitted && f.questions.errors }"></textarea>
                     <div *ngIf="submitted && f.questions.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
                 </div>
               </div>
