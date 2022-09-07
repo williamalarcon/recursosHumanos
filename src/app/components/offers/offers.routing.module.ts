@@ -4,7 +4,6 @@ import { OffersListComponent } from './offers-list/offers-list.component';
 import { EditOfferComponent } from './edit-offer/edit-offer.component';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
 
-
 const routes: Routes = [
   {
     path:'',

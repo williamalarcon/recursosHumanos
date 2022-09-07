@@ -82,12 +82,15 @@ export class LoginComponent implements OnInit {
 
   correctLogin(data){
     this.storageService.setCurrentSession(data);
-    console.log(data);
-
+    
     if(data.activatePw == 0){
       this.router.navigate(['/user/set-password'], { queryParams: { id: data.id } });
     }else{
-      this.router.navigateByUrl('/dashboard/default');
+      if(data.role == 'CANDIDATE'){
+        this.router.navigateByUrl('/job/search');
+      }else{
+        this.router.navigateByUrl('/dashboard/default');
+      }
     }
   }
 

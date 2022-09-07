@@ -4,7 +4,25 @@
       <div class="logo-wrapper"><a [routerLink]="['']" routerLinkActive="router-link-active"><img
             src="assets/images/compost-logo.png" alt=""></a></div>
     </div>
-
+    <div class="mobile-sidebar d-block">
+      <div class="media-body text-right switch-sm">
+        <label class="switch">
+          <input id="sidebar-toggle" type="checkbox" [checked]="navServices.sidebarToggle"><span class="switch-state"
+          (click)="switchToggle()"></span>
+        </label>
+      </div>
+    </div>
+    <div class="vertical-mobile-sidebar"><i class="fa fa-bars sidebar-bar"></i></div>
+    <div class="nav-right col left-menu-header" (click)=openMobileNavL()>
+      <ul class="nav-menus-left" [ngClass]="{'open': openNavL}">
+        <li class="text-dark" (click)="toggleFullScreen()">
+          <app-feather-icons [icon]="'maximize'"></app-feather-icons>
+        </li>
+        
+      </ul>
+      <div class="d-xl-none mobile-toggle-left pull-right"><i data-feather="more-horizontal"
+          (click)=openMobileNav()></i></div>
+    </div>
 
     <div class="nav-right col pull-right right-menu">
       <ul class="nav-menus" [ngClass]="{'open': openNav}">
@@ -14,6 +32,7 @@
                 ngbDropdownToggle>
                 <img class="mr-2 rounded-circle img-35" src="assets/images/dashboard/user.png" alt="">
                 <span class="media-body">
+                  <h6 class="p-10">{{userName}}</h6>
                   <span class="f-12 f-w-600"></span>
                   <span class="d-block"></span></span></span></button>
             <div class="dropdown-menu p-0 profile-dropdown" ngbDropdownMenu>

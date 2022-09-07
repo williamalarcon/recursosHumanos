@@ -6,8 +6,10 @@ export class JobDB {
             job_name: 'UI/UX IT Frontend Developer',
             badgeType: 'primary',
             badgeValue: 'New',
+            range: '€32000 - €34000',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
+            job_type: 'Full Time', 
             Job_description: ['Compost is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and'],
             Qualifications: {
                 title: 'Qualifications',
@@ -53,6 +55,8 @@ export class JobDB {
             job_name: 'React/React Native Developer',
             job_area: 'San Diego,',
             job_city: 'CA',
+            job_type: 'Full Time', 
+            range: '€32000 - €34000',
             Job_description: ['Ideally 2+ years experience with React. Bonus points if you have React Native experience. This is an incredibly exciting opportunity to gain commercial , Professional experience of React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and'],
             Qualifications: {
                 title: 'Qualifications',
@@ -98,6 +102,8 @@ export class JobDB {
             job_name: 'Senior UX designer',
             job_area: 'Minneapolis,',
             job_city: 'MN',
+            job_type: 'Full Time', 
+            range: '€32000 - €34000',
             Job_description: ['The designer will apply Lean UX and Design Thinking practices in a highly collaborative, fast-paced, distributed environment You have 4+ years of UX experience. You support UX leadership by providing continuous feedback regarding the evolution of team process standards.'],
             Qualifications: {
                 title: 'Qualifications',
@@ -143,6 +149,8 @@ export class JobDB {
             job_name: 'Front end web developer',
             job_area: 'Cisco',
             job_city: 'Lelystad, Netherlands',
+            job_type: 'Full Time', 
+            range: '€32000 - €34000',
             Job_description: ['Insipidity the sufficient discretion imprudence resolution sir him decisively. Proceed how any engaged visitor. Explained propriety off out perpetual his you. Feel sold off felt nay rose met you. We so entreaties cultivated astonished is. Was sister for few longer mrs sudden talent become.'],
             Qualifications: {
                 title: 'Qualifications',
@@ -188,6 +196,8 @@ export class JobDB {
             job_name: 'Graphic designer',
             job_area: 'Infosys',
             job_city: 'Lelystad, Netherlands',
+            job_type: 'Full Time', 
+            range: '€32000 - €34000',
             Job_description: ['Contented get distrusts certainty nay are frankness concealed ham. On unaffected resolution on considered of. No thought me husband or colonel forming effects. End sitting shewing who saw besides son musical adapted. Contrasted interested eat alteration pianoforte sympathize was.'],
             Qualifications: {
                 title: 'Qualifications',
@@ -233,6 +243,8 @@ export class JobDB {
             job_name: 'Designer, CRM',
             job_area: 'Citrix',
             job_city: 'Lelystad, Netherlands',
+            job_type: 'Full Time', 
+            range: '€32000 - €34000',
             Job_description: ['Situation admitting promotion at or to perceived be. Mr acuteness we as estimable enjoyment up. An held late as felt know. Learn do allow solid to grave. Middleton suspicion age her attention. Chiefly several bed its wishing. Is so moments on chamber pressed to. Doubtful yet way properly answered.'],
             Qualifications: {
                 title: 'Qualifications',
@@ -278,6 +290,8 @@ export class JobDB {
             job_name: 'UI designer E-commerce',
             job_area: 'Ericsson',
             job_city: 'Lelystad, Netherlands',
+            job_type: 'Full Time', 
+            range: '€32000 - €34000',
             Job_description: ['Situation admitting promotion at or to perceived be. Mr acuteness we as estimable enjoyment up. An held late as felt know. Learn do allow solid to grave. Middleton suspicion age her attention. Chiefly several bed its wishing. Is so moments on chamber pressed to. Doubtful yet way properly answered.'],
             Qualifications: {
                 title: 'Qualifications',
@@ -323,6 +337,8 @@ export class JobDB {
             job_name: 'Senior UX designer',
             job_area: 'Minneapolis,',
             job_city: 'MN',
+            job_type: 'Full Time', 
+            range: '€32000 - €34000',
             Job_description: ['The designer will apply Lean UX and Design Thinking practices in a highly collaborative, fast-paced, distributed environment You have 4+ years of UX experience. You support UX leadership by providing continuous feedback regarding the evolution of team process standards.'],
             Qualifications: {
                 title: 'Qualifications',
@@ -370,6 +386,8 @@ export class JobDB {
             badgeValue: 'New',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
+            job_type: 'Full Time', 
+            range: '€32000 - €34000',
             Job_description: ['Compost is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and'],
             Qualifications: {
                 title: 'Qualifications',
@@ -417,6 +435,8 @@ export class JobDB {
             badgeValue: 'New',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
+            job_type: 'Full Time', 
+            range: '€32000 - €34000',
             Job_description: ['Compost is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and'],
             Qualifications: {
                 title: 'Qualifications',
@@ -464,6 +484,8 @@ export class JobDB {
             badgeValue: 'New',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
+            job_type: 'Full Time', 
+            range: '€32000 - €34000',
             Job_description: ['Compost is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and'],
             Qualifications: {
                 title: 'Qualifications',
@@ -511,6 +533,8 @@ export class JobDB {
             badgeValue: 'New',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
+            job_type: 'Full Time', 
+            range: '€32000 - €34000',
             Job_description: ['Compost is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and'],
             Qualifications: {
                 title: 'Qualifications',
@@ -558,6 +582,8 @@ export class JobDB {
             badgeValue: 'New',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
+            job_type: 'Full Time', 
+            range: '€32000 - €34000',
             Job_description: ['Compost is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and'],
             Qualifications: {
                 title: 'Qualifications',
@@ -605,6 +631,8 @@ export class JobDB {
             badgeValue: 'New',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
+            job_type: 'Full Time', 
+            range: '€32000 - €34000',
             Job_description: ['Compost is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and'],
             Qualifications: {
                 title: 'Qualifications',

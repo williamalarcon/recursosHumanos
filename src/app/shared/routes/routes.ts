@@ -51,7 +51,13 @@ export const content: Routes = [
       breadcrumb: "offers"
     }
   },
-
+  {
+    path: 'job',
+    loadChildren: () => import('../../components/job-search/job-search.module').then(m => m.JobSearchModule),
+    data: {
+      breadcrumb: "Job"
+    }
+  },
 
   {
     path: 'dashboard',

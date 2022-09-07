@@ -43,6 +43,7 @@ export class HeaderComponent implements OnInit {
   public items: Menu[];
   public searchResult: boolean = false;
   public searchResultEmpty: boolean = false;
+  public userName: String; 
 
   constructor(
     public navServices: NavService,
@@ -57,7 +58,10 @@ export class HeaderComponent implements OnInit {
 
     let date = new Date();
     this.month = this.meses[date.getMonth()+1]
-    
+
+    let currentUser = JSON.parse(localStorage.currentUser);
+    this.userName = currentUser.first_name+ " "+ currentUser.last_name;
+
 
     this.translate.setDefaultLang('en');
     this.getAlerts(data => {

@@ -16,7 +16,6 @@ export class SidebarComponent {
 
   constructor(private router: Router, public navServices: NavService) {
     let currentUser = JSON.parse(localStorage.currentUser);
-    console.log(currentUser.role);
     if(currentUser.activatePw == 0 ){
 
     }else{
@@ -47,6 +46,31 @@ export class SidebarComponent {
         });
       }else if(currentUser.role == "CANDIDATE"){
         this.navServices.menuCandidate.subscribe(menuItems => {
+          this.menuItems = menuItems;
+          this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+              menuItems.filter(items => {
+                if (items.path === event.url) {
+                  this.setNavActive(items);
+                }
+                if (!items.children) { return false; }
+                items.children.filter(subItems => {
+                  if (subItems.path === event.url) {
+                    this.setNavActive(subItems);
+                  }
+                  if (!subItems.children) { return false; }
+                  subItems.children.filter(subSubItems => {
+                    if (subSubItems.path === event.url) {
+                      this.setNavActive(subSubItems);
+                    }
+                  });
+                });
+              });
+            }
+          });
+        });
+      }else if(currentUser.role == "AGENCY"){
+        this.navServices.menuAgency.subscribe(menuItems => {
           this.menuItems = menuItems;
           this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {

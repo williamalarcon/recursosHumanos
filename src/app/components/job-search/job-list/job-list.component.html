@@ -1,0 +1,35 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-3 xl-40">
+      <app-job-filter></app-job-filter>
+    </div>
+    <div class="col-xl-9 xl-60">
+      <div class="card" *ngFor="let job of jobs| slice:0:9"
+        [ngClass]="(job.ribbion =='true')?'ribbon-vertical-left-wrapper':''">
+        <div class="job-search">
+          <div class="card-body">
+            <div class="media">
+              <div class="media-body">
+                <div class="row">
+                  <div class="col-md-5">
+                    <h6 class="f-w-600 ml-2"><a [routerLink]="['/job/details', job.Id]">{{job.job_name}}</a></h6>
+                    <p><span> <span class="ml-2"><i class="fa fa-globe"></i></span>  {{job.job_area}}</span></p>
+                  </div>
+                  <div class="col-md-4">
+                    <p><span> <span class="ml-2"><i class="fa fa-money"></i></span>  {{job.range}}</span></p>
+                    <p><span> <span class="ml-2"><i class="fa fa-clock-o"></i></span>  {{job.job_type}}</span></p>
+                  </div>
+                  <div class="col-md-3">
+                    <button class="btn btn-success text-center" type="button">View more</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Container-fluid Ends-->

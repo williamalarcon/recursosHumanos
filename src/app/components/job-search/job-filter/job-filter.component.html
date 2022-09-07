@@ -1,0 +1,80 @@
+<div class="default-according style-1 faq-accordion job-accordion" id="accordionoc">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <button class="btn btn-link pl-0" (click)="isFilter = !isFilter" [attr.aria-expanded]="!isFilter"
+              aria-controls="collapse">Filter</button>
+          </h5>
+        </div>
+        <div class="collapse" id="collapseicon" [ngbCollapse]="isFilter">
+          <div class="card-body filter-cards-view animate-chk">
+            <div class="job-filter">
+              <div class="faq-form">
+                <input class="form-control" type="text" placeholder="Search..">
+                <app-feather-icons class="search-icon" [icon]="'search'"></app-feather-icons>
+              </div>
+            </div>
+            <div class="job-filter">
+              <div class="faq-form">
+                <input class="form-control" type="text" placeholder="location..">
+                <app-feather-icons class="search-icon" [icon]="'map-pin'"></app-feather-icons>
+              </div>
+            </div>
+            <br><br>
+            <button class="btn btn-success text-center" type="button">Find jobs</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <button class="btn btn-link pl-0" (click)="isLocation = !isLocation" [attr.aria-expanded]="!isLocation"
+              aria-controls="collapse">Job Categories</button>
+          </h5>
+        </div>
+        <div class="collapse" id="collapseicon1" [ngbCollapse]="isLocation">
+          <div class="card-body animate-chk">
+            <div class="location-checkbox">
+              <div class="checkbox-animated">
+                <label  *ngFor='let data of categories' class="d-block" for="chk-ani">
+                  <input class="checkbox_animated" id="chk-ani" type="checkbox"> {{data.name}}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <button class="btn btn-link pl-0" (click)="isJob_Title = !isJob_Title" [attr.aria-expanded]="!isJob_Title"
+              aria-controls="collapse">Job Types</button>
+          </h5>
+        </div>
+        <div class="collapse" id="collapseicon2" [ngbCollapse]="isJob_Title">
+          <div class="card-body animate-chk">
+
+            <label class="d-block" for="chk-ani">
+              <input class="checkbox_animated" id="chk-ani" type="checkbox"> Full time
+            </label>
+            <label class="d-block" for="chk-ani1">
+              <input class="checkbox_animated" id="chk-ani1" type="checkbox"> Contract
+            </label>
+            <label class="d-block" for="chk-ani2">
+              <input class="checkbox_animated" id="chk-ani2" type="checkbox"> Part-time
+            </label>
+            <label class="d-block" for="chk-ani3">
+              <input class="checkbox_animated" id="chk-ani3" type="checkbox"> Casual 
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
