@@ -74,8 +74,14 @@
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="form-label">Postcode</label>
-                            <input class="form-control" required type="number" maxlength="4" placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
+                            <input class="form-control" required type="text" maxlength="4" placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
                             <div *ngIf="submitted && f.postcode.errors" class="text text-danger mt-1">This Field is required</div>
+                            <div *ngIf="f.postcode.errors && (f.postcode.dirty || f.postcode.touched)"
+                            class="alert alert-danger">
+                              <div [hidden]="!title.errors.maxlength">
+                                Only 4 characters allowed.
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="col-md-3">
@@ -97,6 +103,12 @@
                             <label class="form-label">Phone</label>
                             <input class="form-control" required type="text" placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
                             <div *ngIf="submitted && f.phone.errors" class="text text-danger mt-1">This Field is required</div>
+                            <div *ngIf="f.phone.errors && (f.phone.dirty || f.phone.touched)"
+                              class="alert alert-danger">
+                              <div >
+                                Only 10 characters allowed.
+                              </div>
+                          </div>
                           </div>
                         </div>    
                         <div class="col-md-5">
@@ -113,7 +125,7 @@
 
                     <!-- /Tab Galeria-->
                   </ngb-tab>                    
-                  <ngb-tab id="tab-selectbyid2" *ngIf="providerId != null" title="Company Headquaters">
+                  <ngb-tab id="tab-selectbyid2" *ngIf="providerId != null"   title="Company Headquaters">
                       <ng-template ngbTabContent>
                         <div class="row browse">
                           <div class="col-md-6">

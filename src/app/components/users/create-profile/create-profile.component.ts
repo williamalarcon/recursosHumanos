@@ -33,7 +33,7 @@ export class CreateProfileComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       title: ['', [Validators.required]],
-      companyMobile: ['', [Validators.required]],
+      companyMobile: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(5)]],
     });
   }
 
@@ -50,5 +50,7 @@ export class CreateProfileComponent implements OnInit {
     let random =  (Math.random() + 1).toString(36).substring(8);
     this.profileService.sendCreateRequest(data, random);
   }
+
+  get f() { return this.createProfile.controls; }
 
 }

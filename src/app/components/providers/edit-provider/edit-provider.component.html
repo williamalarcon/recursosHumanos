@@ -75,6 +75,12 @@
                             <label class="form-label">Postcode</label>
                             <input class="form-control" required type="number" maxlength="4" placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
                             <div *ngIf="submitted && f.postcode.errors" class="text text-danger mt-1">This Field is required</div>
+                            <div *ngIf="f.postcode.errors && (f.postcode.dirty || f.postcode.touched)"
+                            class="alert alert-danger">
+                              <div [hidden]="!title.errors.maxlength">
+                                Only 4 characters allowed.
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="col-md-3">
@@ -96,6 +102,12 @@
                             <label class="form-label">Phone</label>
                             <input class="form-control" required type="text" placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
                             <div *ngIf="submitted && f.phone.errors" class="text text-danger mt-1">This Field is required</div>
+                            <div *ngIf="f.phone.errors && (f.phone.dirty || f.phone.touched)"
+                              class="alert alert-danger">
+                              <div >
+                                Only 10 characters allowed.
+                              </div>
+                            </div>
                           </div>
                         </div>    
                         <div class="col-md-5">
@@ -289,6 +301,12 @@
                                           <label class="form-label">Phone</label>
                                           <input class="form-control" required type="text" placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submittedConsultant && fconsultant.phone.errors }">
                                           <div *ngIf="submittedConsultant && fconsultant.phone.errors" class="text text-danger mt-1">This Field is required</div>
+                                          <div *ngIf="fconsultant.phone.errors && (fconsultant.phone.dirty || fconsultant.phone.touched)" class="alert alert-danger">
+                                            <div >
+                                              Only 10 characters allowed.
+                                            </div>
+                                          </div>
+
                                         </div>
                                       </div>
                                       <div class="col-md-12">

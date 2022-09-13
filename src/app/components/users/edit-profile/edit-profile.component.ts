@@ -46,7 +46,7 @@ export class EditProfileComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       title: ['', [Validators.required]],
-      companyMobile: ['', [Validators.required]],
+      companyMobile: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(5)]],
       password: ['']
     })
   }
@@ -83,5 +83,7 @@ export class EditProfileComponent implements OnInit {
   updateInfo(data){
     this.profileService.updateUser(data);
   }
+
+  get f() { return this.editProfile.controls; }
 
 }

@@ -95,7 +95,7 @@ export class EditProviderComponent implements OnInit {
       lastName: ['', Validators.required],
       title: ['', Validators.required],
       email: ['', [Validators.required,Validators.email]],
-      phone: ['', [ Validators.required, Validators.min(1)]],
+      phone: ['', [ Validators.required,Validators.maxLength(10), Validators.min(1)]],
       branch: ['', Validators.required]
     });
 
@@ -112,7 +112,7 @@ export class EditProviderComponent implements OnInit {
       providerRegion: ['', [Validators.required]],
       providerSite: ['', [Validators.required]],
       phone: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
     })
 
   }

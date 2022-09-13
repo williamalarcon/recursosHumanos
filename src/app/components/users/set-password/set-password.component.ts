@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class SetPasswordComponent implements OnInit {
   public myProfile: FormGroup;
   public setPassword: FormGroup;
+  public acceptTerms = false;
   private userId =  null;
   sub;
   constructor(private fb: FormBuilder, 
@@ -23,11 +24,6 @@ export class SetPasswordComponent implements OnInit {
               private router: Router,
               public toaster: ToastrService,
               private profileService: ProfileService) {
-                this.sub = this.route
-                .queryParams
-                .subscribe(params => {
-                  this.userId = params.id;
-                });
    }
 
   ngOnInit(): void {
@@ -42,9 +38,15 @@ export class SetPasswordComponent implements OnInit {
     })
   }
 
+    
+  checked(value): void {
+    this.acceptTerms = value;
+    
+  }
+
+
 
   updateObject(data){
-    data.id = this.userId;
     this.profileService.setPassword(data);
   }
 

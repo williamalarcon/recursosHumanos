@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
     this.storageService.setCurrentSession(data);
     
     if(data.activatePw == 0){
-      this.router.navigate(['/user/set-password'], { queryParams: { id: data.id } });
+      this.router.navigate(['/user/set-password']);
     }else{
       if(data.role == 'CANDIDATE'){
         this.router.navigateByUrl('/job/search');

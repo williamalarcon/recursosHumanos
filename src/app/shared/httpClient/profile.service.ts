@@ -96,19 +96,20 @@ export class ProfileService {
         const md5 = new Md5();
         encrypt =  md5.appendStr(data.password).end();
       }
-      
-      this.httpClient.post(this.REST_API_SERVER+"/users/setPassword",{"id" : data.id, "password" :  encrypt}).subscribe(
+      let currentUser = JSON.parse(localStorage.currentUser);
+      this.httpClient.post(this.REST_API_SERVER+"/users/setPassword",{"id" : currentUser.id, "password" :  encrypt}).subscribe(
         data  => {
             this.toaster.success(data['message']);
-            let currentUser = JSON.parse(localStorage.currentUser);
             currentUser.activatePw = 1;
             localStorage.setItem("currentUser", JSON.stringify(currentUser));
-            window.location.href = '/dashboard/default';
-            
-            
-            
+            this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+            this.router.onSameUrlNavigation = 'reload';
+            if(currentUser.role == "CANDIDATE"){
+              this.router.navigate(['/job/search']);
+            }else{
+              this.router.navigate(['/dashboard/default']);
+            }
 
-            
            },
           error  => {this.toaster.error(error.error.message);});
     }
@@ -120,7 +121,6 @@ export class ProfileService {
    */  
      public updateUser(data){
       let encrypt
-      console.log(data.password)
       if(data.password != null ){
         const md5 = new Md5();
         encrypt =  md5.appendStr(data.password).end();

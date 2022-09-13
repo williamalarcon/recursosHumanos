@@ -63,7 +63,6 @@ export class CandidatesListComponent implements OnInit {
     this.getData(data => {
       this.temp = [...data];  
       this.rows = data;
-      console.log(this.rows);
     });
 
 

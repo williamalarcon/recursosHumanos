@@ -25,14 +25,14 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="form-label">Employer</label>
-                  <input class="form-control" required type="text" placeholder="Candidate First Name" formControlName="employer" [ngClass]="{ 'is-invalid': submitted && f.employer.errors }">
+                  <input class="form-control" required type="text" placeholder="Employer" formControlName="employer" [ngClass]="{ 'is-invalid': submitted && f.employer.errors }">
                   <div *ngIf="submitted && f.employer.errors" class="text text-danger mt-1">This Field is required</div>
                 </div>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label class="form-label">Job Title</label>
-                  <input class="form-control" required type="text" placeholder="Candidate First Name" formControlName="jobTitle" [ngClass]="{ 'is-invalid': submitted && f.jobTitle.errors }">
+                  <input class="form-control" required type="text" placeholder="Job Title" formControlName="jobTitle" [ngClass]="{ 'is-invalid': submitted && f.jobTitle.errors }">
                   <div *ngIf="submitted && f.jobTitle.errors" class="text text-danger mt-1">This Field is required</div>
                 </div>
               </div>
@@ -68,24 +68,24 @@
                   <div *ngIf="submitted && f.jobType.errors" class="text text-danger mt-1">This Field is required</div>
                 </div>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label class="form-label">Job Paying</label>
-                  <input class="form-control" required type="text" placeholder="Candidate First Name" formControlName="jobPaying" [ngClass]="{ 'is-invalid': submitted && f.jobPaying.errors }">
+                  <input class="form-control" required type="text" placeholder="Job Paying" formControlName="jobPaying" [ngClass]="{ 'is-invalid': submitted && f.jobPaying.errors }">
                   <div *ngIf="submitted && f.jobPaying.errors" class="text text-danger mt-1">This Field is required</div>
                 </div>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label class="form-label">Job Time</label>
-                  <input class="form-control" required type="text" placeholder="Candidate First Name" formControlName="jobTime" [ngClass]="{ 'is-invalid': submitted && f.jobTime.errors }">
+                  <input class="form-control" required type="text" placeholder="Job Time" formControlName="jobTime" [ngClass]="{ 'is-invalid': submitted && f.jobTime.errors }">
                   <div *ngIf="submitted && f.jobTime.errors" class="text text-danger mt-1">This Field is required</div>
                 </div>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label class="form-label">Job Adder Link</label>
-                  <input class="form-control" type="text" placeholder="Candidate First Name" formControlName="JobAdderLink" [ngClass]="{ 'is-invalid': submitted && f.JobAdderLink.errors }">
+                  <input class="form-control" type="text" placeholder="Job Adder Link" formControlName="JobAdderLink" [ngClass]="{ 'is-invalid': submitted && f.JobAdderLink.errors }">
                   <div *ngIf="submitted && f.JobAdderLink.errors" class="text text-danger mt-1">This Field is required</div>
                 </div>
               </div>
@@ -100,14 +100,7 @@
                   <div *ngIf="submitted && f.jobVacancy.errors" class="text text-danger mt-1">This Field is required</div>
                 </div>
               </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                    <label class="form-label">Job Description</label>
-                    <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control" required formControlName="jobDescription" mdbInput [ngClass]="{ 'is-invalid': submitted && f.jobDescription.errors }"></textarea>
-                    <div *ngIf="submitted && f.jobDescription.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
-                </div>
-              </div>
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group">
                     <label class="form-label">Skills and Experience</label>
                     <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control"  formControlName="skills" mdbInput [ngClass]="{ 'is-invalid': submitted && f.skills.errors }"></textarea>
@@ -116,12 +109,20 @@
               </div>
               <div class="col-md-12">
                 <div class="form-group">
+                    <label class="form-label">Job Description</label>
+                    <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control" required formControlName="jobDescription" mdbInput [ngClass]="{ 'is-invalid': submitted && f.jobDescription.errors }"></textarea>
+                    <div *ngIf="submitted && f.jobDescription.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
+                </div>
+              </div>
+ 
+              <div class="col-md-6">
+                <div class="form-group">
                     <label class="form-label">About the Role</label>
                     <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control"  formControlName="about" mdbInput [ngClass]="{ 'is-invalid': submitted && f.about.errors }"></textarea>
                     <div *ngIf="submitted && f.about.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
                 </div>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group">
                     <label class="form-label">Employer Questions</label>
                     <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control" formControlName="questions" mdbInput [ngClass]="{ 'is-invalid': submitted && f.questions.errors }"></textarea>

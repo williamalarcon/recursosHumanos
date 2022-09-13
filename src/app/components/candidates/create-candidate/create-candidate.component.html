@@ -68,8 +68,14 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Postcode </label>
-                <input class="form-control" required type="number" maxlength="4"  placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
+                <input class="form-control" required type="text" maxlength="4"  placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
                 <div *ngIf="submitted && f.postcode.errors" class="text text-danger mt-1">This Field is required</div>
+                <div *ngIf="f.postcode.errors && (f.postcode.dirty || f.postcode.touched)"
+                class="alert alert-danger">
+                  <div [hidden]="!title.errors.maxlength">
+                    Only 4 characters allowed.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-6">
@@ -113,7 +119,15 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Mobile</label>
-                <input class="form-control" required type="number" maxlength="12" placeholder="Mobile" formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
+                <input class="form-control" type="text" placeholder="Mobile" formControlName="mobile" [ngClass]="{ 'is-invalid':submitted && f.mobile.errors }">
+                
+                <div *ngIf="f.mobile.errors && (f.mobile.dirty || f.mobile.touched)"
+                  class="alert alert-danger">
+                  <div >
+                    Only 10 characters allowed.
+                  </div>
+              </div>
+
                 <div *ngIf="submitted && f.mobile.errors" class="text text-danger mt-1">This Field is required</div>
               </div>
             </div>
@@ -232,6 +246,8 @@
               </div>
                 <div class="alert alert-danger" *ngIf="createSubject.get('presentationLetter')?.errors?.required && createSubject.get('presentationLetter')?.touched"> Este campo es obligatorio</div>
             </div>
+
+            <!--
             <div class="col-md-12" >
               <div class="form-group">
                 <div class="single_checkbox">
@@ -240,11 +256,13 @@
                 </div>
               </div>
             </div>
+            -->
 
             </div>
           </div>
           <div class="card-footer text-right">
-            <button class="btn btn-primary" type="submit" [disabled]="!acceptTerms " (click)="cSubject(createSubject.value)">Save</button>
+            <!-- <button class="btn btn-primary" type="submit" [disabled]="!acceptTerms " (click)="cSubject(createSubject.value)">Save</button> -->
+            <button class="btn btn-primary" type="submit" (click)="cSubject(createSubject.value)">Save</button>
           </div>
         </form>
       </div>

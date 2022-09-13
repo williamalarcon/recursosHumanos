@@ -73,7 +73,7 @@ export class CreateProviderComponent implements OnInit {
       lastName: ['', Validators.required],
       title: ['', Validators.required],
       email: ['', [Validators.required,Validators.email]],
-      phone: ['', [ Validators.required, Validators.min(1)]],
+      phone: ['', [ Validators.required, Validators.maxLength(10)]],
       branch: ['', Validators.required]
     });
 
@@ -85,11 +85,11 @@ export class CreateProviderComponent implements OnInit {
       unit: ['', []],
       suburb: ['', [Validators.required]],
       state: ['', [Validators.required]],
-      postcode: ['', [Validators.required]],
+      postcode: ['', [Validators.required,Validators.maxLength(4)],],
       providerRegion: ['', [Validators.required]],
       providerSite: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.maxLength(10)]],
+      email: ['', [Validators.required, Validators.email]],
     })
   }
 
@@ -259,20 +259,28 @@ export class CreateProviderComponent implements OnInit {
 
 
   cSubject(data, tabSet){
+    
     this.submitted = true;
     if (this.createSubject.invalid) {
       return;
     }
-
-    this.__providerService.sendCreateRequest(data).subscribe(
-      data  => {
-        var that = this
-        tabSet.select(that.pages[1]);
-        this.providerId = data['id'];
-        this.toaster.success(data['message']);
-         },
-        error  => {
-          this.toaster.error(error.error.message);});
+    var that = this;
+    if(this.providerId != null){
+      this.__providerService.sendCreateRequest(data).subscribe(
+        data  => {
+          this.providerId = data['id'];
+          
+          tabSet.activeId = that.pages[1];
+          tabSet.select(that.pages[1]);
+          
+          this.toaster.success(data['message']);
+          },
+          error  => {
+            this.toaster.error(error.error.message);});
+    }else{
+      tabSet.activeId = that.pages[1];
+      tabSet.select(that.pages[1]);
+    }
 
   }
 

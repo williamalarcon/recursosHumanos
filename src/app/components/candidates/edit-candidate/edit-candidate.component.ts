@@ -129,11 +129,11 @@ export class EditCandidateComponent implements OnInit {
       unit: ['', []],
       suburb: ['', [Validators.required]],
       state: ['', [Validators.required]],
-      postcode: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      postcode: ['', [Validators.required, Validators.maxLength(4)]],
+      email: ['', [Validators.required, Validators.email]],
       gender: ['', [Validators.required]],
       dateOfBirth: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
+      mobile: ['', [Validators.required, Validators.maxLength(10)]],
       candidateProfile: ['', [Validators.required]],
       otherProfile: ['', []],
       industryInterest: ['', [Validators.required]],
@@ -155,9 +155,9 @@ export class EditCandidateComponent implements OnInit {
 
   openFile(file){
     if(file == "cv"){
-      window.open("analisysrh.nuvoll.com/api/private/files/cv/"+this.visibleCV, "_blank");
+      window.open("/api/private/files/cv/"+this.visibleCV, "_blank");
     }else if(file = "pt"){
-      window.open("analisysrh.nuvoll.com/api/private/files/pt/"+this.visibleCV, "_blank");
+      window.open("/api/private/files/pt/"+this.visiblePT, "_blank");
     }
   }
 
@@ -192,13 +192,16 @@ export class EditCandidateComponent implements OnInit {
               this.listConsultants = [...data];  
             });
             
-            this.editObject.controls['consultant'].setValue(data['consultant']);
-            this.selectConsultant(data['consultant'])
+            
 
             this.__ProviderService.getDataById(data['provider']).subscribe(result => {
               this.editObject.controls['providerRegion'].setValue(result['providerRegion']);
               this.editObject.controls['providerSiteLocation'].setValue(result['providerSite']);
             });
+
+
+            this.editObject.controls['consultant'].setValue(data['consultant']);
+            this.selectConsultant(data['consultant'])
 
             this.__candidatesService.getCandidates(id).subscribe(result => {
               Object.keys(result).map((key) => {
