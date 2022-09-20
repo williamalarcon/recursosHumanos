@@ -22,7 +22,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { StorageService } from "./shared/services/storage.service";
 import {ExcelService} from './shared/services/excelService/excel.service';
-
+import { JwPaginationModule } from 'jw-angular-pagination';
 
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -47,6 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     //TagInputModule,
     BrowserModule,
+    JwPaginationModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

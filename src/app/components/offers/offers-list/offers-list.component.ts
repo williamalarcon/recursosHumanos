@@ -58,8 +58,7 @@ export class OffersListComponent implements OnInit {
 
   ColumnMode = ColumnMode;
 
-  constructor(private __categoriesService: CategoriesService,
-              private __offersService: OffersService,
+  constructor(private __offersService: OffersService,
              public router: Router,
              public toaster: ToastrService,
              private modalService: NgbModal,

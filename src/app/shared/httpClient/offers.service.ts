@@ -31,7 +31,7 @@ export class OffersService {
     this.httpClient.post(this.REST_API_SERVER+"offers/cOffer",data).subscribe(
       data  => {
         this.toaster.success(data['message']);
-         return this.router.navigateByUrl('/offers/categories-list');
+         return this.router.navigateByUrl('/offers/offers-list');
          },
         error  => {
           this.toaster.error(error.error.message);});
@@ -63,6 +63,14 @@ export class OffersService {
   public getAllData(){
     return this.httpClient.get(this.REST_API_SERVER+"/offers/lOffers");
   }
+
+
+    /**
+   * Trae el listado de funcionarios
+   */
+     public searchData(name, location){
+      return this.httpClient.get(this.REST_API_SERVER+"/offers/lSearch",  { params: {"name": name, "location": location}});
+    }
 
 
   
