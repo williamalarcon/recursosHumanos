@@ -58,13 +58,13 @@ export class NavService {
 
 	MENUADMIN: Menu[] = [
 		{
-			title: 'Offers', icon: 'trello', type: 'sub', active: false, children: [
+			title: 'Offers', icon: 'briefcase', type: 'sub', active: false, children: [
 				{ path: '/offers/offers-list', title: 'List', type: 'link' },
 				{ path: '/offers/create-offer', title: 'Create', type: 'link' },
 			]
 		},
 		{
-			title: 'Candidates', icon: 'layers', type: 'sub', active: false, children: [
+			title: 'Candidates', icon: 'users', type: 'sub', active: false, children: [
 				{ path: '/candidates/candidates-list', title: 'List', type: 'link' },
 				{ path: '/candidates/create-candidate', title: 'Create', type: 'link' },
 			]
@@ -104,13 +104,13 @@ export class NavService {
 
 	MENUAGENCY: Menu[] = [
 		{
-			title: 'Offers', icon: 'trello', type: 'sub', active: false, children: [
+			title: 'Offers', icon: 'briefcase', type: 'sub', active: false, children: [
 				{ path: '/offers/offers-list', title: 'List', type: 'link' },
 				{ path: '/offers/create-offer', title: 'Create', type: 'link' },
 			]
 		},
 		{
-			title: 'Candidates', icon: 'layers', type: 'sub', active: false, children: [
+			title: 'Candidates', icon: 'users', type: 'sub', active: false, children: [
 				{ path: '/candidates/candidates-list', title: 'List', type: 'link' },
 				{ path: '/candidates/create-candidate', title: 'Create', type: 'link' },
 			]

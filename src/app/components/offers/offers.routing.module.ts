@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { OffersListComponent } from './offers-list/offers-list.component';
 import { EditOfferComponent } from './edit-offer/edit-offer.component';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
+import { ViewCandidatesComponent } from './view-candidates/view-candidates.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,14 @@ const routes: Routes = [
         data:{
           title:"Edit",
           breadcrumb:"Edit",
+        }
+      },
+      {
+        path:"view-candidates",
+        component: ViewCandidatesComponent,
+        data:{
+          title:"Candidates",
+          breadcrumb:"Candidates",
         }
       },
     ],

@@ -82,6 +82,11 @@ export class OffersListComponent implements OnInit {
     this.router.navigate(['/offers/edit-offer'], { queryParams: { id: e.id } });
   }
 
+
+  viewCandidates(row){
+    this.router.navigate(['/offers/view-candidates'], { queryParams: { id: row.id } });
+  }
+
     
   openConfirmation(e){
     const modalRef = this.modalService.open(NgbdModalContent);

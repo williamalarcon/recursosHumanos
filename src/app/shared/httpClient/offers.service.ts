@@ -55,6 +55,25 @@ export class OffersService {
     }
 
 
+
+
+    public addNote(data){
+      let user = this.storageService.getCurrentSession();
+      data.userCrea =  user['id'];
+      return this.httpClient.post(this.REST_API_SERVER+"/offers/addNote", data);
+    }
+
+
+
+    
+
+
+       
+    public applyOffer(idOffer){      
+      let user = this.storageService.getCurrentSession();
+      return this.httpClient.post(this.REST_API_SERVER+"/offers/applyOffer", {"offer" : idOffer, "candidate": user['id'] });
+    }
+
   
 
   /**
@@ -96,6 +115,28 @@ export class OffersService {
    public getDataById(data){
     return this.httpClient.get(this.REST_API_SERVER+"offers/rOffer/"+data);
   }
+
+
+    /**
+   * Trae el listado de funcionarios
+   */
+     public getCandidatesByOffer(data){
+      return this.httpClient.get(this.REST_API_SERVER+"offers/lCandidatesByOffer/"+ data);
+    }
+
+      /**
+   * Trae el listado de funcionarios
+   */
+    public getStatus(){
+      return this.httpClient.get(this.REST_API_SERVER+"offers/lStatus");
+    } 
+
+
+    public getNotes(id){
+      return this.httpClient.get(this.REST_API_SERVER+"offers/getNotes/"+id);
+    }
+  
+  
 
 
   

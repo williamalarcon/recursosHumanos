@@ -1,0 +1,178 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-2 xl-40">
+    
+      <div class="card">
+        <div class="card-header">
+          <h6 class="mb-0 f-w-600">
+           {{totalCandidates}} Candidates
+            </h6>
+        </div>
+        
+          <div *ngFor='let item of candidates' class="card-body" (click)="selectCandidate(item)">
+              <span><strong> {{item.first_name}} {{item.last_name}} </strong> </span>
+              <br>
+              <p>{{item.address}}
+                <br> <i>{{item.nameCategorie}} - {{item.status}}</i>
+              </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-6 xl-60">
+      <div class="card" *ngIf="idCandidate != null">
+        <div class="card-header">
+          <h5>{{candidateInfo.first_name}} {{candidateInfo.last_name}}</h5>
+        </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4"><span><strong>Adress</strong></span><br><p>{{candidateInfo.address}}</p></div>
+              <div class="col-md-4"><span><strong>Unit</strong></span><br><p>{{candidateInfo.unit}}</p></div>
+              <div class="col-md-4"><span><strong>Suburb</strong></span><br><p>{{candidateInfo.suburb}}</p></div>
+              <div class="col-md-12"><br></div>
+              <div class="col-md-4"><span><strong>State/Territory</strong></span><br><p>{{candidateInfo.last_name}}</p></div>
+              <div class="col-md-4"><span><strong>PostCode</strong></span><br><p>{{candidateInfo.postcode}}</p></div>
+              <div class="col-md-4"><span><strong>Gender</strong></span><br><p>{{candidateInfo.gender}}</p></div>
+              <div class="col-md-12"><br></div>
+              <div class="col-md-4"><span><strong>Date of Birth</strong></span><br><p>{{candidateInfo.dateofbirth}}</p></div>
+              <div class="col-md-4"><span><strong>Mobile</strong></span><br><p>{{candidateInfo.mobile}}</p></div>
+              <div class="col-md-4"><span><strong>Email</strong></span><br><p>{{candidateInfo.email}}</p></div>
+              <div class="col-md-12"><br></div>
+              <div class="col-md-6"><span><strong>Candidate Profile</strong></span><br><p>{{candidateInfo.candidateProfile}}</p></div>
+              <div class="col-md-6"><span><strong>Indistry Interest</strong></span>
+                <br><em *ngFor='let item of candidateInfo.categories' >{{item.name}} </em>
+              </div>
+              <div class="col-md-12"><br></div>
+              <div class="col-md-6"><span><strong>Presentation Letter(Download)</strong></span><br>
+                <p>
+                  <button class="btn btn-block btn-danger" *ngIf="visiblePT" (click)="openFile('pt')" type="submit">Open Presentation Letter</button>
+                </p></div>
+              <div class="col-md-6"><span><strong>Curriculum vitae(Download)</strong></span><br>
+                <p>
+                  <button class="btn btn-block btn-danger" *ngIf="visibleCV" type="submit" (click)="openFile('cv')" >Open CV</button>
+                </p></div>
+              
+            </div>
+                    
+          </div>
+      </div>
+    </div>
+    <div class="col-xl-3 xl-40">
+    
+      <div class="card"  *ngIf="idCandidate != null">
+        <div class="card-header">
+          <h5 class="mb-0 f-w-600">
+            Status
+            </h5>
+        </div>
+        <div class="card-body" *ngIf="statusCandidate != 9">
+          <form [formGroup]="addNote">
+
+
+
+
+
+            <div class="form-group">
+              <select class="form-control btn-square" (change)='changeStatus($event)' formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                <option value="" selected>Select</option>
+                <option *ngIf="statusCandidate == 1" value="2">Pre-Screen</option>
+                <option *ngIf="statusCandidate == 2" value="3">Filtering</option>
+                <option *ngIf="statusCandidate == 3" value="4">Phone Interview</option>
+                <option *ngIf="statusCandidate == 4" value="5">Internal Interview</option>
+                <option *ngIf="statusCandidate == 5" value="6">Employer Interview</option>
+                <option value="7">Pending Ticket or License</option>
+                <option value="8">Offer</option>
+                <option value="9">Noi Suitable</option>
+                <option value="10">Placement</option>
+            </select>
+            <div *ngIf="submitted && f.status.errors" class="text text-danger mt-1">This Field is required</div>
+            <br>
+            <label class="form-label"><i class="fa fa-lock" aria-hidden="true"></i> Note</label>
+            <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control"  formControlName="nota" mdbInput [ngClass]="{ 'is-invalid': submitted && f.nota.errors }"></textarea>
+            <div *ngIf="submitted && f.nota.errors" class="text text-danger mt-1">This Field is required</div>
+            <br>
+            <ng-container *ngIf="(addNote.controls.status.value == 5 || addNote.controls.status.value == 6)">           
+              <label class="form-label"><i class="fa fa-lock" aria-hidden="true"></i> Date 1</label>
+              <div class="input-group">
+                <input class="form-control" required placeholder="dd/mm/aaaa" readonly name="dp" [(ngModel)]="model1" ngbDatepicker [minDate]="{year: 2022, month:1, day: 1}" 
+                [footerTemplate]="footerTemplate" #fd1="ngbDatepicker" formControlName="date1" [ngClass]="{ 'is-invalid': submitted && f.date1.errors }">
+                <div class="input-group-append">
+                <button class="btn calendar btn-success" (click)="fd1.toggle()" type="button"><i
+                    class="fa fa-calendar"></i></button>
+                </div>
+                <ng-template #footerTemplate>
+                    <hr class="my-0">
+                    <button class="btn btn-primary btn-sm m-2 float-left" (click)="model1 = ''; fd1.close()">Limpiar</button>
+                </ng-template>
+            </div>
+            <br>
+            </ng-container>
+
+            <ng-container *ngIf="(addNote.controls.status.value == 5 || addNote.controls.status.value == 6)">           
+              <label class="form-label"><i class="fa fa-lock" aria-hidden="true"></i> Date 2</label>
+              <div class="input-group">
+                <input class="form-control" required placeholder="dd/mm/aaaa" readonly name="dp" [(ngModel)]="model2" ngbDatepicker [minDate]="{year: 2022, month:1, day: 1}" 
+                [footerTemplate]="footerTemplate" #fd1="ngbDatepicker" formControlName="date2" [ngClass]="{ 'is-invalid': submitted && f.date2.errors }">
+                <div class="input-group-append">
+                <button class="btn calendar btn-success" (click)="fd1.toggle()" type="button"><i
+                    class="fa fa-calendar"></i></button>
+                </div>
+                <ng-template #footerTemplate>
+                    <hr class="my-0">
+                    <button class="btn btn-primary btn-sm m-2 float-left" (click)="model2 = ''; fd1.close()">Limpiar</button>
+                </ng-template>
+            </div>
+            <br>
+            </ng-container>
+            
+
+            <ng-container *ngIf="(addNote.controls.status.value == 5 || addNote.controls.status.value == 6)">           
+              <label class="form-label"><i class="fa fa-lock" aria-hidden="true"></i> Time</label>
+              <input class="form-control" required type="text" placeholder="Time" formControlName="time" [ngClass]="{ 'is-invalid': submitted && f.time.errors }">
+              <br>
+            </ng-container>
+            
+
+            <ng-container *ngIf="(addNote.controls.status.value == 5 || addNote.controls.status.value == 6)">           
+              <label class="form-label"><i class="fa fa-lock" aria-hidden="true"></i> Name</label>
+              <input class="form-control" required type="text" placeholder="Name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+              <br>
+            </ng-container>
+
+            <ng-container *ngIf="addNote.controls.status.value == 6">           
+              <label class="form-label"><i class="fa fa-lock" aria-hidden="true"></i> Address</label>
+              <input class="form-control" required type="text" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+              <br>
+            </ng-container>
+            
+            <ng-container *ngIf="addNote.controls.status.value == 7">           
+              <label class="form-label"><i class="fa fa-lock" aria-hidden="true"></i> License or Ticket</label>
+              <input class="form-control" required type="text" placeholder="License or Ticket" formControlName="license" [ngClass]="{ 'is-invalid': submitted && f.license.errors }">
+              <br>
+            </ng-container>
+            
+
+
+
+            <button class="btn btn-success pull-right" type="submit" [disabled]='!addNote.valid' (click)="addStatus(addNote.value)">Save Note</button>
+            </div>   
+          </form>
+        </div>
+        <hr>
+
+        <div class="notes" *ngFor="let note of notes">
+          <span><strong>{{note.dateCreated}}</strong></span>
+          <p>
+          {{note.note}}
+          </p>
+        <hr>
+        </div>
+        
+
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
