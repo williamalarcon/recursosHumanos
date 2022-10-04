@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
 import { EditCandidateComponent } from './edit-candidate/edit-candidate.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CandidatesListComponent } from './candidates-list/candidates-list.component';
 
 const routes: Routes = [
@@ -32,6 +33,15 @@ const routes: Routes = [
           breadcrumb:"Candidates List",
         }
       },
+      {
+        path:"edit-profile",
+        component: EditProfileComponent,
+        data:{
+          title:"Profile",
+          breadcrumb:"Profile",
+        }
+      },
+      
     ],
   }
 ];

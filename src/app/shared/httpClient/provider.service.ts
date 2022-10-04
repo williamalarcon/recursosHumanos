@@ -30,6 +30,7 @@ export class ProviderService {
     let encrypt =  md5.appendStr(random).end();
 
     let user = this.storageService.getCurrentSession();
+    console.log("llego")
     return this.httpClient.post(this.REST_API_SERVER+"providers/cProvider",
     {"data" : data , 
      "userCreated": user['id'],

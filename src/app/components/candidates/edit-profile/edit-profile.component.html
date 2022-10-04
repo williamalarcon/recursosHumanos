@@ -1,0 +1,213 @@
+<div class="container-fluid">
+  <div class="edit-profile">
+    <div class="row">
+      <div class="col-lg-12">
+        <form class="card" [formGroup]="editObject">
+          <div class="card-header">
+            <h4 class="card-title mb-0">Edit Candidate</h4>
+            <div class="card-options"><a class="card-options-collapse" href="javascript:void(0)" data-toggle="card-collapse"><i
+                  class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="javascript:void(0)" data-toggle="card-remove"><i
+                  class="fe fe-x"></i></a></div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Address</label>
+                <input class="form-control" required type="text" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+                <div *ngIf="submitted && f.address.errors" class="text text-danger mt-1">This Field is required</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Unit</label>
+                <input class="form-control"  type="text" placeholder="Unit" formControlName="unit" [ngClass]="{ 'is-invalid': submitted && f.unit.errors }">
+                <div *ngIf="submitted && f.unit.errors" class="text text-danger mt-1">This Field is required</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Suburb</label>
+                <input class="form-control" required type="text" placeholder="Suburb" formControlName="suburb" [ngClass]="{ 'is-invalid': submitted && f.suburb.errors }">
+                <div *ngIf="submitted && f.suburb.errors" class="text text-danger mt-1">This Field is required</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">State / Territory</label>
+                <select class="form-control btn-square" formControlName="state" [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+                  <option value="" selected>Select</option>
+                  <option value="1">ACT</option>
+                  <option value="2">NSW</option>
+                  <option value="3">NT</option>
+                  <option value="4">QLD</option>
+                  <option value="5">SA</option>
+                  <option value="6">TAS</option>
+                  <option value="7">VIC</option>
+                  <option value="8">WA</option>
+                </select>
+                <div *ngIf="submitted && f.state.errors" class="text text-danger mt-1">This Field is required</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Postcode</label>
+                <input class="form-control" required type="number"  placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
+                <div *ngIf="submitted && f.postcode.errors" class="text text-danger mt-1">This Field is required</div>
+                <div *ngIf="f.postcode.errors && (f.postcode.dirty || f.postcode.touched)"
+                class="alert alert-danger">
+                  <div [hidden]="!title.errors.maxlength">
+                    Only 4 characters allowed.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Email</label>
+                <input class="form-control" required type="email" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                <div *ngIf="submitted && f.email.errors" class="text text-danger mt-1">This Field is required</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Gender</label>
+                <select class="form-control btn-square" formControlName="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+                  <option value="" selected>Select</option>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                  <option value="O">Other</option>
+                </select>
+                <div *ngIf="submitted && f.gender.errors" class="text text-danger mt-1">This Field is required</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label class="form-label">Date of Birth</label>
+                  <div class="input-group">
+                      <input class="form-control" required placeholder="dd/mm/aaaa" readonly name="dp" [(ngModel)]="modelD" ngbDatepicker [minDate]="{year: 1970, month:1, day: 1}" 
+                      [footerTemplate]="footerTemplate" #fd1="ngbDatepicker" formControlName="dateOfBirth" [ngClass]="{ 'is-invalid': submitted && f.dateOfBirth.errors }">
+                      <div class="input-group-append">
+                      <button class="btn calendar btn-success" (click)="fd1.toggle()" type="button"><i
+                          class="fa fa-calendar"></i></button>
+                      </div>
+                      <ng-template #footerTemplate>
+                          <hr class="my-0">
+                          <button class="btn btn-primary btn-sm m-2 float-left" (click)="modelD = ''; fd1.close()">Limpiar</button>
+                      </ng-template>
+                  </div>
+                  <div *ngIf="submitted && f.dateOfBirth.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Mobile</label>
+                <input class="form-control" required type="number" maxlength="12" placeholder="Mobile" formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
+                <div *ngIf="submitted && f.mobile.errors" class="text text-danger mt-1">This Field is required</div>
+                <div *ngIf="f.mobile.errors && (f.mobile.dirty || f.mobile.touched)"
+                class="alert alert-danger">
+                  <div [hidden]="!title.errors.maxlength">
+                    Only 10 characters allowed.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Candidate Profile</label>
+                <select class="form-control btn-square" (change)="selectProfile($event)" formControlName="candidateProfile" [ngClass]="{ 'is-invalid': submitted && f.candidateProfile.errors }">
+                  <option value="" selected>Select</option>
+                  <option value="DES">DES</option>
+                  <option value="JVES">JVES</option>
+                  <option value="NDIS">NDIS</option>
+                  <option value="ParentsNext">ParentsNext</option>
+                  <option value="Strive Laboir Hire">Strive Laboir Hire</option>
+                  <option value="TtW">TtW</option>
+                  <option value="WFA">WFA</option>
+                  <option value="Other">Other</option>
+                </select>
+                <div *ngIf="submitted && f.candidateProfile.errors" class="text text-danger mt-1">This Field is required</div>
+              </div>
+            </div>
+
+            
+            <div class="col-md-6" *ngIf="editObject.get('candidateProfile')?.value == 'Other' ">
+              <div class="form-group">
+                  <label for="name">Other Profile</label>
+                  <input class="form-control" type="text" placeholder="Other Profile" formControlName="otherProfile" >
+              </div>
+              <div class="text text-danger mt-1" 
+                  *ngIf="editObject.get('otherProfile')?.errors?.required
+                  && editObject.get('otherProfile')?.touched">
+                  This Field is required</div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Industry Interest</label>
+                <ng-select [items]="industryInterest"
+                            bindLabel="name"
+                            bindValue="id"
+                            [multiple]="true"
+                            formControlName="industryInterest"
+                            placeholder="Select"
+                            [ngClass]="{ 'is-invalid': submitted && f.industryInterest.errors }"
+                            >
+                </ng-select>
+                <div *ngIf="submitted && f.industryInterest.errors" class="text text-danger mt-1">This Field is required</div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label for="name">CV</label>
+                  <button class="btn btn-block btn-danger" *ngIf="visibleCV" type="submit" (click)="openFile('cv')" >Open CV</button>
+                  <input [ngClass]="{ 'is-invalid': submitted && f.cv.errors }"
+                      class="form-control" 
+                      type="file" 
+                      accept="PDF"
+                      (change)="selectCV($event)"
+                      formControlName="cv"
+                      onlyNumbers>
+                      <br>
+              </div>
+              <div class="alert alert-danger" *ngIf="editObject.get('cv')?.errors?.required && editObject.get('cv')?.touched"> Este campo es obligatorio</div>
+            </div>
+
+            <div class="col-md-6">
+              
+              <div class="form-group">
+                  <label for="name">Presentation Letter</label>
+                  <button class="btn btn-block btn-danger" *ngIf="visiblePT" (click)="openFile('pt')" type="submit">Open Presentation Letter</button>
+                  <input 
+                      [ngClass]="{ 'is-invalid': submitted && f.presentationLetter.errors }"
+                      class="form-control" 
+                      type="file" 
+                      accept="PDF"
+                      (change)="selectPT($event)"
+                      formControlName="presentationLetter"
+                      onlyNumbers>
+                      <br>
+                      
+              </div>
+                <div class="alert alert-danger" *ngIf="editObject.get('presentationLetter')?.errors?.required && editObject.get('presentationLetter')?.touched"> Este campo es obligatorio</div>
+            </div>
+            <div class="col-md-12">
+              <strong> <label for="name">Cover letter template and hv templates</label></strong>
+              <br>
+              <a class="m-10" href="http://analisysrh.nuvoll.com/api/private/files/GAPS_Resume_Template_1.docx" target="_blank" ><span> GAPS Resume Template 1</span></a> <br>
+              <a class="m-10" href="http://analisysrh.nuvoll.com/api/private/files/GAPS_Resume_Template_2.docx" target="_blank" ><span> GAPS Resume Template 1</span></a> <br>
+              <a class="m-10" href="http://analisysrh.nuvoll.com/api/private/files/GAPS_Cover_Letter_Template.docx" target="_blank" ><span> GAPS Cover Letter Template</span></a> <br>
+            </div>
+
+            </div>
+          </div>
+          <div class="card-footer text-right">
+            <button class="btn btn-primary" type="submit" (click)="eSubject(editObject.value)">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

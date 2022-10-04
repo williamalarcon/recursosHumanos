@@ -52,8 +52,11 @@ export class CandidatesService {
       this.httpClient.post(this.REST_API_SERVER+"/candidates/uCandidate",data).subscribe(
         data  => {
             this.toaster.success(data['message']);
+            let currentUser = JSON.parse(localStorage.currentUser);
+            if(currentUser.role != "CANDIDATE"){
+              return this.router.navigateByUrl('/candidates/candidates-list');
+            }
             
-            return this.router.navigateByUrl('/candidates/candidates-list');
            },
           error  => {this.toaster.error(error.error.message);});
     }
@@ -91,6 +94,17 @@ export class CandidatesService {
    */
    public getDataById(data){
     return this.httpClient.get(this.REST_API_SERVER+"candidates/rCandidate/"+data);
+  }
+
+
+  
+  /**
+   * Trae el listado de funcionarios
+   */
+   public getDataByIdUser(){
+    let user = this.storageService.getCurrentSession();
+
+    return this.httpClient.get(this.REST_API_SERVER+"candidates/rCandidateByUser/"+user['id']);
   }
 
 

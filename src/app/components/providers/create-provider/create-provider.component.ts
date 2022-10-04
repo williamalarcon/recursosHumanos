@@ -10,6 +10,7 @@ import { ConsultantsService } from '../../../shared/httpClient/consultants.servi
 import { TitlesService } from '../../../shared/httpClient/titles.service';
 import { ModalComponent } from '../../modal/modal.component';
 import { ToastrService } from 'ngx-toastr';
+import { AlertsService } from 'src/app/shared/httpClient/alerts/alerts.service';
 
 
 @Component({
@@ -259,13 +260,14 @@ export class CreateProviderComponent implements OnInit {
 
 
   cSubject(data, tabSet){
-    
     this.submitted = true;
     if (this.createSubject.invalid) {
+      this.getFormValidationErrors();
       return;
     }
     var that = this;
-    if(this.providerId != null){
+    console.log(this.providerId);
+    if(this.providerId == null){
       this.__providerService.sendCreateRequest(data).subscribe(
         data  => {
           this.providerId = data['id'];
@@ -283,6 +285,18 @@ export class CreateProviderComponent implements OnInit {
     }
 
   }
+
+
+  getFormValidationErrors() {
+    Object.keys(this.createSubject.controls).forEach(key => {
+    const controlErrors: ValidationErrors = this.createSubject.get(key).errors;
+    if (controlErrors != null) {
+          Object.keys(controlErrors).forEach(keyError => {
+            console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+          });
+        }
+      });
+    }
 
     /**
    * Create form unit

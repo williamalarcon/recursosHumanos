@@ -13,7 +13,7 @@
               <span><strong> {{item.first_name}} {{item.last_name}} </strong> </span>
               <br>
               <p>{{item.address}}
-                <br> <i>{{item.nameCategorie}} - {{item.status}}</i>
+                <br> <i>{{item.nameCategorie}}</i>
               </p>
         </div>
       </div>
@@ -67,11 +67,6 @@
         </div>
         <div class="card-body" *ngIf="statusCandidate != 9">
           <form [formGroup]="addNote">
-
-
-
-
-
             <div class="form-group">
               <select class="form-control btn-square" (change)='changeStatus($event)' formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
                 <option value="" selected>Select</option>
@@ -162,9 +157,31 @@
 
         <div class="notes" *ngFor="let note of notes">
           <span><strong>{{note.dateCreated}}</strong></span>
+          <br><br>
           <p>
           {{note.note}}
           </p>
+          <ng-container *ngIf="note.date1 != null && note.date1 != ''">
+            <strong>Date 1:</strong> {{note.date1}}
+          </ng-container>  
+          <ng-container *ngIf="note.date2 != null && note.date2 != ''">
+            <strong>Date 2:</strong> {{note.date2}}
+          </ng-container>  
+          <ng-container *ngIf="note.ftime != null && note.ftime != ''">
+            <strong>Time:</strong> {{note.ftime}}
+          </ng-container>  
+          <ng-container *ngIf="note.address != null && note.address != ''">
+            <strong>Address:</strong> {{note.address}}
+          </ng-container>      
+          <ng-container *ngIf="note.license != null && note.license != ''">
+            <strong>License:</strong> {{note.license}}
+          </ng-container> 
+
+          <br><br>
+
+          <strong>Author: </strong><i> {{note.first_name}} {{note.last_name }}</i>
+
+
         <hr>
         </div>
         
