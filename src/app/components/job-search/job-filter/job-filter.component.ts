@@ -54,6 +54,14 @@ export class JobFilterComponent implements OnInit {
     this.newItemEvent.emit(this.searchForm.value);
   }
 
+
+  clear(){
+    this.searchForm.controls['name'].setValue("");
+    this.searchForm.controls['location'].setValue("");  
+    this.search();
+  }
+
+
   onChange(name: string, isChecked: boolean) {
     const categoriesFormArray = <FormArray>this.searchForm.controls.categories;
 

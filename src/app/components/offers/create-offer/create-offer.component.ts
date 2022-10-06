@@ -32,12 +32,10 @@ export class CreateOfferComponent implements OnInit {
       jobPaying: ['', [Validators.required]],
       jobTime: ['', [Validators.required]],
       JobAdderLink: ['', []],
-      jobVacancy: ['', []],
       jobDescription: ['', [Validators.required]],
       skills: ['', []],
       about: ['', []],
-      questions: ['', []],
-      publish: ['', [Validators.required]]
+      questions: ['', []]
 
     });
 

@@ -203,6 +203,14 @@ export class ViewCandidatesComponent implements OnInit {
   }
 
 
+  openFile(file){
+    if(file == "cv"){
+      window.open("/api/private/files/cv/"+this.visibleCV, "_blank");
+    }else if(file = "pt"){
+      window.open("/api/private/files/pt/"+this.visiblePT, "_blank");
+    }
+  }
+  
   get f() { return this.editProfile.controls; }
 
 }

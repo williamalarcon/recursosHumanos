@@ -75,7 +75,12 @@ export class JobListComponent implements OnInit {
   getAllData(dataComp){
     this.__offersService.searchData(this.name, this.location).subscribe(
       data  => {
+        
           dataComp(data);
+         },
+
+         error => {
+          dataComp([]);
          }
        );   
   }

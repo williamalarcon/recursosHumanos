@@ -52,7 +52,7 @@ export class NavService {
 		},
 		{
 			title: 'Settings', icon: 'settings', type: 'sub', active: false, children: [
-				{ path: '/candidates/edit-profile', title: 'List', type: 'link' },
+				{ path: '/candidates/edit-profile', title: 'My profile', type: 'link' },
 			]
 		}
 	];

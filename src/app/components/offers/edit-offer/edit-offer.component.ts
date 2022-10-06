@@ -45,12 +45,10 @@ export class EditOfferComponent implements OnInit {
       jobPaying: ['', [Validators.required]],
       jobTime: ['', [Validators.required]],
       JobAdderLink: ['', []],
-      jobVacancy: ['', []],
       jobDescription: ['', [Validators.required]],
       skills: ['', []],
       about: ['', []],
-      questions: ['', []],
-      publish: ['', [Validators.required]]
+      questions: ['', []]
     });
     this.getCategories(data => {this.listCategories = data;});
   }
@@ -69,12 +67,10 @@ export class EditOfferComponent implements OnInit {
           this.editProfile.controls['jobPaying'].setValue(data['jobPaying']);
           this.editProfile.controls['jobTime'].setValue(data['JobTime']);
           this.editProfile.controls['JobAdderLink'].setValue(data['jobAdderLink']);
-          this.editProfile.controls['jobVacancy'].setValue(data['jobVacancy']);
           this.editProfile.controls['jobDescription'].setValue(data['jobDescription']);
           this.editProfile.controls['skills'].setValue(data['skills']);
           this.editProfile.controls['about'].setValue(data['about']);
           this.editProfile.controls['questions'].setValue(data['questions']);
-          this.editProfile.controls['publish'].setValue(data['publish']);
 
          },
           error  => {this.toaster.error(error.error.message);}

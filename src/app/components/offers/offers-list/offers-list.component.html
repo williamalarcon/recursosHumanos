@@ -29,7 +29,7 @@
                           <span  class="badge badge-pill pill-badge-info"  (click)="editObject(row)">Edit</span>
                           <span *ngIf="row.publish == 0" class="badge badge-pill pill-badge-success" (click)="activateItem(row.id)" >Publish</span>
                           <span *ngIf="row.publish == 1" class="badge badge-pill pill-badge-secondary" (click)="openConfirmation(row)" >Unpublish</span>
-                          <span  class="badge badge-pill pill-badge-success"  (click)="viewCandidates(row)"><i class="fa fa-users" aria-hidden="true"></i></span>
+                          <span  class="badge badge-pill pill-badge-success" placement="top" ngbTooltip="Candidates" (click)="viewCandidates(row)"><i class="fa fa-users" aria-hidden="true"></i></span>
                           
                         </ng-template>
                       </ngx-datatable-column>

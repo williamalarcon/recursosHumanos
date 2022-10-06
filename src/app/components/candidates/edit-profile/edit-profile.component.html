@@ -52,7 +52,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Postcode</label>
-                <input class="form-control" required type="number"  placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
+                <input class="form-control" required type="text"  placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
                 <div *ngIf="submitted && f.postcode.errors" class="text text-danger mt-1">This Field is required</div>
                 <div *ngIf="f.postcode.errors && (f.postcode.dirty || f.postcode.touched)"
                 class="alert alert-danger">
@@ -60,13 +60,6 @@
                     Only 4 characters allowed.
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label">Email</label>
-                <input class="form-control" required type="email" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-                <div *ngIf="submitted && f.email.errors" class="text text-danger mt-1">This Field is required</div>
               </div>
             </div>
             <div class="col-md-6">
@@ -85,7 +78,7 @@
               <div class="form-group">
                   <label class="form-label">Date of Birth</label>
                   <div class="input-group">
-                      <input class="form-control" required placeholder="dd/mm/aaaa" readonly name="dp" [(ngModel)]="modelD" ngbDatepicker [minDate]="{year: 1970, month:1, day: 1}" 
+                      <input class="form-control" required placeholder="dd/mm/aaaa" readonly name="dp" [(ngModel)]="modelD" ngbDatepicker [minDate]="{year: 1950, month:1, day: 1}" 
                       [footerTemplate]="footerTemplate" #fd1="ngbDatepicker" formControlName="dateOfBirth" [ngClass]="{ 'is-invalid': submitted && f.dateOfBirth.errors }">
                       <div class="input-group-append">
                       <button class="btn calendar btn-success" (click)="fd1.toggle()" type="button"><i
@@ -103,7 +96,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Mobile</label>
-                <input class="form-control" required type="number" maxlength="12" placeholder="Mobile" formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
+                <input class="form-control" required type="text" maxlength="12" placeholder="Mobile" formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
                 <div *ngIf="submitted && f.mobile.errors" class="text text-danger mt-1">This Field is required</div>
                 <div *ngIf="f.mobile.errors && (f.mobile.dirty || f.mobile.touched)"
                 class="alert alert-danger">

@@ -129,17 +129,6 @@
                     <div *ngIf="submitted && f.questions.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="form-label">Publish</label>
-                  <select class="form-control btn-square" formControlName="publish" [ngClass]="{ 'is-invalid': submitted && f.publish.errors }">
-                    <option value="" selected>Select</option>
-                    <option value="1">Active</option>
-                    <option value="2">Inactive</option>
-                  </select>
-                  <div *ngIf="submitted && f.publish.errors" class="text text-danger mt-1">This Field is required</div>
-                </div>
-              </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <button class="btn btn-primary" type="submit" [disabled]='!editProfile.valid' (click)="updateObject(editProfile.value)">Save</button>
