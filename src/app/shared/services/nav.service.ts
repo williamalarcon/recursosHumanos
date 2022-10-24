@@ -44,10 +44,27 @@ export class NavService {
 	];
 
 
+	MENUPROVIDER: Menu[] = [
+		{
+			title: 'Dashboard',path: '/dashboard/default', icon: 'home', type: 'sub', badgeType: 'pill gradient-primary-1'
+		},
+		{
+			title: 'Reports', icon: 'file-text', type: 'sub', badgeType: 'pill gradient-primary-1', children: [
+				{ path: '/reports/generate-report', title: 'Generate', type: 'link' }
+			]
+		}
+	];
+
+
 	MENUCANDIDATE: Menu[] = [
 		{
 			title: 'Jobs', icon: 'user-check', type: 'sub', active: false, children: [
 				{ path: '/job/search', title: 'Search', type: 'link' }
+			]
+		},
+		{
+			title: 'Reports', icon: 'file-text', type: 'sub', badgeType: 'pill gradient-primary-1', children: [
+				{ path: '/reports/generate-report', title: 'Generate', type: 'link' }
 			]
 		},
 		{
@@ -75,6 +92,11 @@ export class NavService {
 			title: 'Providers', icon: 'book', type: 'sub', active: false, children: [
 				{ path: '/providers/providers-list', title: 'List', type: 'link' },
 				{ path: '/providers/create-provider', title: 'Create', type: 'link' },
+			]
+		},
+		{
+			title: 'Reports', icon: 'file-text', type: 'sub', badgeType: 'pill gradient-primary-1', children: [
+				{ path: '/reports/generate-report', title: 'Generate', type: 'link' }
 			]
 		},
 		{
@@ -124,6 +146,11 @@ export class NavService {
 			]
 		},
 		{
+			title: 'Reports', icon: 'file-text', type: 'sub', badgeType: 'pill gradient-primary-1', children: [
+				{ path: '/reports/generate-report', title: 'Generate', type: 'link' }
+			]
+		},
+		{
 			title: 'Settings', icon: 'settings', type: 'sub', active: false, children: [
 				{
 					title: 'Users', icon: 'users', type: 'sub', active: false, children: [
@@ -148,6 +175,7 @@ export class NavService {
 	// Array
 	items = new BehaviorSubject<Menu[]>(this.MENUADMIN);
 	menuCandidate = new BehaviorSubject<Menu[]>(this.MENUCANDIDATE);
+	menuProvider = new BehaviorSubject<Menu[]>(this.MENUPROVIDER);
 	menuAgency = new BehaviorSubject<Menu[]>(this.MENUAGENCY);
 	
 

@@ -220,6 +220,18 @@
 
             <div class="col-md-6">
               <div class="form-group">
+                <label class="form-label">Agency</label>
+                <select class="form-control btn-square" formControlName="agency" [ngClass]="{ 'is-invalid': submitted && f.agency.errors }">
+                  <option value="" selected>Select</option>
+                  <ng-container *ngFor='let data of usersAgency' ><option [value]="data.id" *ngIf="data.active=='1'">{{data.firstName}}  {{data.lastName}}</option>
+                  </ng-container>    
+                </select>
+                <div *ngIf="submitted && f.agency.errors" class="text text-danger mt-1">This Field is required</div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
                   <label for="name">CV</label>
                   <input [ngClass]="{ 'is-invalid': submitted && f.cv.errors }"
                       class="form-control" 

@@ -5,9 +5,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { CookieService } from 'ngx-cookie-service';
 import {Md5} from 'ts-md5/dist/md5';
-import {Observable} from "rxjs";
-import {LoginComponent} from "../../auth/login/login.component";
-import {Session} from "../../core/models/session.model";
+import { StorageService } from '../services/storage.service';
 import { environment } from '../../../environments/environment';
 
 export interface User {
@@ -29,6 +27,7 @@ export class DataService implements OnInit{
 
   constructor(public toster: ToastrService, 
               public httpClient: HttpClient, 
+              private storageService: StorageService,
               public router: Router, 
               public ngZone: NgZone,
               private cookies: CookieService,
@@ -57,6 +56,12 @@ export class DataService implements OnInit{
   deleteToken(){
     this.cookies.delete("token");
   }
+
+  public getAllData(from, to, role, idUser ){
+
+    return this.httpClient.post(this.REST_API_SERVER+"/reports/all", { "role": role, "idUser": idUser , "from": from, "to": to});
+  }
+  
 
 
   

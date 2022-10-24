@@ -91,17 +91,6 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="form-label">Job Vacancy</label>
-                  <select class="form-control btn-square" formControlName="jobVacancy" [ngClass]="{ 'is-invalid': submitted && f.jobVacancy.errors }">
-                    <option value="" selected>Select</option>
-                    <option value="1">Active</option>
-                    <option value="2">Inactive</option>
-                  </select>
-                  <div *ngIf="submitted && f.jobVacancy.errors" class="text text-danger mt-1">This Field is required</div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
                     <label class="form-label">Skills and Experience</label>
                     <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control"  formControlName="skills" mdbInput [ngClass]="{ 'is-invalid': submitted && f.skills.errors }"></textarea>
                     <div *ngIf="submitted && f.skills.errors" class="text text-danger mt-1">Este campo es obligatorio</div>

@@ -1,0 +1,87 @@
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-12">
+          <div class="card">
+              <div class="card-header">
+                  <h5>Generate Report</h5>
+              </div>
+              <div class="card-body custom-datatable">
+                <div *ngIf="!hideSpinner" class="spinner-form ">
+                  <div class="loader-box">
+                    <div class="loader-37"></div>
+                  </div>
+                </div>
+
+                <form class="custom-datepicker-dropdown" [formGroup]="createForm" style="width: 100%;">
+                  <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">From</label>
+                            <div class="input-group">
+                                <input class="form-control"
+                                       placeholder="dd/mm/aaaa" 
+                                       readonly 
+                                       name="dp"
+                                       [maxDate]="maxDate"   
+                                       [(ngModel)]="modelD" 
+                                       ngbDatepicker
+                                       [footerTemplate]="footerTemplate" 
+                                       #fd1="ngbDatepicker" 
+                                       formControlName="desde" 
+                                       (ngModelChange)="changeDesde($event)"
+                                       [ngClass]="{ 'is-invalid': submitted && f.desde.errors }">
+                                <div class="input-group-append">
+                                <button class="btn calendar" (click)="fd1.toggle()" type="button"><i
+                                    class="fa fa-calendar"></i></button>
+                                </div>
+                                <ng-template #footerTemplate>
+                                    <hr class="my-0">
+                                    <button class="btn btn-primary btn-sm m-2 float-left" (click)="modelD = ''; fd1.close()">Limpiar</button>
+                                </ng-template>
+                            </div>
+                            <div *ngIf="submitted && f.desde.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">To</label>
+                            <div class="input-group">
+                                <input class="form-control"   
+                                       [minDate]="minDate"  
+                                       placeholder="dd/mm/aaaa" 
+                                       readonly 
+                                       name="dp" 
+                                       [(ngModel)]="modelH" 
+                                       ngbDatepicker
+                                       [footerTemplate]="footerTemplate1" 
+                                       #fh1="ngbDatepicker" 
+                                       (ngModelChange)="changeHasta($event)"
+                                       formControlName="hasta" 
+                                       [ngClass]="{ 'is-invalid': submitted && f.hasta.errors }">
+                                <div class="input-group-append">
+                                <button class="btn calendar" (click)="fh1.toggle()" type="button"><i
+                                    class="fa fa-calendar"></i></button>
+                                </div>
+                                <ng-template #footerTemplate1>
+                                    <hr class="my-0">
+                                    <button class="btn btn-primary btn-sm m-2 float-left" (click)="modelH = ''; fh1.close()">Limpiar</button>
+                                </ng-template>
+                                <div *ngIf="submitted && f.hasta.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label style="color:transparent">n</label>
+                        <div class="input-group">
+                          <button class="btn btn-primary" type="submit" (click)="generateReport(createForm.value)">Generar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>

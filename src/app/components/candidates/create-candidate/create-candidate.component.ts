@@ -5,6 +5,7 @@ import { CategoriesService } from '../../../shared/httpClient/categories.service
 import { ProviderService } from '../../../shared/httpClient/provider.service';
 import { ConsultantsService } from '../../../shared/httpClient/consultants.service';
 import { CandidatesService } from '../../../shared/httpClient/candidates.service';
+import { ProfileService } from '../../../shared/httpClient/profile.service';
 import { TitlesService } from '../../../shared/httpClient/titles.service';
 import { removeSpaces} from '../../../shared/validators/removeSpaces';
 import { Observable } from 'rxjs';
@@ -26,6 +27,7 @@ export class CreateCandidateComponent implements OnInit {
   public industryInterest = [];
   public listProviders = [];
   public listConsultants = [];
+  public usersAgency = [];
   public providerSelected = null;
   public consultantSelected = null;
   public acceptTerms = false;
@@ -38,6 +40,7 @@ export class CreateCandidateComponent implements OnInit {
               private __categoriesService: CategoriesService,
               private __consultantsService: ConsultantsService,
               private __ProviderService: ProviderService,
+              private __profileService: ProfileService,
               private toaster: ToastrService,
               private __titlesService: TitlesService,
               private __candidatesService: CandidatesService,
@@ -66,6 +69,7 @@ export class CreateCandidateComponent implements OnInit {
       providerSiteLocation: ['',],
       consultantTitle: ['',],
       consultant: ['', [Validators.required]],
+      agency: ['', [Validators.required]],
       cv: ['', []],
       presentationLetter: ['', []],
 
@@ -77,11 +81,18 @@ export class CreateCandidateComponent implements OnInit {
     this.getCategories(data => {this.industryInterest = data;});
     this.getProviders(data => { this.listProviders = data;});
     this.getTitles(data => {this.titles = data;});
+    this.getUsesAgency(data => { this.usersAgency = data});
   }
 
 
   getTitles(dataComp){
     this.__titlesService.getAllData().subscribe(data  => {  dataComp(data);});   
+  }
+
+  getUsesAgency(dataComp){
+    this.__profileService.getAllUsers().subscribe(data => {
+        dataComp(data);
+    })
   }
 
 

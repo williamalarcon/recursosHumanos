@@ -138,7 +138,15 @@ export class ViewCandidatesComponent implements OnInit {
       data  => {  
         
         this.candidateInfo = data;
-        this.candidateInfo.gender = data['gender']=="F"?'Female':'Male';
+        
+        if(data['gender']=="F"){
+          this.candidateInfo.gender = 'Female';
+        }else if(data['gender']=="M"){
+          this.candidateInfo.gender = 'Male';
+        }else if(data['gender']=="O"){
+          this.candidateInfo.gender = 'Other';
+        }
+        
         this.visiblePT = (data['pt']== null)?false: data['pt'];
         this.visibleCV = (data['cv']== null)?false: data['cv'];
         this.idCandidate = item.id;

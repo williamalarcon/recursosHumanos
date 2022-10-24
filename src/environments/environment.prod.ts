@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  urlApis: "http://analisysrhapi.nuvoll.com",
+  urlApis: "https://analisysrhapi.nuvoll.com",
   firebase: {
     apiKey: "Your Firebase API Key",
     authDomain: "Your Firebase Auth Domain",

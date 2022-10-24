@@ -8,6 +8,7 @@ import { ProviderService } from '../../../shared/httpClient/provider.service';
 import { ConsultantsService } from '../../../shared/httpClient/consultants.service';
 import { CandidatesService } from '../../../shared/httpClient/candidates.service';
 import { TypeguidesService } from '../../../shared/httpClient/typeguides/typeguides.service';
+import { ProfileService } from '../../../shared/httpClient/profile.service';
 import { NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { map } from "rxjs/operators"; 
@@ -26,6 +27,7 @@ export class EditCandidateComponent implements OnInit {
   public industryInterest = [];
   public listProviders = [];
   public listConsultants = [];
+  public usersAgency = [];
   public titles = [];
   public providerSelected = null;
   public consultantSelected = null;
@@ -45,11 +47,11 @@ export class EditCandidateComponent implements OnInit {
               private __candidatesService: CandidatesService,
               private __consultantsService: ConsultantsService,
               private __ProviderService: ProviderService,
-              private typeguidesService: TypeguidesService,
-              private subjectsService: SubjectsService) {
+              private __profileService: ProfileService) {
                           
               this.getCategories(data => {this.industryInterest = data;});
               this.getProviders(data => { this.listProviders = data;});
+              this.getUsesAgency(data => { this.usersAgency = data});
               this.getTitles(data => {this.titles = data;});
                 this.sub = this.route
                 .queryParams
@@ -142,6 +144,7 @@ export class EditCandidateComponent implements OnInit {
       providerSiteLocation: ['',],
       consultantTitle: ['',],
       consultant: ['', [Validators.required]],
+      agency: ['', [Validators.required]],
       cv: ['', []],
       presentationLetter: ['', []],
     })
@@ -180,6 +183,7 @@ export class EditCandidateComponent implements OnInit {
             this.editObject.controls['provider'].setValue(data['provider']);
             this.editObject.controls['providerRegion'].setValue(data['providerRegion']);
             this.editObject.controls['providerSiteLocation'].setValue(data['providerSiteLocation']);
+            this.editObject.controls['agency'].setValue(data['usersAgency']);
           
             let date = new Date(data['dateofbirth']);
             this.editObject.controls['dateOfBirth'].setValue({year:date.getFullYear(),month:date.getMonth()+1,day:date.getUTCDate()});
@@ -222,6 +226,14 @@ export class EditCandidateComponent implements OnInit {
   selectPT(event): void {
     this.pt = event.target.files;
   }
+
+  getUsesAgency(dataComp){
+    this.__profileService.getAllUsers().subscribe(data => {
+        dataComp(data);
+    })
+  }
+
+
 
   eSubject(data){
     this.submitted = true;

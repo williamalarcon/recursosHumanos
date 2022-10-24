@@ -134,6 +134,7 @@ export class EditProfileComponent implements OnInit {
       otherProfile: ['', []],
       industryInterest: ['', [Validators.required]],
       provider: ['', [Validators.required]],
+      agency: ['', [Validators.required]],
       providerRegion: ['',],
       providerSiteLocation: ['',],
       consultantTitle: ['',],
@@ -181,7 +182,7 @@ export class EditProfileComponent implements OnInit {
             this.editObject.controls['provider'].setValue(data['provider']);
             this.editObject.controls['providerRegion'].setValue(data['providerRegion']);
             this.editObject.controls['providerSiteLocation'].setValue(data['providerSiteLocation']);
-          
+            this.editObject.controls['agency'].setValue(data['usersAgency']);
             let date = new Date(data['dateofbirth']);
             this.editObject.controls['dateOfBirth'].setValue({year:date.getFullYear(),month:date.getMonth()+1,day:date.getUTCDate()});
             

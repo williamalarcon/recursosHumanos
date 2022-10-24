@@ -66,9 +66,15 @@ export const content: Routes = [
       breadcrumb: 'Dashboard'
     }
   },
-
-
-
+  {
+    path: 'reports',
+    loadChildren: () => import('../../components/reports/reports.module').then(m => m.ReportsModule),
+    data: {
+      title: "reports",
+      breadcrumb: "reports",
+      link: "reports/generate-report"
+    },
+  },
   {
     path: 'icons',
     loadChildren: () => import('../../components/icons/icons.module').then(m => m.IconsModule),
