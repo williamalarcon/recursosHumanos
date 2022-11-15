@@ -83,6 +83,11 @@ export class OffersService {
     return this.httpClient.get(this.REST_API_SERVER+"/offers/lOffers");
   }
 
+  
+     public getAllActive(){
+      return this.httpClient.get(this.REST_API_SERVER+"/offers/lOffersActive");
+    }
+
 
     /**
    * Trae el listado de funcionarios

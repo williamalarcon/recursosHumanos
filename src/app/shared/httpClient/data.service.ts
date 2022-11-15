@@ -58,8 +58,15 @@ export class DataService implements OnInit{
   }
 
   public getAllData(from, to, role, idUser ){
-
     return this.httpClient.post(this.REST_API_SERVER+"/reports/all", { "role": role, "idUser": idUser , "from": from, "to": to});
+  }
+
+
+  public getTotals(){
+    let user = this.storageService.getCurrentSession();
+
+
+    return this.httpClient.get(this.REST_API_SERVER+"reports/totals/"+ user['role'] +"/"+user['id']);
   }
   
 

@@ -46,7 +46,7 @@ export class NavService {
 
 	MENUPROVIDER: Menu[] = [
 		{
-			title: 'Dashboard',path: '/dashboard/default', icon: 'home', type: 'sub', badgeType: 'pill gradient-primary-1'
+			title: 'Dashboard',path: '/dashboard/default', icon: 'home', type: 'link', badgeType: 'pill gradient-primary-1'
 		},
 		{
 			title: 'Reports', icon: 'file-text', type: 'sub', badgeType: 'pill gradient-primary-1', children: [
@@ -57,6 +57,9 @@ export class NavService {
 
 
 	MENUCANDIDATE: Menu[] = [
+		{
+			title: 'Dashboard',path: '/dashboard/default', icon: 'home', type: 'link', badgeType: 'pill gradient-primary-1'
+		},
 		{
 			title: 'Jobs', icon: 'user-check', type: 'sub', active: false, children: [
 				{ path: '/job/search', title: 'Search', type: 'link' }
@@ -76,6 +79,9 @@ export class NavService {
 
 
 	MENUADMIN: Menu[] = [
+		{
+			title: 'Dashboard',path: '/dashboard/default', icon: 'home', type: 'link'
+		},
 		{
 			title: 'Offers', icon: 'briefcase', type: 'sub', active: false, children: [
 				{ path: '/offers/offers-list', title: 'List', type: 'link' },
@@ -127,6 +133,9 @@ export class NavService {
 	];
 
 	MENUAGENCY: Menu[] = [
+		{
+			title: 'Dashboard',path: '/dashboard/default', icon: 'home', type: 'sub', badgeType: 'pill gradient-primary-1'
+		},
 		{
 			title: 'Offers', icon: 'briefcase', type: 'sub', active: false, children: [
 				{ path: '/offers/offers-list', title: 'List', type: 'link' },

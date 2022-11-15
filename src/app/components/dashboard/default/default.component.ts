@@ -1,19 +1,53 @@
-import { NgbDateStruct, NgbDate, NgbCalendar, NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnInit, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
+import { NgbDateStruct, NgbModal, NgbActiveModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, ViewChild, ViewEncapsulation, ElementRef, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import * as chartData from './../../../shared/data/dashboard/default';
 import { DatatableComponent, ColumnMode } from '@swimlane/ngx-datatable';
 import { SubjectsService } from '../../../shared/httpClient/subjects/subjects.service';
-import { StatisticsService } from '../../../shared/httpClient/statistics/statistics.service';
-import { SolicitudesService } from '../../../shared/httpClient/solicitudes.service';
-import { Router } from '@angular/router';
-import * as knobData from '../../../shared/data/chart/knob';
+import { StorageService } from '../../../shared/services/storage.service';
+import { CandidatesService } from '../../../shared/httpClient/candidates.service';
+import { OffersService } from '../../../shared/httpClient/offers.service';
+import { DataService } from '../../../shared/httpClient/data.service';
+import { Data, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import {
   ChartComponent
 } from "ng-apexcharts";
 
 declare let require: any;
+@Component({
+  selector: 'ngbd-modal-content',
+  template: `
+    <div class="modal-header">
+      <h4>Confirmation</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="text-align: center">
+    <label>Do Yo you want desactivate the User:  <strong> {{firstName}} </strong></label>
+      <br><br>
+      <button class="btn btn-primary" type="submit"  (click)="delete(id, 0)" style="margin-right: 10px">Accept</button>  
+      
+      <button class="btn btn-danger" type="submit"   (click)="activeModal.dismiss('Cross click')">Cancel</button>
+    </div>
+  `
+})
+export class NgbdModalContent {
+  @Input() id;
+  @Input() firstName;
+  @Input() parent;
+  constructor(public activeModal: NgbActiveModal) {}
+
+
+  delete(e,i){
+    this.parent.inactivateItem(e,i);
+    
+  }
+}
+
+
 
 @Component({
   selector: 'app-default',
@@ -22,6 +56,9 @@ declare let require: any;
   encapsulation: ViewEncapsulation.None
 })
 export class DefaultComponent implements OnInit {
+
+  public totalData: any = [ {"totals":{"Application":"0","Pre-Screen":"0","Filtering":"0","Phone Interview":"0","Internal Interview":"0","Employer Interview":"0","Pending Ticket or License":"0","Offer":"0","Noi Suitable":"0","Placement":"0"},"offers":{"active":"0","total":"0"}}];
+  public role =  "";
 
   // Chart Data
   public chart1 = chartData.chartBox1;
@@ -36,17 +73,19 @@ export class DefaultComponent implements OnInit {
 
   meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
   month: String;
+
   totalGuias = 1;
   rows = [];
   temp = [];
+
+  rows1 = [];
+  temp1 = [];
+
+
   actualizaciones = 0;
   capacitaciones = 0;
   inquietudes = 0;
 
-  //Table
-  columns = [{ name: 'radicado', label: 'N°', size: 1 }, { name: 'Fecha', label: 'Fecha' }, { name: 'Solicitante', label: 'Solicitante' }, { name: 'Area', label: 'Área' }, { name: 'Solicitud', label: 'Solicitud' }, { name: 'Estado', label: 'Estado' } ];
-  @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
-  ColumnMode = ColumnMode;
 
   @ViewChild("chart") chart: ChartComponent;
 
@@ -56,169 +95,6 @@ export class DefaultComponent implements OnInit {
   
   
 
-  public chartOptions = {
-    chart: {
-      height: 350,
-      type: 'area',
-      toolbar: {
-        show: true,
-        tools: {
-          download: false,
-          selection: false,
-          zoom: false,
-          zoomin: false,
-          zoomout: false,
-          pan: false,
-          reset: false
-        },
-      }
-    },
-    series: [
-    ],
-    yaxis: {
-      show: false,
-      "labels": {
-        "formatter": function (val) {
-            return val.toFixed(0)
-        }
-      },
-      showGrid: false,
-    },
-    dataLabels: {
-      enabled: false
-    },
-    grid: {
-      borderColor: '#f0f7fa',
-      show: false
-    },
-    stroke: {
-      curve: 'smooth'
-    },
-    xaxis: {
-      low: 0,
-      offsetX: 0,
-      offsetY: 0,
-      showGrid: false,
-      show: false,
-      type: 'date',
-      labels: {
-        low: 0,
-        offsetX: 0,
-        show: false,
-      },
-      axisBorder: {
-        low: 0,
-        offsetX: 0,
-        show: false,
-      },
-      axisTicks: {
-        show: false,
-      },
-      categories: {},
-    },
-    tooltip: {
-      x: {
-        format: 'dd/MM/yy'
-      },
-    },
-    colors: ["#fb740d", "#158df7", "#fb2e63","#51bb25"],
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shadeIntensity: 1,
-        opacityFrom: 0.5,
-        opacityTo: 0.4,
-        stops: [0, 95, 100]
-      }
-    },
-    responsive: [
-      {
-        breakpoint: 992,
-        options: {
-          stroke: {
-            width: 5
-          },
-          chart: {
-            height: 200
-          }
-        }
-      },
-      {
-        breakpoint: 480,
-        options: {
-          stroke: {
-            width: 1
-          }
-        }
-      },
-      {
-        breakpoint: 320,
-        options: {
-          stroke: {
-            width: 1
-          }
-        }
-      }
-    ]
-  };
-
-  //ChartOptions2
-
-  public chart2Options = {
-    
-    series: [
-      {
-          name: "Materias",
-          data: [44, 55, 57]
-      },
-      {
-          name: "Guias",
-          data: [76, 85, 101]
-      },
-  ],
-  chart: {
-      type: "bar",
-      height: 350
-  },
-  plotOptions: {
-      bar: {
-          horizontal: false,
-          columnWidth: "55%",
-          endingShape: "rounded"
-      }
-  },
-  dataLabels: {
-      enabled: false
-  },
-  stroke: {
-      show: true,
-      width: 2,
-      colors: ["transparent"]
-  },
-  xaxis: {
-      categories: [
-          "Creadas",
-          "Actualizadas",
-          "En Proceso"
-      ]
-  },
-  yaxis: {
-      title: {
-          text: "Total"
-      }
-  },
-  colors:["#fb740d", "#158df7", '#51bb25'],
-  fill: {
-      opacity: 1
-  },
-  tooltip: {
-      y: {
-          formatter: function (val) {
-              return val;
-          }
-      }
-  }
-  };
 
   public exportForm1: FormGroup;
   public exportForm2: FormGroup;
@@ -230,247 +106,42 @@ export class DefaultComponent implements OnInit {
   model3D     : NgbDateStruct;
   model3H     : NgbDateStruct;
 
+  columns = [{ label: 'First Name' , name: 'firstName' }, { label: 'Last Name' , name: 'lastName' }, { label: 'Address' , name: 'address' }, { label: 'Unit' , name: 'unit' }, { label: 'Suburb' , name: 'suburb' }, { label: 'Email' , name: 'email' }];
+  
+  columns2 = [{ name : 'employer',  label: 'Employer' },{ name : 'jobTitle',  label: 'Job Title' },{ name : 'jobDescription',  label: 'Job Description' }];
+
+  @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
+
+  ColumnMode = ColumnMode;
+
   constructor( public subjectsService: SubjectsService,
-               private solicitudesService: SolicitudesService,
-               private statisticsService: StatisticsService,
+               private __dataService: DataService,
+               public toaster: ToastrService, 
+               private __offersService: OffersService,
+               private storageService: StorageService,
+               private modalService: NgbModal,
+               private __candidatesService: CandidatesService,
                private fb: FormBuilder, 
-               public router: Router, ) { 
+               public router: Router, ) {   
+                
+    let user = this.storageService.getCurrentSession();
+    this.role =  user['role'];
+    this.getTotals();
+  }
 
-    let arrayCategorias = new Array();   
-    let arrayRadicados = new Array();    
-    let arrayProceso = new Array();    
-    let arrayPendiente = new Array();    
-    let arrayCerrado = new Array();  
-    let actualizaciones, capacitaciones, inquietudes;     
-    this.getEstadisticasChart1(data => {
+  ngOnInit(): void {
 
-    Object.keys(data.estadisticas).forEach(function (key){
-      arrayRadicados.push(data.estadisticas[key][0].total);
-      arrayProceso.push(data.estadisticas[key][1].total);
-      arrayPendiente.push(data.estadisticas[key][2].total);
-      arrayCerrado.push(data.estadisticas[key][3].total);
-      arrayCategorias.push(key);
-    });
-
-    this.chartOptions = {
-      chart: {
-        height: 350,
-        type: 'area',
-        toolbar: {
-          show: true,
-          tools: {
-            download: true,
-            selection: false,
-            zoom: false,
-            zoomin: false,
-            zoomout: false,
-            pan: false,
-            reset: false
-          },
-        }
-      },
-      series: [
-        {
-          name: "Radicación",
-          data: arrayRadicados
-        },
-        {
-          name: "Proceso",
-          data: arrayProceso
-        },
-        {
-          name: "Pendiente",
-          data: arrayPendiente
-        },
-        {
-          name: "Cerrado",
-          data: arrayCerrado
-        }
-
-      ],
-      yaxis: {
-        show: false,
-        "labels": {
-          "formatter": function (val) {
-              return val.toFixed(0)
-          }
-        },
-        showGrid: false,
-      },
-      dataLabels: {
-        enabled: false
-      },
-      grid: {
-        borderColor: '#f0f7fa',
-        show: false
-      },
-      stroke: {
-        curve: 'smooth'
-      },
-      xaxis: {
-        low: 0,
-        offsetX: 0,
-        offsetY: 0,
-        showGrid: false,
-        show: false,
-        type: 'date',
-        labels: {
-          low: 0,
-          offsetX: 0,
-          show: false,
-        },
-        axisBorder: {
-          low: 0,
-          offsetX: 0,
-          show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
-        categories: arrayCategorias,
-      },
-      tooltip: {
-        x: {
-          format: 'dd/MM/yy'
-        },
-      },
-      colors: ["#fb740d", "#158df7", "#fb2e63","#51bb25"],
-      fill: {
-        type: 'gradient',
-        gradient: {
-          shadeIntensity: 1,
-          opacityFrom: 0.5,
-          opacityTo: 0.4,
-          stops: [0, 95, 100]
-        }
-      },
-      responsive: [
-        {
-          breakpoint: 992,
-          options: {
-            stroke: {
-              width: 5
-            },
-            chart: {
-              height: 200
-            }
-          }
-        },
-        {
-          breakpoint: 480,
-          options: {
-            stroke: {
-              width: 1
-            }
-          }
-        },
-        {
-          breakpoint: 320,
-          options: {
-            stroke: {
-              width: 1
-            }
-          }
-        }
-      ]
-    };
-
-
-     });
-
-     this.getEstadisticasChart2(data => {
-      this.chart2Options = {  
-          series: [
-            {
-                name: "Materias",
-                data: data.materias
-            },
-            {
-                name: "Guías",
-                data: data.guias 
-            },
-          ],
-        chart: {
-            type: "bar",
-            height: 350
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: "55%",
-                endingShape: "rounded"
-            }
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ["transparent"]
-        },
-        xaxis: {
-            categories: [
-                "Creadas",
-                "Actualizadas",
-                "En Proceso"
-            ]
-        },
-        yaxis: {
-            title: {
-                text: "Total"
-            }
-        },
-        colors:["#fb740d", "#158df7", '#51bb25'],
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val;
-                }
-            }
-        }
-        };
-
-     }); 
-
-    this.getEstadisticasChart3(data => {
-
-      Object.keys(data.tiposSolicitudes).forEach(function (key){
-        if(data.tiposSolicitudes[key].tipo == "Actualizacion"){
-          actualizaciones = data.tiposSolicitudes[key].total;
-        }else if(data.tiposSolicitudes[key].tipo == "Capacitacion"){
-          capacitaciones = data.tiposSolicitudes[key].total;
-        }else if(data.tiposSolicitudes[key].tipo == "Inquietudes"){
-          inquietudes = data.tiposSolicitudes[key].total;
-        }
-      });
-  
-      this.loadKnob(actualizaciones,capacitaciones,inquietudes);
-  
-    });
-
-    let date = new Date();
-    this.month = this.meses[date.getMonth()];
-    
-    this.getStadisticsGuias(data => {
-      this.estadisticasGuias = data;
-      this.totalGuias = data['guiasCreadas'].reduce((
-        acc,
-        obj,
-      ) => acc += Number(obj.total), 0);  
-    });
-    this.getSolicitudes(data => {
+    this.getData(data => {
       this.temp = [...data];  
       this.rows = data;
     });
 
-  
-  }
 
-  ngOnInit(): void {
+    this.getAllOffers(data => {
+      this.temp1 = [...data];  
+      this.rows1 = data;
+    });
+
     this.exportForm1 = this.fb.group({
       fDesde: [''],
       fHasta: [''],
@@ -485,364 +156,84 @@ export class DefaultComponent implements OnInit {
     });
   }
 
-  getStadisticsGuias(dataComp){
-    this.subjectsService.getEstadisticas().subscribe(
+
+  getData(dataComp){
+    this.__candidatesService.getAllData().subscribe(
       data  => {
-            dataComp(data);
+          dataComp(data);
          }
-        );
-  }
-
-
-  getSolicitudes(dataComp){
-    this.solicitudesService.getListSolicitudes().subscribe(
-      data  => {
-          dataComp(data);
-         },
-       error => {
-          let prueba = [];
-          dataComp(prueba);
-       }  
-       );   
-  }
-
-  viewRequest(e){
-    this.router.navigate(['/request/view-request'], { queryParams: { id: e.radicado } });
-  }
-
-
-
-  getEstadisticasChart1(dataComp){
-    let fDesde = "", fHasta = "";
-    if(this.exportForm1 != null){
-      fDesde = this.exportForm1.controls['fDesde'].value;
-      fHasta = this.exportForm1.controls['fHasta'].value;
-    }  
-    this.statisticsService.getChart1Data(fDesde, fHasta).subscribe(
-      data  => {
-          dataComp(data);
-         },
-       error => {
-          let prueba = [];
-          dataComp(prueba);
-       }  
-       );   
-  }
-
-  getEstadisticasChart2(dataComp){
-    let fDesde = "", fHasta = "";
-    if(this.exportForm2 != null){
-      fDesde = this.exportForm2.controls['fDesde'].value;
-      fHasta = this.exportForm2.controls['fHasta'].value;
-    }  
-    this.statisticsService.getChart2Data(fDesde, fHasta).subscribe(
-      data  => {
-          dataComp(data);
-         },
-       error => {
-          let prueba = [];
-          dataComp(prueba);
-       }  
        );   
   }
 
 
 
-
-  getEstadisticasChart3(dataComp){
-    let fDesde = "", fHasta = "";
-    if(this.exportForm3 != null){
-      fDesde = this.exportForm3.controls['fDesde'].value;
-      fHasta = this.exportForm3.controls['fHasta'].value;
-    } 
-    this.statisticsService.getChart3Data(fDesde, fHasta).subscribe(
-      data  => {
-          dataComp(data);
-         },
-       error => {
-          let prueba = [];
-          dataComp(prueba);
-       }  
+  getTotals(){
+    this.__dataService.getTotals().subscribe(result => {
+        this.totalData = result;
+      }
        );   
   }
 
-  filter(){
-
-  }
-
-  filterChart1(){
-    let arrayCategorias = new Array();   
-    let arrayRadicados = new Array();    
-    let arrayProceso = new Array();    
-    let arrayPendiente = new Array();    
-    let arrayCerrado = new Array();   
-
-    this.getEstadisticasChart1(data => {
-      Object.keys(data.estadisticas).forEach(function (key){
-        arrayRadicados.push(data.estadisticas[key][0].total);
-        arrayProceso.push(data.estadisticas[key][1].total);
-        arrayPendiente.push(data.estadisticas[key][2].total);
-        arrayCerrado.push(data.estadisticas[key][3].total);
-        arrayCategorias.push(key);
-      });
   
-      this.chartOptions = {
-        chart: {
-          height: 350,
-          type: 'area',
-          toolbar: {
-            show: true,
-            tools: {
-              download: true,
-              selection: false,
-              zoom: false,
-              zoomin: false,
-              zoomout: false,
-              pan: false,
-              reset: false
-            },
-          },
-        },
-        series: [
-          {
-            name: "Radicación",
-            data: arrayRadicados
-          },
-          {
-            name: "Proceso",
-            data: arrayProceso
-          },
-          {
-            name: "Pendiente",
-            data: arrayPendiente
-          },
-          {
-            name: "Cerrado",
-            data: arrayCerrado
-          }
-  
-        ],
-        yaxis: {
-          show: false,
-          "labels": {
-            "formatter": function (val) {
-                return val.toFixed(0)
-            }
-          },
-          showGrid: false,
-        },
-        dataLabels: {
-          enabled: false
-        },
-        grid: {
-          borderColor: '#f0f7fa',
-          show: false
-        },
-        stroke: {
-          curve: 'smooth'
-        },
-        xaxis: {
-          low: 0,
-          offsetX: 0,
-          offsetY: 0,
-          showGrid: false,
-          show: false,
-          type: 'date',
-          labels: {
-            low: 0,
-            offsetX: 0,
-            show: false,
-          },
-          axisBorder: {
-            low: 0,
-            offsetX: 0,
-            show: false,
-          },
-          axisTicks: {
-            show: false,
-          },
-          categories: arrayCategorias,
-        },
-        tooltip: {
-          x: {
-            format: 'dd/MM/yy'
-          },
-        },
-        colors: ["#fb740d", "#158df7", "#fb2e63","#51bb25"],
-        fill: {
-          type: 'gradient',
-          gradient: {
-            shadeIntensity: 1,
-            opacityFrom: 0.5,
-            opacityTo: 0.4,
-            stops: [0, 95, 100]
-          }
-        },
-        responsive: [
-          {
-            breakpoint: 992,
-            options: {
-              stroke: {
-                width: 5
-              },
-              chart: {
-                height: 200
-              }
-            }
-          },
-          {
-            breakpoint: 480,
-            options: {
-              stroke: {
-                width: 1
-              }
-            }
-          },
-          {
-            breakpoint: 320,
-            options: {
-              stroke: {
-                width: 1
-              }
-            }
-          }
-        ]
-      };
-  
-       });
+  openConfirmation(e){
+    const modalRef = this.modalService.open(NgbdModalContent);
+    modalRef.componentInstance.id = e.id;
+    modalRef.componentInstance.firstName = e.firstName + " " +  e.lastName;
+    modalRef.componentInstance.parent = this;
   }
 
+  inactivateItem(e){
+    this.__candidatesService.inactivateItem(e).subscribe(
+      data  => {
+        this.getData(data => {
+          this.temp = [...data];  
+          this.rows = data;
+        });
+        this.modalService.dismissAll();
+        this.toaster.success(data['message']);
+         },
+        error  => {this.toaster.error(error.error.message);});
+  }
 
-  filterChart2(){
-    this.getEstadisticasChart2(data => {
-      this.chart2Options = {  
-          series: [
-            {
-                name: "Materias",
-                data: data.materias
-            },
-            {
-                name: "Guías",
-                data: data.guias 
-            },
-          ],
-        chart: {
-            type: "bar",
-            height: 350
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: "55%",
-                endingShape: "rounded"
-            }
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ["transparent"]
-        },
-        xaxis: {
-            categories: [
-                "Creadas",
-                "Actualizadas",
-                "En Proceso"
-            ]
-        },
-        yaxis: {
-            title: {
-                text: "Total"
-            }
-        },
-        colors:["#fb740d", "#158df7", '#51bb25'],
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val;
-                }
-            }
+  getAllOffers(dataComp){
+    this.__offersService.getAllActive().subscribe(
+      data  => {
+          dataComp(data);
         }
-        };
-      });
+      );   
+  }
+  
+  
+  activateItem(e){
+    this.__candidatesService.activateItem(e).subscribe(
+      data  => {
+        this.getData(data => {
+          this.temp = [...data];  
+          this.rows = data;
+        });
+        this.toaster.success(data['message']);
+         },
+        error  => {this.toaster.error(error.error.message);});
   }
 
-  filterChart3(){
-    let actualizaciones = 0, capacitaciones = 0, inquietudes = 0;     
-    this.getEstadisticasChart3(data => {
-      Object.keys(data.tiposSolicitudes).forEach(function (key){
-        if(data.tiposSolicitudes[key].tipo == "Actualizacion"){
-          actualizaciones = data.tiposSolicitudes[key].total;
-        }else if(data.tiposSolicitudes[key].tipo == "Capacitacion"){
-          capacitaciones = data.tiposSolicitudes[key].total;
-        }else if(data.tiposSolicitudes[key].tipo == "Inquietudes"){
-          inquietudes = data.tiposSolicitudes[key].total;
-        }
-      });
-      
-      this.divActual.nativeElement.removeChild(this.divActual.nativeElement.childNodes[0]);
-      this.divCapaci.nativeElement.removeChild(this.divCapaci.nativeElement.childNodes[0]);
-      this.divInquie.nativeElement.removeChild(this.divInquie.nativeElement.childNodes[0]);
-
-      this.loadKnob(actualizaciones,capacitaciones,inquietudes);
-  
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+    // filter our data
+    const temp = this.temp.filter(function(d) {
+      if(d.descripcion == null){
+        d.descripcion = '';
+      }
+      return (d.firstName.toLowerCase().indexOf(val) !== -1 ||
+       d.lastName.toLowerCase().indexOf(val) !== -1 ||
+       d.address.toLowerCase().indexOf(val) !== -1 ||
+       d.email.toLowerCase().indexOf(val) !== -1 ||
+       !val);
     });
+    // update the rows
+    this.rows = temp;
+    // Whenever the filter changes, always go back to the first page
+    this.table.offset = 0;
   }
 
-
-  loadKnob(actualizaciones, capacitaciones, inquietudes){
-
-    //document.getElementById('actual').removeChild();
-    let Knob = require('knob');
-    let knobA = Knob({
-      className: "review",
-      value: actualizaciones,
-      angleOffset: 90,
-      thickness: 0.1,
-      width: 120,
-      cursor: true,
-      fgColor: "#8fd1be",
-      readOnly: true,
-      bgColor: '#8fd1be',
-      lineCap: 'round',
-      displayPrevious: false
-    })
-    document.getElementById('actual').append(knobA);
-
-    let knobC = Knob({
-      className: "review",
-      value: capacitaciones,
-      angleOffset: 90,
-      thickness: 0.1,
-      width: 120,
-      cursor: true,
-      fgColor: "#99a9a5",
-      readOnly: true,
-      bgColor: '#99a9a5',
-      lineCap: 'round',
-      displayPrevious: false
-    })
-    document.getElementById('capac').append(knobC);
-
-    let knobI = Knob({
-      className: "review",
-      value: inquietudes,
-      angleOffset: 90,
-      thickness: 0.1,
-      width: 120,
-      cursor: true,
-      fgColor: "#f1c445",
-      readOnly: true,
-      bgColor: '#f1c445',
-      lineCap: 'round',
-      displayPrevious: false
-    })
-    document.getElementById('inqu').append(knobI);
-  }
 
 }

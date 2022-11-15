@@ -1,31 +1,31 @@
 <!-- page-wrapper Start-->
 <div class="login-content container-fluid p-0">
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-9">
 			<img class="img-login" src="../../../assets/images/login.jpg" >
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
                 <div class="auth-innerright">
                     <div class="authentication-box">
 
-						<h4 class="color-green">Welcome to the platform</h4>
+						<h4 class="color-green">Log in to Gaps Employment</h4>
 
 						<div class="image-logo">
 							<img class="img-login" src="../../../assets/images/logo.png" >
 						</div>
-						<p><span>To access this page you can only do with username and password</span></p>
+						<!-- <p><span>To access this page you can only do with username and password</span></p> -->
                         <div>
                                     <div>
                                         <form class="theme-form" [formGroup]="loginForm" *ngIf="!newUser">
                                             <div class="form-group">
-												<input class="form-control" required placeholder="User" formControlName="user" type="text" required="">
+												<input class="form-control" required placeholder="Email" formControlName="user" type="text" required="">
 												<div *ngIf="loginForm.controls.user.touched && loginForm.controls.user.errors?.required"
 													class="text text-danger mt-1">
-													User invalid
+													Email invalid
 												</div>
 												<div *ngIf="loginForm.controls.user.touched && loginForm.controls.user.errors?.user"
 													class="text text-danger mt-1">
-													User invalid
+													Email invalid
 												</div>
 											</div>
 											<div class="form-group">
@@ -39,7 +39,7 @@
 											<div class="form-group form-row mt-3 mb-0">
 												<button class="btn btn-primary btn-block btn-login btn-lg"
 													[disabled]="!loginForm.valid " (click)="login(loginForm.value)"
-													type="submit"><span>Sing In</span>
+													type="submit"><span>Log in</span>
 												</button>
 											</div>
                                         </form>
