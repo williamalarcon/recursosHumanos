@@ -52,7 +52,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Postcode</label>
-                <input class="form-control" required type="text"  placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
+                <input class="form-control" required onlyNumbers type="text"  placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
                 <div *ngIf="submitted && f.postcode.errors" class="text text-danger mt-1">This Field is required</div>
                 <div *ngIf="f.postcode.errors && (f.postcode.dirty || f.postcode.touched)"
                 class="alert alert-danger">
@@ -96,7 +96,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">Mobile</label>
-                <input class="form-control" required type="text" maxlength="12" placeholder="Mobile" formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
+                <input class="form-control" onlyNumbers required type="text" maxlength="12" placeholder="Mobile" formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
                 <div *ngIf="submitted && f.mobile.errors" class="text text-danger mt-1">This Field is required</div>
                 <div *ngIf="f.mobile.errors && (f.mobile.dirty || f.mobile.touched)"
                 class="alert alert-danger">

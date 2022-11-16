@@ -4,6 +4,7 @@ import { ActivatedRoute, Router  } from '@angular/router';
 import { CategoriesService } from '../../../shared/httpClient/categories.service';
 import { OffersService } from '../../../shared/httpClient/offers.service';
 import { ChargesService } from '../../../shared/httpClient/charges/charges.service';
+import { NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -16,6 +17,7 @@ export class EditOfferComponent implements OnInit {
   public myProfile: FormGroup;
   public editProfile: FormGroup;
   listCategories = [];
+  public modelD: NgbDateStruct;
   sub;
   submitted = false;
 
@@ -45,6 +47,7 @@ export class EditOfferComponent implements OnInit {
       jobPaying: ['', [Validators.required]],
       jobTime: ['', [Validators.required]],
       JobAdderLink: ['', []],
+      jobDate: ['', [Validators.required]],
       jobDescription: ['', [Validators.required]],
       skills: ['', []],
       about: ['', []],
@@ -68,6 +71,8 @@ export class EditOfferComponent implements OnInit {
           this.editProfile.controls['jobTime'].setValue(data['JobTime']);
           this.editProfile.controls['JobAdderLink'].setValue(data['jobAdderLink']);
           this.editProfile.controls['jobDescription'].setValue(data['jobDescription']);
+          let date = new Date(data['jobDate']);
+          this.editProfile.controls['jobDate'].setValue({year:date.getFullYear(),month:date.getMonth()+1,day:date.getUTCDate()});
           this.editProfile.controls['skills'].setValue(data['skills']);
           this.editProfile.controls['about'].setValue(data['about']);
           this.editProfile.controls['questions'].setValue(data['questions']);

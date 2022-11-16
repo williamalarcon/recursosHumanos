@@ -103,7 +103,7 @@ export class EditProviderComponent implements OnInit {
     this.editProvider = this.fb.group({
       id: ['',[Validators.required]],
       providerCompany: ['',[Validators.required]],
-      abn: ['', [Validators.required]],
+      abn: ['', [Validators.required, Validators.maxLength(11)]],
       address: ['', [Validators.required]],
       unit: ['', []],
       suburb: ['', [Validators.required]],

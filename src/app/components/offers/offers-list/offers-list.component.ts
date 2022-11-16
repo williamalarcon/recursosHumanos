@@ -51,7 +51,7 @@ export class OffersListComponent implements OnInit {
   temp = [];
   hidePrice  = false;
 
-  columns = [{ name : 'employer',  label: 'Employer' },{ name : 'jobTitle',  label: 'Job Title' },{ name : 'jobDescription',  label: 'Job Description' }];
+  columns = [{ name : 'employer',  label: 'Employer' },{ name : 'jobTitle',  label: 'Job Title' },{ name : 'jobDescription',  label: 'Job Description' }, { name : 'jobDate',  label: 'Job Date' }];
 
   
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
@@ -114,7 +114,7 @@ export class OffersListComponent implements OnInit {
     const val = event.target.value.toLowerCase();
     // filter our data
     const temp = this.temp.filter(function(d) {
-      return (d.usuario.toLowerCase().indexOf(val) !== -1 || d.cargo.toLowerCase().indexOf(val) !== -1 || d.nombre.toLowerCase().indexOf(val) !== -1 || !val);
+      return (d.employer.toLowerCase().indexOf(val) !== -1 || d.jobTitle.toLowerCase().indexOf(val) !== -1 || d.jobDescription.toLowerCase().indexOf(val) !== -1 || !val || d.jobDate.toLowerCase().indexOf(val) !== -1 || !val);
     });
     // update the rows
     this.rows = temp;

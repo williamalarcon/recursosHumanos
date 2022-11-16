@@ -28,8 +28,13 @@
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="form-label">ABN</label>
-                            <input class="form-control" required type="number" placeholder="ABN" formControlName="abn" [ngClass]="{ 'is-invalid': submitted && f.abn.errors }">
+                            <input class="form-control" onlyNumbers required type="text" placeholder="ABN" formControlName="abn" [ngClass]="{ 'is-invalid': submitted && f.abn.errors }">
                             <div *ngIf="submitted && f.abn.errors" class="text text-danger mt-1">This Field is required</div>
+                            <div *ngIf="f.abn.errors && (f.abn.dirty || f.abn.touched)" class="alert alert-danger">
+                              <div [hidden]="!f.abn.errors.maxlength">
+                                Only 11 characters allowed.
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="col-md-5">
@@ -42,7 +47,7 @@
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="form-label">Unit</label>
-                            <input class="form-control" required type="text" placeholder="Unit" formControlName="unit" [ngClass]="{ 'is-invalid': submitted && f.unit.errors }">
+                            <input class="form-control" type="text" placeholder="Unit" formControlName="unit" [ngClass]="{ 'is-invalid': submitted && f.unit.errors }">
                             <div *ngIf="submitted && f.unit.errors" class="text text-danger mt-1">This Field is required</div>
                           </div>
                         </div>
@@ -73,7 +78,7 @@
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="form-label">Postcode</label>
-                            <input class="form-control" required type="number" maxlength="4" placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
+                            <input class="form-control" required type="number"onlyNumbers maxlength="4" placeholder="Postcode" formControlName="postcode" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }">
                             <div *ngIf="submitted && f.postcode.errors" class="text text-danger mt-1">This Field is required</div>
                             <div *ngIf="f.postcode.errors && (f.postcode.dirty || f.postcode.touched)"
                             class="alert alert-danger">

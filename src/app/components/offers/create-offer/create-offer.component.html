@@ -91,6 +91,24 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
+                    <label class="form-label">Date of Job</label>
+                    <div class="input-group">
+                        <input class="form-control" required placeholder="dd/mm/aaaa" readonly name="dp" [(ngModel)]="modelD" ngbDatepicker [minDate]="{year: 1950, month:1, day: 1}" 
+                        [footerTemplate]="footerTemplate" #fd1="ngbDatepicker" formControlName="jobDate" [ngClass]="{ 'is-invalid': submitted && f.jobDate.errors }">
+                        <div class="input-group-append">
+                        <button class="btn calendar btn-success" (click)="fd1.toggle()" type="button"><i
+                            class="fa fa-calendar"></i></button>
+                        </div>
+                        <ng-template #footerTemplate>
+                            <hr class="my-0">
+                            <button class="btn btn-primary btn-sm m-2 float-left" (click)="modelD = ''; fd1.close()">Limpiar</button>
+                        </ng-template>
+                    </div>
+                    <div *ngIf="submitted && f.jobDate.errors" class="text text-danger mt-1">Este campo es obligatorio</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
                     <label class="form-label">Skills and Experience</label>
                     <textarea type="text" maxlength="500" rows="4"  class="md-textarea form-control"  formControlName="skills" mdbInput [ngClass]="{ 'is-invalid': submitted && f.skills.errors }"></textarea>
                     <div *ngIf="submitted && f.skills.errors" class="text text-danger mt-1">Este campo es obligatorio</div>

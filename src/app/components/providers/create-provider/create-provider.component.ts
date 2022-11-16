@@ -81,7 +81,7 @@ export class CreateProviderComponent implements OnInit {
 
     this.createSubject = this.fb.group({
       providerCompany: ['',[Validators.required]],
-      abn: ['', [Validators.required]],
+      abn: ['', [Validators.required, Validators.maxLength(11)]],
       address: ['', [Validators.required]],
       unit: ['', []],
       suburb: ['', [Validators.required]],
