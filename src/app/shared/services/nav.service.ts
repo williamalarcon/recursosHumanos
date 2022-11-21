@@ -85,19 +85,25 @@ export class NavService {
 		{
 			title: 'Offers', icon: 'briefcase', type: 'sub', active: false, children: [
 				{ path: '/offers/offers-list', title: 'List', type: 'link' },
-				{ path: '/offers/create-offer', title: 'Create', type: 'link' },
+				{ path: '/offers/create-offer', title: 'New Job Offer', type: 'link' },
 			]
 		},
 		{
 			title: 'Candidates', icon: 'users', type: 'sub', active: false, children: [
 				{ path: '/candidates/candidates-list', title: 'List', type: 'link' },
-				{ path: '/candidates/create-candidate', title: 'Create', type: 'link' },
+				{ path: '/candidates/create-candidate', title: 'New JS', type: 'link' },
 			]
 		},
 		{
 			title: 'Providers', icon: 'book', type: 'sub', active: false, children: [
 				{ path: '/providers/providers-list', title: 'List', type: 'link' },
-				{ path: '/providers/create-provider', title: 'Create', type: 'link' },
+				{ path: '/providers/create-provider', title: 'New Provider', type: 'link' },
+			]
+		},
+		{
+			title: 'Agency Staff', icon: 'users', type: 'sub', active: false, children: [
+				{ path: '/user/team-details', title: 'List', type: 'link' },
+				{ path: '/user/create-profile', title: 'New Agency Staff', type: 'link' },
 			]
 		},
 		{
@@ -107,12 +113,7 @@ export class NavService {
 		},
 		{
 			title: 'Settings', icon: 'settings', type: 'sub', active: false, children: [
-				{
-					title: 'Users', icon: 'users', type: 'sub', active: false, children: [
-						{ path: '/user/team-details', title: 'List', type: 'link' },
-						{ path: '/user/create-profile', title: 'Create', type: 'link' },
-					]
-				},
+
 				{
 					title: 'Admins', icon: 'users', type: 'sub', active: false, children: [
 						{ path: '/admins/admin-list', title: 'List', type: 'link' },
@@ -139,19 +140,25 @@ export class NavService {
 		{
 			title: 'Offers', icon: 'briefcase', type: 'sub', active: false, children: [
 				{ path: '/offers/offers-list', title: 'List', type: 'link' },
-				{ path: '/offers/create-offer', title: 'Create', type: 'link' },
+				{ path: '/offers/create-offer', title: 'New Job Offer', type: 'link' },
 			]
 		},
 		{
 			title: 'Candidates', icon: 'users', type: 'sub', active: false, children: [
 				{ path: '/candidates/candidates-list', title: 'List', type: 'link' },
-				{ path: '/candidates/create-candidate', title: 'Create', type: 'link' },
+				{ path: '/candidates/create-candidate', title: 'New JS', type: 'link' },
 			]
 		},
 		{
 			title: 'Providers', icon: 'book', type: 'sub', active: false, children: [
 				{ path: '/providers/providers-list', title: 'List', type: 'link' },
-				{ path: '/providers/create-provider', title: 'Create', type: 'link' },
+				{ path: '/providers/create-provider', title: 'New Provider', type: 'link' },
+			]
+		},
+		{
+			title: 'Agency Staff', icon: 'users', type: 'sub', active: false, children: [
+				{ path: '/user/team-details', title: 'List', type: 'link' },
+				{ path: '/user/create-profile', title: 'New Agency Staff', type: 'link' },
 			]
 		},
 		{
@@ -161,12 +168,6 @@ export class NavService {
 		},
 		{
 			title: 'Settings', icon: 'settings', type: 'sub', active: false, children: [
-				{
-					title: 'Users', icon: 'users', type: 'sub', active: false, children: [
-						{ path: '/user/team-details', title: 'List', type: 'link' },
-						{ path: '/user/create-profile', title: 'Create', type: 'link' },
-					]
-				},
 				{
 					title: 'Categories', icon: 'users', type: 'sub', active: false, children: [
 						{ path: '/categories/categories-list', title: 'List', type: 'link' },

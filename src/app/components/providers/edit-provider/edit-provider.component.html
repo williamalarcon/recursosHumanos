@@ -105,7 +105,7 @@
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="form-label">Phone</label>
-                            <input class="form-control" required type="text" placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                            <input class="form-control" required type="text" onlyNumbers placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
                             <div *ngIf="submitted && f.phone.errors" class="text text-danger mt-1">This Field is required</div>
                             <div *ngIf="f.phone.errors && (f.phone.dirty || f.phone.touched)"
                               class="alert alert-danger">

@@ -4,7 +4,7 @@
       <div class="col-lg-12">
         <form class="card" [formGroup]="createSubject">
           <div class="card-header">
-            <h4 class="card-title mb-0">Create Provider</h4>
+            <h4 class="card-title mb-0">New Provider</h4>
             <div class="card-options"><a class="card-options-collapse" href="javascript:void(0)" data-toggle="card-collapse"><i
                   class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="javascript:void(0)" data-toggle="card-remove"><i
                   class="fe fe-x"></i></a></div>
@@ -106,7 +106,7 @@
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="form-label">Phone</label>
-                            <input class="form-control" required type="text" placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                            <input class="form-control" required onlyNumbers type="text" placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
                             <div *ngIf="submitted && f.phone.errors" class="text text-danger mt-1">This Field is required</div>
                             <div *ngIf="f.phone.errors && (f.phone.dirty || f.phone.touched)"
                               class="alert alert-danger">

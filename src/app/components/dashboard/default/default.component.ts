@@ -166,6 +166,11 @@ export class DefaultComponent implements OnInit {
   }
 
 
+  editProfile(e){
+    this.router.navigate(['/candidates/edit-candidate'], { queryParams: { id: e.id } });
+  }
+
+
 
   getTotals(){
     this.__dataService.getTotals().subscribe(result => {
